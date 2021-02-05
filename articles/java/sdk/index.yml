@@ -4,34 +4,46 @@ summary: Azure での Java を使用したクラウド開発。
 metadata:
   title: Azure SDK for Java のドキュメント
   description: Azure での Java を使用したクラウド開発
-  ms.date: 04/03/2020
+  ms.date: 02/02/2021
   ms.topic: landing-page
-  ms.openlocfilehash: 2380696b801927bc842278b1b8604825feda0984
-  ms.sourcegitcommit: be67ceba91727da014879d16bbbbc19756ee22e2
+  ms.openlocfilehash: cde5054104f4331e48078b5854d61dca2c36f6cf
+  ms.sourcegitcommit: 71847ee0a1fee3f3320503629d9a8c82319a1f6a
   ms.translationtype: HT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 05/05/2020
-  ms.locfileid: "81675148"
+  ms.lasthandoff: 02/03/2021
+  ms.locfileid: "99511074"
 landingContent:
-- title: Java クラウド開発者向けの Azure
+- title: Java 開発者向けの Azure
   linkLists:
   - linkListType: get-started
     links:
     - text: Java を使用した Azure 開発
-      url: java-sdk-azure-get-started.md
+      url: get-started.md
+    - text: Azure SDK for Java を使用する
+      url: overview.md
   - linkListType: reference
     links:
     - text: Java API ブラウザー
-      url: /java/api/?view=azure-java
+      url: /java/api
   - linkListType: how-to-guide
     links:
-    - text: ルート証明書を追加する
-      url: java-sdk-add-certificate-ca-store.md
-    - text: Authenticate
-      url: java-sdk-azure-authenticate.md
+    - text: ID と認証
+      url: identity.md
     - text: ログの構成
-      url: java-sdk-azure-log.md
+      url: logging-overview.md
+- title: 一般的な概念
+  linkLists:
   - linkListType: learn
     links:
-    - text: パターンとベスト プラクティス
-      url: java-sdk-azure-concepts.md
+    - text: HTTP クライアントとパイプライン
+      url: http-client-pipeline.md
+    - text: 非同期プログラミング
+      url: async-programming.md
+    - text: 改ページと反復
+      url: pagination.md
+    - text: 長時間にわたって実行される操作
+      url: lro.md
+    - text: プロキシの利用
+      url: proxying.md
+    - text: トレース
+      url: tracing.md

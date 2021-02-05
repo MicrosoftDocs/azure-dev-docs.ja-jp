@@ -1,35 +1,79 @@
 - name: Azure SDK for Java のドキュメント
   href: index.yml
   items:
-    - name: 開始するには
-      href: java-sdk-azure-get-started.md
+    - name: はじめに
+      href: get-started.md
     - name: 概念
       expanded: true
       items:
-        - name: パターンとベスト プラクティス
-          href: java-sdk-azure-concepts.md
-    - name: ハウツー記事
-      expanded: true
+        - name: 概要
+          href: overview.md
+        - name: 一般的な概念
+          expanded: false
+          items:
+            - name: HTTP クライアントとパイプライン
+              href: http-client-pipeline.md
+            - name: 非同期プログラミング
+              href: async-programming.md
+            - name: 改ページと反復
+              href: pagination.md
+            - name: 長時間にわたって実行される操作
+              href: lro.md
+            - name: プロキシの利用
+              href: proxying.md
+            - name: トレース
+              href: tracing.md
+        - name: ID と認証
+          expanded: false
+          items:
+            - name: 概要
+              href: identity.md
+            - name: 開発環境での認証
+              href: identity-dev-env-auth.md
+            - name: Azure でホストされるアプリケーションでの認証
+              href: identity-azure-hosted-auth.md
+            - name: サービス プリンシパルを使用した認証
+              href: identity-service-principal-auth.md
+            - name: ユーザー資格情報を使用した認証
+              href: identity-user-auth.md
+        - name: ログの記録
+          expanded: false
+          items:
+            - name: 概要
+              href: logging-overview.md
+            - name: java.util.logging
+              href: logging-jul.md
+            - name: Logback
+              href: logging-logback.md
+            - name: Log4J
+              href: logging-log4j.md
+    - name: 統合
+      expanded: false
       items:
-        - name: ルート証明書を追加する
-          href: java-sdk-add-certificate-ca-store.md
-        - name: Authenticate
-          href: java-sdk-azure-authenticate.md
-        - name: ログの構成
-          href: java-sdk-azure-log.md
+        - name: Spring
+          href: /azure/developer/java/spring-framework/spring-boot-starters-for-azure
+        - name: MicroProfile
+          href: 'https://docs.microsoft.com/azure/developer/java/eclipse-microprofile/'
+    - name: トラブルシューティング
+      expanded: false
+      items:
+        - name: ネットワークの問題
+          href: troubleshooting-network.md
     - name: コード サンプル
       items:
         - name: 仮想マシン
-          href: java-sdk-azure-virtual-machine-samples.md
-        - name: Web Apps
-          href: java-sdk-azure-web-apps-samples.md
+          href: virtual-machine-samples.md
+        - name: Web アプリ
+          href: web-apps-samples.md
         - name: SQL Database
-          href: java-sdk-azure-sql-database-samples.md
+          href: sql-database-samples.md
         - name: Security
-          href: java-sdk-azure-security-samples.md
+          href: security-samples.md
         - name: Containers
-          href: java-sdk-azure-containers-samples.md
+          href: containers-samples.md
         - name: すべての Java サンプル
           href: /samples/browse/?products=azure&languages=java
-    - name: リファレンス
-      href: /java/api/?view=azure-java
+    - name: パッケージ インデックス
+      href: azure-sdk-library-package-index.md
+    - name: 参照先
+      href: /java/api
