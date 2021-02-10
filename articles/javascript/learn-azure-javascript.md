@@ -4,12 +4,12 @@ description: Microsoft Learn プラットフォームを使用して、JavaScrip
 ms.topic: reference
 ms.date: 01/14/2021
 ms.custom: devx-track-js
-ms.openlocfilehash: 7fd0fd26b1b0133faf8cf21bd7b29afdbd37f5aa
-ms.sourcegitcommit: 593d177cfb5f56f236ea59389e43a984da30f104
+ms.openlocfilehash: 80c0a9d285c1701369f8c7518f42220662759d86
+ms.sourcegitcommit: 3f8aa923e4626b31cc533584fe3b66940d384351
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/18/2021
-ms.locfileid: "98561678"
+ms.lasthandoff: 02/01/2021
+ms.locfileid: "99224826"
 ---
 # <a name="learn-to-develop-with-azure-and-javascript"></a>Azure と JavaScript を使用した開発について学習する 
 
@@ -47,6 +47,10 @@ Microsoft Learn プラットフォームまたは Microsoft ラーニング パ�
 * [Gatsby と Azure Static Web Apps で静的 Web アプリを作成して発行する](/learn/modules/create-deploy-static-webapp-gatsby-app-service/)
 * [HTML、CSS、および JavaScript を使用してシンプルな Web サイトを構築する](/learn/modules/build-simple-website/)
 
+### <a name="server-apis"></a>サーバー API
+
+* [Node HTTP サーバーを作成する](/learn/modules/build-web-api-nodejs-express/)
+
 ### <a name="serverless-apis"></a>サーバーレス API
 
 * [Azure Functions を使用してサーバーレス API をビルドする](/learn/modules/build-api-azure-functions/)
@@ -65,11 +69,7 @@ Microsoft Learn プラットフォームまたは Microsoft ラーニング パ�
 ### <a name="virtual-machines"></a>Virtual Machines
 * [Azure Linux 仮想マシン上の MEAN スタックで Web アプリケーションを構築して実行する](/learn/modules/build-a-web-app-with-mean-on-a-linux-vm/)
 
-
-
-
 [その他の Learn のリソース](/search/?category=Learn&terms=JavaScript)については検索してください。
-
 
 ## <a name="microsoft-learning-partners"></a>Microsoft ラーニング パートナー
 

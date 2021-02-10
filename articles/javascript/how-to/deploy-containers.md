@@ -4,12 +4,12 @@ description: Docker コンテナーを使用して Node.js アプリを Azure �
 ms.topic: how-to
 ms.date: 12/07/2020
 ms.custom: seo-javascript-september2019, devx-track-js
-ms.openlocfilehash: 6bf8acb66a708433966bdfe90cc358a56d2d3b42
-ms.sourcegitcommit: ae2fa266a36958c04625bb0ab212e6f2db98e026
+ms.openlocfilehash: 50c26c26fffc0c9377b661d79858dd97318bd3c2
+ms.sourcegitcommit: 3f8aa923e4626b31cc533584fe3b66940d384351
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96857810"
+ms.lasthandoff: 02/01/2021
+ms.locfileid: "99224786"
 ---
 # <a name="deploy-nodejs-container-to-azure"></a>Node.js コンテナーを Azure にデプロイする 
 
@@ -29,18 +29,9 @@ ms.locfileid: "96857810"
 
 ## <a name="build-containerize-and-deploy-app-to-azure"></a>アプリをビルドおよびコンテナー化して Azure にデプロイする
 
-開始するには、次の方法を示すこちらの[チュートリアル](develop-nodejs-on-azure.md)に従ってください。
-
-* サンプル コードのダウンロード
-* Node.js アプリを実行する
-* Visual Studio Code でアプリをデバッグする
-* Node.js の MEAN アプリをコンテナー化する
-* Azure CLI コマンドを使用してアプリをデプロイする
-* CosmosDB リソース上に MongoDB サーバーを作成する
-* コンテナー イメージをプライベート コンテナー レジストリに追加する
-* カスタム ドメイン名を Web アプリに追加する
-* Web アプリをより大きなサイズにスケールアウトする
-* すべてのリソース用のリソース グループを作成および削除する
+作業を開始するには、下記一覧から選択します。
+* チュートリアル:[Express.js](../tutorial/tutorial-vscode-docker-node/tutorial-vscode-docker-node-01.md)
+* チュートリアル:[Deno](../tutorial/deploy-deno-app-azure-app-service-azure-cli.md)
 
 ## <a name="next-steps"></a>次のステップ
 

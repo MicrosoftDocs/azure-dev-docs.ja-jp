@@ -2,19 +2,36 @@
 title: JavaScript ドキュメントの新着情報
 description: デベロッパー センターの JavaScript ドキュメントの新着情報
 ms.topic: conceptual
-ms.date: 01/05/2021
-ms.openlocfilehash: 71f4db11833d0c5346ee6204c94ecd943bb4f126
-ms.sourcegitcommit: 0eb25e1fdafcd64118843748dc061f60e7e48332
+ms.date: 02/02/2021
+ms.openlocfilehash: 9bfb3b8b05861a50d82fc878b74e14ddd3402dae
+ms.sourcegitcommit: 71847ee0a1fee3f3320503629d9a8c82319a1f6a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/21/2021
-ms.locfileid: "98625903"
+ms.lasthandoff: 02/03/2021
+ms.locfileid: "99510963"
 ---
 # <a name="javascript-docs-whats-new"></a>JavaScript ドキュメント:新機能
 
 JavaScript および TypeScript 開発者向けの新規および更新されたコンテンツを紹介します。
 
+## <a name="2021-february"></a>2021 年 2 月
+
+### <a name="whats-new"></a>新機能
+
+|名前|Notes|
+|---------------------------------------|--|
+|[Azure Cosmos DB での MongoDB の使用方法](./how-to/with-database/use-mongodb-as-cosmosdb.md)|MongoDB データベースを Azure で作成、移動、または使用するには、Cosmos DB リソースが必要です。 リソースを作成し、データベースを使用する方法について説明します。 |
+
 ## <a name="2021-january"></a>2021 年 1 月
+
+### <a name="whats-new"></a>新機能
+
+|名前|Notes|
+|---------------------------------------|--|
+|[デベロッパー アドボケイトの最新情報](whats-new-developer-advocacy.md)|ブログ、動画、学習モジュール|
+|[チュートリアル: テキストを音声に変換する](./tutorial/convert-text-to-speech-cognitive-services.md)|このチュートリアルでは、既存の Express.js アプリに Cognitive Services Speech を追加して、Cognitive Services Speech サービスを使用したテキストから音声への変換を追加します。 テキストを音声に変換することにより、オーディオを手動で生成するコストをかけずに、オーディオを提供することができます。|
+|Azure CLI の攻略ガイド|* [コンテナー レジストリを作成および使用する](./how-to/with-azure-cli/create-container-registry-resource.md)<br>* [カスタム ドメイン名の構成](./how-to/with-azure-cli/configure-app-service-custom-domain-name.md)<br>* [Cosmos DB を使用して Azure で MongoDB を作成および使用する](./how-to/with-azure-cli/create-mongodb-cosmosdb.md) |
+|Visual Studio Code の攻略ガイド|* [Node.js を開発およびデバッグする](./how-to/with-visual-studio-code/install-run-debug-nodejs.md)<br>* [GitHub リポジトリを複製および使用する](./how-to/with-visual-studio-code/clone-github-repository.md)<br>* [ローカル JavaScript プロジェクトからコンテナー イメージを作成する](./how-to/with-visual-studio-code/containerize-local-project.md)|
 
 ### <a name="whats-updated"></a>更新内容
 
@@ -22,6 +39,7 @@ JavaScript および TypeScript 開発者向けの新規および更新された
 |---------------------------------------|--|
 |[**初心者向け**](learn-azure-javascript.md#getting-started)|JavaScript、Node.js、Web 開発、および JavaScript 開発者にとって重要なその他の領域の使用を開始するためのさまざまなオンライン資料のコレクションです。|
 |[JavaScript 開発者向けの主要タスク](how-to/common-javascript-tasks.md)|現在のタスクの例を参照してください。|
+|[Visual Studio Code の起動ファイルを構成する](./how-to/configure-web-app-settings.md#configure-browser-for-cors-to-connect-with-server)|独自のサーバーに接続する必要があり、クライアントによるローカルでの実行とデバッグ中に CORS セキュリティを無視する必要がある場合、解決策として、Visual Studio Code デバッグ ファイル `launch.json` でこの設定を構成し、セキュリティを無効にするための設定をブラウザーに渡すことをお勧めします。|
 
 ## <a name="2020-december"></a>2020 年 12 月
 

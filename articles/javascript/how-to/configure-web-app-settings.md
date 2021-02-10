@@ -4,12 +4,12 @@ description: Web アプリの一般的な構成を設定する方法について
 ms.topic: conceptual
 ms.date: 01/21/2021
 ms.custom: devx-track-js
-ms.openlocfilehash: 7b72cb2a72e1bf27630ad06451d9a6ad90dcf1ad
-ms.sourcegitcommit: 3d906f265b748fbc0a070fce252098675674c8d9
+ms.openlocfilehash: 50125f4b0b79254b5106cf60b9e156555547e052
+ms.sourcegitcommit: 3f8aa923e4626b31cc533584fe3b66940d384351
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/22/2021
-ms.locfileid: "98699780"
+ms.lasthandoff: 02/01/2021
+ms.locfileid: "99224796"
 ---
 # <a name="hosting-web-apps-on-azure"></a>Azure での Web アプリのホスティング
 
@@ -170,4 +170,4 @@ const port = process.env.PORT || 3000
 
 ## <a name="next-steps"></a>次のステップ
 
-* [エンドツーエンドの Node.js アプリ](./develop-nodejs-on-azure.md)開発フローで、これらの手順の多くを確認してください。
+* [Visual Studio Code を使用して Node.js の開発とデバッグを行う方法](with-visual-studio-code/install-run-debug-nodejs.md)

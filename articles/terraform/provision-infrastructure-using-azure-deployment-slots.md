@@ -5,12 +5,12 @@ keywords: Azure DevOps Terraform デプロイ スロット
 ms.topic: how-to
 ms.date: 01/07/2021
 ms.custom: devx-track-terraform
-ms.openlocfilehash: 0a7bb2fa3e5a0251b6a441ef8312726d93d29e07
-ms.sourcegitcommit: 347bfa3b6c34579c567d1324efc63c1d6672a75b
+ms.openlocfilehash: 5464764dbfbe7ff52b7f0b47f8f15e2c7af629ae
+ms.sourcegitcommit: 3843092e47691fbd32452c93d51f894a0cab31db
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98109135"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99069109"
 ---
 # <a name="provision-infrastructure-with-azure-deployment-slots-using-terraform"></a>Terraform を使用して Azure デプロイ スロットでインフラストラクチャをプロビジョニングする
 
@@ -195,7 +195,7 @@ Terraform によって作成されたすべてのリソースが表示されま�
 
 1. **[ブランチの選択]** タブで **[master]** を選択します。
 
-    ![master ブランチを選択する](./media/provision-infrastructure-using-azure-deployment-slots/choose-branch-master.png)
+    ![ブランチの選択](./media/provision-infrastructure-using-azure-deployment-slots/choose-branch-master.png)
 
 1. **[デプロイ オプション]** タブで **[OK]** を選択します。
 
@@ -203,7 +203,7 @@ Terraform によって作成されたすべてのリソースが表示されま�
 
 - 手順 3 で、**slotAppServiceSlotOne** リソースを選択します。
 
-- 手順 13 で、master ブランチではなく working ブランチを選択します。
+- 手順 13 で、作業ブランチを選択します。
 
     ![working ブランチを選択する](./media/provision-infrastructure-using-azure-deployment-slots/choose-branch-working.png)
 

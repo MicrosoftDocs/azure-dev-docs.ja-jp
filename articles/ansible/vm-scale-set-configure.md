@@ -5,16 +5,16 @@ keywords: ansible, azure, devops, bash, プレイブック, 仮想マシン, 仮
 ms.topic: tutorial
 ms.date: 04/30/2019
 ms.custom: devx-track-ansible
-ms.openlocfilehash: e8f2db42ee43db5fa9b8a61acb3f60119f84145d
-ms.sourcegitcommit: e43be891c643ba2ddc3189ad98e4a49f03dfeedc
+ms.openlocfilehash: 88b8c32f4eb1a7422cc6aa55e8a2520a01476656
+ms.sourcegitcommit: 3f8aa923e4626b31cc533584fe3b66940d384351
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/30/2020
-ms.locfileid: "97824405"
+ms.lasthandoff: 02/01/2021
+ms.locfileid: "99224716"
 ---
 # <a name="tutorial-configure-virtual-machine-scale-sets-in-azure-using-ansible"></a>チュートリアル:Ansible を使用して Azure 内に仮想マシン スケール セットを構成する
 
-[!INCLUDE [ansible-27-note.md](includes/ansible-27-note.md)]
+[!INCLUDE [ansible-29-note.md](includes/ansible-29-note.md)]
 
 [!INCLUDE [open-source-devops-intro-vm-scale-set.md](../includes/open-source-devops-intro-vm-scale-set.md)]
 
@@ -52,11 +52,11 @@ ms.locfileid: "97824405"
 - hosts: localhost
   vars:
     resource_group: myResourceGroup
-    vmss_name: myScaleSet
     vmss_lb_name: myScaleSetLb
     location: eastus
     admin_username: azureuser
     admin_password: "{{ admin_password }}"
+
   tasks:
     - name: Create a resource group
       azure_rm_resourcegroup:
@@ -92,25 +92,37 @@ ms.locfileid: "97824405"
 
     - name: Create a load balancer
       azure_rm_loadbalancer:
-        name: "{{ vmss_lb_name }}"
-        location: "{{ location }}"
         resource_group: "{{ resource_group }}"
-        public_ip: "{{ vmss_name }}"
-        probe_protocol: Tcp
-        probe_port: 8080
-        probe_interval: 10
-        probe_fail_count: 3
-        protocol: Tcp
-        load_distribution: Default
-        frontend_port: 80
-        backend_port: 8080
-        idle_timeout: 4
-        natpool_frontend_port_start: 50000
-        natpool_frontend_port_end: 50040
-        natpool_backend_port: 22
-        natpool_protocol: Tcp
+        name: "{{ vmss_name }}lb"
+        location: "{{ location }}"
+        frontend_ip_configurations:
+          - name: "{{ vmss_name }}front-config"
+            public_ip_address: "{{ vmss_name }}"
+        backend_address_pools:
+          - name: "{{ vmss_name }}backend-pool"
+        probes:
+          - name: "{{ vmss_name }}prob0"
+            port: 8080
+            interval: 10
+            fail_count: 3
+        inbound_nat_pools:
+          - name: "{{ vmss_name }}nat-pool"
+            frontend_ip_configuration_name: "{{ vmss_name }}front-config"
+            protocol: Tcp
+            frontend_port_range_start: 50000
+            frontend_port_range_end: 50040
+            backend_port: 22
+        load_balancing_rules:
+          - name: "{{ vmss_name }}lb-rules"
+            frontend_ip_configuration: "{{ vmss_name }}front-config"
+            backend_address_pool: "{{ vmss_name }}backend-pool"
+            frontend_port: 80
+            backend_port: 8080
+            load_distribution: Default
+            probe: "{{ vmss_name }}prob0"
 
-    - name: Create Scale Set
+    - name: Create VMSS
+      no_log: true
       azure_rm_virtualmachinescaleset:
         resource_group: "{{ resource_group }}"
         name: "{{ vmss_name }}"
@@ -130,7 +142,7 @@ ms.locfileid: "97824405"
           publisher: Canonical
           sku: 16.04-LTS
           version: latest
-        load_balancer: "{{ vmss_lb_name }}"
+        load_balancer: "{{ vmss_name }}lb"
         data_disks:
           - lun: 0
             disk_size_gb: 20
@@ -140,6 +152,7 @@ ms.locfileid: "97824405"
             disk_size_gb: 30
             managed_disk_type: Standard_LRS
             caching: ReadOnly
+
 ```
 
 プレイブックを実行する前に、次の注意事項を参照してください。
@@ -202,11 +215,11 @@ localhost                  : ok=8    changed=7    unreachable=0    failed=0
     az vmss show -n myScaleSet -g myResourceGroup --query '{"capacity":sku.capacity}' 
     ```
 
-    Cloud Shell で Azure CLI コマンドを実行した結果には、現在 3 つのインスタンスが存在することが示されています。 
+    Cloud Shell で Azure CLI コマンドを実行した結果には、2 つのインスタンスが存在することが示されています。
 
     ```bash
     {
-      "capacity": 3,
+      "capacity": 2,
     }
     ```
 
@@ -220,11 +233,16 @@ localhost                  : ok=8    changed=7    unreachable=0    failed=0
 * `vmss-scale-out.yml` という名前の新規ファイルを作成して、次のコンテンツをコピーする。
 
 ```yml
+---
 - hosts: localhost
+  gather_facts: false
+  
   vars:
-    resource_group: myResourceGroup
-    vmss_name: myScaleSet
-  tasks: 
+    resource_group: myTestRG
+    vmss_name: myTestVMSS
+  
+  tasks:
+
     - name: Get scaleset info
       azure_rm_virtualmachine_scaleset_facts:
         resource_group: "{{ resource_group }}"
@@ -232,16 +250,17 @@ localhost                  : ok=8    changed=7    unreachable=0    failed=0
         format: curated
       register: output_scaleset
 
-    - name: Dump scaleset info
-      debug:
-        var: output_scaleset
-
-    - name: Modify scaleset (change the capacity to 3)
+    - name: set image fact
       set_fact:
-        body: "{{ output_scaleset.ansible_facts.azure_vmss[0] | combine({'capacity': 3}, recursive=True) }}"
+        vmss_image: "{{ output_scaleset.vmss[0].image }}"
 
-    - name: Update something in that scale set
-      azure_rm_virtualmachinescaleset: "{{ body }}"
+    - name: Create VMSS
+      no_log: true
+      azure_rm_virtualmachinescaleset:
+        resource_group: "{{ resource_group }}"
+        name: "{{ vmss_name }}"
+        capacity: 3
+        image: "{{ vmss_image }}"
 ```
 
 [ansible-playbook](https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html) を使用してプレイブックを実行します
@@ -261,29 +280,14 @@ ok: [localhost]
 TASK [Get scaleset info] 
 ok: [localhost]
 
-TASK [Dump scaleset info] 
-ok: [localhost] => {
-    "output_scaleset": {
-        "ansible_facts": {
-            "azure_vmss": [
-                {
-                    ......
-                }
-            ]
-        },
-        "changed": false,
-        "failed": false
-    }
-}
-
-TASK [Modify scaleset (set upgradePolicy to Automatic and capacity to 3)] 
+TASK [Set image fact] 
 ok: [localhost]
 
-TASK [Update something in that scale set] 
+TASK [Change VMSS capacity] 
 changed: [localhost]
 
 PLAY RECAP 
-localhost                  : ok=5    changed=1    unreachable=0    failed=0
+localhost                  : ok=3    changed=1    unreachable=0    failed=0
 ```
 
 ## <a name="verify-the-results"></a>結果を確認する
@@ -294,7 +298,7 @@ localhost                  : ok=5    changed=1    unreachable=0    failed=0
 
 1. 構成したスケール セットに移動します。
 
-1. 次のように、インスタンスの数がかっこ内に入ったスケール セット名を確認できます。`Standard_DS1_v2 (3 instances)` 
+1. 次のように、インスタンスの数がかっこ内に入ったスケール セット名を確認できます。`Standard_DS1_v2 (3 instances)`
 
 1. 次のコマンドを実行して、[Azure Cloud Shell](https://shell.azure.com/) で変更を検証することもできます。
 
@@ -312,5 +316,5 @@ localhost                  : ok=5    changed=1    unreachable=0    failed=0
 
 ## <a name="next-steps"></a>次のステップ
 
-> [!div class="nextstepaction"] 
+> [!div class="nextstepaction"]
 > [チュートリアル:Ansible を使用して Azure の仮想マシン スケール セットにアプリをデプロイする](./vm-scale-set-deploy-app.md)

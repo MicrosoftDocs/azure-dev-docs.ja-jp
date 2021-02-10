@@ -4,12 +4,12 @@ description: 現在のタスクの例を参照してください。
 ms.topic: reference
 ms.date: 01/20/2021
 ms.custom: devx-track-js
-ms.openlocfilehash: 2d7a3091529adb530af76069d9f70880a68e40d3
-ms.sourcegitcommit: 681ea211dc8e1809dd299b5cd64eebd974c073d7
+ms.openlocfilehash: cc5ca751b8d22612c63d26a46934eb5b4c057c69
+ms.sourcegitcommit: 71847ee0a1fee3f3320503629d9a8c82319a1f6a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/21/2021
-ms.locfileid: "98658769"
+ms.lasthandoff: 02/03/2021
+ms.locfileid: "99511000"
 ---
 # <a name="top-tasks-for-javascript-developers"></a>JavaScript 開発者向けの主要タスク
 
@@ -89,8 +89,13 @@ ms.locfileid: "98658769"
 |アプリ リソースの作成 - Express.js アプリのデプロイ、アプリ設定の構成、npm インストールの実行、デプロイされた Web サイトの参照を含む|[Visual Studio Code 拡張機能](../tutorial/deploy-nodejs-azure-app-service-with-visual-studio-code.md?tabs=bash#6-create-app-service-resource-in-visual-studio-code)|
 |アプリ リソースを作成する|[Azure CLI](../tutorial/tutorial-vscode-azure-cli-node/tutorial-vscode-azure-cli-node-03.md)|
 |アプリの作成、デプロイ、ブラウザー アプリ、ログの表示|[Azure CLI](../tutorial/tutorial-vscode-azure-cli-node/tutorial-vscode-azure-cli-node-03.md)|
+|データベース接続文字列を使用するように Web アプリを構成する|[Azure CLI](./with-azure-cli/create-mongodb-cosmosdb.md#configure-your-azure-web-app-with-the-connection-string)|
+|コンテナーを使用するように Web アプリを構成する|[Azure CLI](./with-azure-cli/create-container-registry-resource.md#configure-web-app-to-use-container)|
+|Web アプリのカスタム ドメイン名を構成する|[Azure CLI](./with-azure-cli/configure-app-service-custom-domain-name.md#register-a-domain-name-with-your-azure-app)|
 |アプリ リソースを削除する|[Visual Studio Code 拡張機能](../tutorial/deploy-nodejs-mongodb-app-service-from-visual-studio-code.md#clean-up-resources)<br>[Azure CLI](../tutorial/tutorial-vscode-azure-cli-node/tutorial-vscode-azure-cli-node-07.md)|
 |アプリをデプロイまたは再デプロイする|[Visual Studio Code 拡張機能](deploy-web-app.md#deploy-or-redeploy-to-app-service-with-visual-studio-code)|
+|Web アプリの外部 IP を取得する|[Azure CLI](./with-azure-cli/configure-app-service-custom-domain-name.md#register-a-domain-name-with-your-azure-app)|
+|ドメイン名を購入して DNS レコードを構成する|[Azure CLI](./with-azure-cli/configure-app-service-custom-domain-name.md#purchase-a-domain-name-and-configure-dns-record)|
 |リモート ログをストリーミングする|[Visual Studio Code 拡張機能](../tutorial/deploy-nodejs-azure-app-service-with-visual-studio-code.md?tabs=bash#7-stream-remote-service-logs-in-visual-studio-code)<br>[Azure CLI](../tutorial/tutorial-vscode-azure-cli-node/tutorial-vscode-azure-cli-node-05.md)|
 
 ## <a name="cognitive-services"></a>Cognitive Services
@@ -102,40 +107,42 @@ ms.locfileid: "98658769"
 |Azure SDK をインストールする|[Bash](../tutorial/static-web-app/add-computer-vision-react-app.md#add-computer-vision-to-local-react-app)|
 |[`@azure/cognitiveservices-computervision`](https://www.npmjs.com/package/@azure/cognitiveservices-computervision) を使用して画像を分析する|[Visual Studio Code](../tutorial/static-web-app/add-computer-vision-react-app.md#add-computer-vision-code-as-separate-module)|
 
-## <a name="containers"></a>Containers
-
-探しているものが見つからない場合は、[Docker タスク](#docker)を確認してください。 
+## <a name="containers-including-docker-tasks"></a>Docker タスクを含むコンテナー
 
 |タスク|using|
 |--|--|
-|コンテナー レジストリ リソースを作成する|[Visual Studio Code 拡張機能](../tutorial/tutorial-vscode-docker-node/tutorial-vscode-docker-node-02.md#create-an-azure-container-registry)|
-|レジストリ リソースにイメージをプッシュする|[Visual Studio Code 拡張機能](../tutorial/tutorial-vscode-docker-node/tutorial-vscode-docker-node-04.md#push-the-image-to-a-registry)|
+|Docker ファイルをローカル プロジェクトに追加する|[Visual Studio Code 拡張機能](../tutorial/tutorial-vscode-docker-node/tutorial-vscode-docker-node-04.md#add-docker-files)|
+|ローカル プロジェクトから Docker イメージを構築する|[Visual Studio Code 拡張機能](../tutorial/tutorial-vscode-docker-node/tutorial-vscode-docker-node-04.md#build-a-docker-image)|
+|ローカル JavaScript プロジェクトからコンテナー イメージを作成する|[Visual Studio Code](./with-visual-studio-code/containerize-local-project.md#create-a-container)|
+|コンテナー レジストリ リソースを作成する|[Visual Studio Code 拡張機能](../tutorial/tutorial-vscode-docker-node/tutorial-vscode-docker-node-02.md#create-an-azure-container-registry)<br>[Azure CLI](./with-azure-cli/create-container-registry-resource.md#create-a-container-registry)|
+|Dockerfile を作成します。|[Visual Studio Code 拡張機能](./with-visual-studio-code/containerize-local-project.md#create-a-dockerfile-in-your-project)|
+|イメージをアプリ サービスにデプロイする|[Visual Studio Code 拡張機能](../tutorial/tutorial-vscode-docker-node/tutorial-vscode-docker-node-05.md#deploy-image)|
 |レジストリへの管理者アクセスを有効にする|[Visual Studio Code 拡張機能](../tutorial/tutorial-vscode-docker-node/tutorial-vscode-docker-node-05.md#enable-admin-access-on-the-registry)|
-|イメージをアプリ サービスにデプロイする|[Visual Studio Code 拡張機能](../tutorial/tutorial-vscode-docker-node/tutorial-vscode-docker-node-05.md?branch=main#deploy-image)|
-
+|Azure コンテナー レジストリの資格情報を取得する|[Azure CLI](./with-azure-cli/create-container-registry-resource.md#get-container-registry-credentials)|
+|コンテナー レジストリへのログイン|[BASH - Docker CLI](./with-azure-cli/create-container-registry-resource.md#login-to-container-registry-with-docker-cli)|
+|Docker レジストリ リソースにイメージをプッシュする|[Visual Studio Code 拡張機能](./with-visual-studio-code/containerize-local-project.md#push-local-container-image-to-dockerhub)|
+|Azure Container Registry リソースにイメージをプッシュする|[Visual Studio Code 拡張機能](../tutorial/tutorial-vscode-docker-node/tutorial-vscode-docker-node-04.md#push-the-image-to-a-registry)<BR>[BASH - Docker CLI](./with-azure-cli/create-container-registry-resource.md#push-your-local-image-to-your-container-registry)|
+|ローカル コンテナーを実行する|[Visual Studio Code 拡張機能](with-visual-studio-code/containerize-local-project.md#build-image-from-your-project)|
+|ローカル イメージにタグを付ける|[BASH - Docker CLI](./with-azure-cli/create-container-registry-resource.md#tag-your-local-image)|
+|Docker のバージョンを確認する|[Bash](../tutorial/tutorial-vscode-docker-node/tutorial-vscode-docker-node-01.md#verify-docker-install)|
 
 ## <a name="databases"></a>データベース
 
 |タスク|using|
 |--|--|
-|CosmosDB の作成 - MongoDB リソース|[Visual Studio Code 拡張機能](../tutorial/deploy-nodejs-mongodb-app-service-from-visual-studio-code.md)|
-|CosmosDB 接続文字列を取得する|[Visual Studio Code 拡張機能](../tutorial/deploy-nodejs-mongodb-app-service-from-visual-studio-code.md#get-cosmosdb-connection-string)|
-
-## <a name="docker"></a>Docker
-
-探しているものが見つからない場合は、[コンテナー タスク](#containers)を確認してください。 
-
-|タスク|using|
-|--|--|
-|Docker のバージョンを確認する|[Bash](../tutorial/tutorial-vscode-docker-node/tutorial-vscode-docker-node-01.md#verify-docker-install)|
-|Docker ファイルをローカル プロジェクトに追加する|[Visual Studio Code 拡張機能](../tutorial/tutorial-vscode-docker-node/tutorial-vscode-docker-node-04.md#add-docker-files)|
-|ローカル プロジェクトから Docker イメージを構築する|[Bash](../tutorial/tutorial-vscode-docker-node/tutorial-vscode-docker-node-04.md#build-a-docker-image)|
+|Cosmos DB の作成 - MongoDB リソース|[Visual Studio Code 拡張機能](../tutorial/deploy-nodejs-mongodb-app-service-from-visual-studio-code.md)<br>[Azure CLI](./with-azure-cli/create-mongodb-cosmosdb.md#create-a-cosmos-db-resource-for-mongodb)|
+|CosmosDB 接続文字列を取得する|[Visual Studio Code 拡張機能](../tutorial/deploy-nodejs-mongodb-app-service-from-visual-studio-code.md#get-cosmosdb-connection-string)<br>[Azure CLI](./with-azure-cli/create-mongodb-cosmosdb.md#get-the-mongodb-connection-string-for-your-resource)|
+|Cosmos DB の表示|[Cosmos DB Explorer](https://cosmos.azure.com/)|
+|Cosmos DB で MongoDB 用 Mongoose API を使用する|[JavaScript](./with-database/use-mongodb-as-cosmosdb.md#use-mongoose-sdk-to-connect-to-mongodb-on-azure)
 
 ## <a name="git"></a>Git
 
 |タスク|using|
 |--|--|
 |ローカル Git リポジトリを初期化する|[Visual Studio Code 拡張機能](../tutorial/deploy-nodejs-azure-app-service-with-visual-studio-code.md?tabs=bash#5-initialize-git-in-visual-studio-code-for-current-app)|
+|ローカル ブランチを作成する|[Visual Studio Code のコマンド パレット](./with-visual-studio-code/clone-github-repository.md#create-a-branch-for-changes-with-git-cl)<br>[Visual Studio Code のステータス バー](./with-visual-studio-code/clone-github-repository.md#create-a-branch-from-status-bar)|
+|GitHub からローカル コンピューターにプロジェクトを複製する|[Visual Studio Code](with-visual-studio-code/install-run-debug-nodejs.md#clone-sample-project-to-local-computer)|
+|ローカル ブランチをリモート リポジトリにプッシュする|[Visual Studio Code のステータス バー](./with-visual-studio-code/clone-github-repository.md#push-a-local-branch-to-remote-from-status-bar)<br>[Visual Studio Code のソース管理拡張機能](./with-visual-studio-code/clone-github-repository.md#push-a-local-branch-to-remote-from-the-source-control-extension)|
 
 ## <a name="github"></a>GitHub 
 
@@ -172,6 +179,12 @@ ms.locfileid: "98658769"
 |[`@azure/storage-blob`](https://www.npmjs.com/package/@azure/storage-blob) を使用してファイルをストレージにアップロードする|[React/TypeScript](../tutorial/browser-file-upload-azure-storage-blob.md#upload-button-functionality)|
 |[`@azure/storage-blob`](https://www.npmjs.com/package/@azure/storage-blob) を使用して Storage コンテナー内のファイルを一覧表示する|[React/TypeScript](../tutorial/browser-file-upload-azure-storage-blob.md#get-list-of-blobs)|
 
+## <a name="terminal-usage"></a>ターミナルの使用法
+
+|タスク|using|
+|--|--|
+|統合ターミナル|[Visual Studio Code](./with-visual-studio-code/install-run-debug-nodejs.md#use-the-integrated-bash-terminal-to-install-dependencies)|
+
 ## <a name="virtual-machines"></a>仮想マシン
 
 |タスク|using|
@@ -185,11 +198,15 @@ ms.locfileid: "98658769"
 |ログを表示する|[Azure CLI](../tutorial/nodejs-virtual-machine-vm/azure-monitor-application-insights-nodejs-expressjs-code.md#viewing-the-vm-logs-for-nginx-and-pm2)<br>[ポータル](../tutorial/nodejs-virtual-machine-vm/azure-monitor-application-insights-logs.md#view-application-traces-in-azure-portal)|
 
 
-## <a name="visual-studio-code"></a>Visual Studio Code
+## <a name="visual-studio-code-develop-and-debug-javascript-apps"></a>Visual Studio Code:JavaScript アプリの開発とデバッグ 
 
 |タスク|using|
 |--|--|
-|GitHub リポジトリを複製する|[Visual Studio Code](../tutorial/browser-file-upload-azure-storage-blob.md#2-clone-and-run-the-initial-react-app)|
+|コード補完|[Visual Studio Code](./with-visual-studio-code/install-run-debug-nodejs.md#use-visual-studio-code-autocompletion-with-mongodb)|
+|ローカル Node.js アプリをデバッグする|[Visual Studio Code](./with-visual-studio-code/install-run-debug-nodejs.md#debugging-the-local-nodejs-app)|
+|ローカルのフルスタック デバッグ|[Visual Studio Code](with-visual-studio-code/install-run-debug-nodejs.md#local-full-stack-debugging-in-visual-studio-code)|
+|プロジェクト ファイルとコード内を移動する|[Visual Studio Code](./with-visual-studio-code/install-run-debug-nodejs.md#navigate-the-project-files-and-code)|
+|ローカル Node.js アプリを実行する|[Visual Studio Code](./with-visual-studio-code/install-run-debug-nodejs.md#running-the-local-nodejs-app)|
 
 ## <a name="samples-supporting-these-tasks"></a>これらのタスクをサポートするサンプル
 

@@ -5,16 +5,16 @@ keywords: Ansible, Azure, DevOps, Bash, Cloud Shell, 動的インベントリ
 ms.topic: tutorial
 ms.date: 10/30/2020
 ms.custom: devx-track-ansible, devx-track-azurecli
-ms.openlocfilehash: dd9a6f2b76c6d653eba9542d3b5dfdda4cb75ba5
-ms.sourcegitcommit: e1175aa94709b14b283645986a34a385999fb3f7
+ms.openlocfilehash: d5d3095384fb3f192f7e8cd74b2a49b41b47f239
+ms.sourcegitcommit: 3f8aa923e4626b31cc533584fe3b66940d384351
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/03/2020
-ms.locfileid: "93192354"
+ms.lasthandoff: 02/01/2021
+ms.locfileid: "99224736"
 ---
 # <a name="tutorial-configure-dynamic-inventories-of-your-azure-resources-using-ansible"></a>チュートリアル:Ansible を使用して Azure リソースの動的インベントリを構成する
 
-Ansible を使用して、(Azure などのクラウド ソースを含む) さまざまなソースから " *動的インベントリ* " にインベントリ情報をプルすることができます。 
+Ansible を使用して、(Azure などのクラウド ソースを含む) さまざまなソースから "*動的インベントリ*" にインベントリ情報をプルすることができます。 
 
 [!INCLUDE [ansible-tutorial-goals.md](includes/ansible-tutorial-goals.md)]
 
@@ -48,7 +48,7 @@ Ansible を使用して、(Azure などのクラウド ソースを含む) さ�
 
 1. 次の手法のいずれかを使用して、Azure に 2 つの Linux 仮想マシンを作成します。
 
-    - **Ansible プレイブック** - Ansible プレイブックから仮想マシンを作成する方法については、「 [Ansible を使用して Azure で基本的な仮想マシンを作成する](./vm-configure.md)」を参照してください。 プレイブックを使用して仮想マシンの一方または両方を定義する場合は、パスワードの代わりに SSH 接続を必ず使用してください。
+    - **Ansible プレイブック** - Ansible プレイブックから仮想マシンを作成する方法については、「[Ansible を使用して Azure で基本的な仮想マシンを作成する](./vm-configure.md)」を参照してください。 プレイブックを使用して仮想マシンの一方または両方を定義する場合は、パスワードの代わりに SSH 接続を必ず使用してください。
 
     - **Azure CLI** - Cloud Shell で次の各コマンドを発行して、2 つの仮想マシンを作成します。
 
@@ -133,16 +133,16 @@ Ansible 2.8 以降、Ansible では [Azure 動的インベントリ プラグイ
     ansible all -m ping -i ./myazure_rm.yml
     ```
 
-1. 上記のコマンドを実行しているときに、エラーが発生する場合があります。 このエラーは、ホストへの接続に失敗したことを示しています。 
+1. 既定では、ホスト キー チェックが有効になっているため、次のエラーが発生する場合があります。
 
     ```output
     Failed to connect to the host via ssh: Host key verification failed.
     ```
-    
-    "host-key verification" というエラーを受け取る場合は、Ansible 構成ファイルに次の行を追加します。 Ansible 構成ファイルは `/etc/ansible/ansible.cfg` または `~/.ansible.cfg` にあります。
+
+    `ANSIBLE_HOST_KEY_CHECKING` 環境変数を `False` に設定して、ホスト キーの検証を無効にします。
 
     ```bash
-    host_key_checking = False
+    export ANSIBLE_HOST_KEY_CHECKING=False
     ```
 
 1. プレイブックを実行すると、次の出力のような結果が表示されます。

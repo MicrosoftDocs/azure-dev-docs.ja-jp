@@ -1,25 +1,27 @@
 ---
 title: Python 用 Azure ライブラリにログを構成する
 description: Azure ライブラリでは、ライブラリごとまたは操作ごとに構成される標準の Python ログ モジュールが使用されます。
-ms.date: 06/04/2020
+ms.date: 02/01/2021
 ms.topic: conceptual
 ms.custom: devx-track-python
-ms.openlocfilehash: 0c08ba9c514bf9bca3c982ccf3ef3182f203e247
-ms.sourcegitcommit: 980efe813d1f86e7e00929a0a3e1de83514ad7eb
+ms.openlocfilehash: f42941ec54876fec5854a0a82cee1cbcf30506ce
+ms.sourcegitcommit: b09d3aa79113af04a245b05cec2f810e43062152
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87983316"
+ms.lasthandoff: 02/02/2021
+ms.locfileid: "99476448"
 ---
 # <a name="configure-logging-in-the-azure-libraries-for-python"></a>Python 用 Azure ライブラリにログを構成する
 
 [azure.core ページに基づく](azure-sdk-library-package-index.md#libraries-using-azurecore) Python 用 Azure ライブラリでは、標準の Python [ログ](https://docs.python.org/3/library/logging.html) ライブラリを使用してログ出力を提供します。
 
-ロガー出力は、既定では有効になっていません。 ログを有効にするには、次の手順を行います。
+ログを操作する一般的なプロセスは次のとおりです。
 
 1. 目的のライブラリのログ オブジェクトを取得し、ログ レベルを設定します。
 1. ログ ストリームのハンドラーを登録します。
-1. `logging_enable=True` パラメーターをクライアント オブジェクト コンストラクターまたは特定のメソッドに渡して、ログを有効にします。
+1. HTTP 情報を含めるには、`logging_enable=True` パラメーターをクライアント オブジェクト コンストラクター、資格情報オブジェクト コンストラクター、または特定のメソッドに渡します。
+
+詳細については、この記事の残りのセクションで説明します。
 
 原則として、ライブラリ内のログの使用状況を理解するための最適なリソースは、[github.com/Azure/azure-sdk-for-python](https://github.com/Azure/azure-sdk-for-python) で SDK ソース コードを参照することです。 次のセクションで提案しているように、必要に応じて詳細を簡単に検索できるように、このリポジトリをローカルに複製することをお勧めします。
 
@@ -73,7 +75,7 @@ print(f"Logger enabled for ERROR={logger.isEnabledFor(logging.ERROR)}, " \
 | logging.ERROR             | アプリケーションが回復する可能性が低いエラー (メモリ不足など)。 |
 | logging.WARNING (既定) | 関数が目的のタスクの実行に失敗する (ただし、REST API 呼び出しの再試行など、関数が回復できる場合は失敗しない)。 関数は、通常、例外発生時に警告をログに記録します。 警告レベルでは、エラー レベルが自動的に有効になります。 |
 | logging.INFO              | 関数が正常に動作しているか、サービス呼び出しが取り消されました。 一般に、情報イベントには、要求、応答、ヘッダーが含まれます。 情報レベルでは、エラー レベルと警告レベルが自動的に有効になります。 |
-| logging.DEBUG             | トラブルシューティングによく使用される詳細情報。 デバッグは、ヘッダーにアカウント キーなどの機密情報を含む唯一のログ レベルです。 デバッグ出力には、通常、例外のスタック トレースが含まれます。 デバッグ レベルでは、情報、警告、エラー レベルが自動的に有効になります。 |
+| logging.DEBUG             | 通常、トラブルシューティングに使用され、例外のスタック トレースが含まれている詳細情報。 デバッグ レベルでは、情報、警告、エラー レベルが自動的に有効になります。 注意:`logging_enable=True` も設定した場合、デバッグ レベルにはヘッダー内のアカウント キーやその他の資格情報などの機密情報が含まれます。 セキュリティ侵害を避けるため、これらのログは必ず保護するようにしてください。 |
 | logging.NOTSET            | すべてのログを無効にします。 |
 
 ### <a name="library-specific-logging-level-behavior"></a>ライブラリ固有のログ レベルの動作
@@ -104,41 +106,58 @@ handler = logging.StreamHandler(stream=sys.stdout)
 logger.addHandler(handler)
 ```
 
-この例では、ログ出力を stdout に向けるハンドラーを登録します。 Python ドキュメントの「[logging.handlers](https://docs.python.org/3/library/logging.handlers.html)」で説明されているように、他の種類のハンドラーを使用することもできます。
+この例では、ログ出力を stdout に向けるハンドラーを登録します。 Python ドキュメントの「[logging.handlers](https://docs.python.org/3/library/logging.handlers.html)」で説明されているように他の種類のハンドラーを使用することも、標準の [logging.basicConfig](https://docs.python.org/3/library/logging.html#logging.basicConfig) メソッドを使用することもできます。
 
-## <a name="enable-logging-for-a-client-object-or-operation"></a>クライアント オブジェクトまたは操作のログを有効にする
+## <a name="enable-http-logging-for-a-client-object-or-operation"></a>クライアント オブジェクトまたは操作の HTTP ログを有効にする
 
-ログ レベル セットを設定し、ハンドラーを登録した後も、クライアント オブジェクト コンストラクターまたは操作メソッドのログを有効にするように Azure ライブラリに指示する必要があります。
+既定では、Azure ライブラリ内のログには HTTP 情報は含まれません。 HTTP 情報を (DEBUG レベルとして) ログ出力に含めるには、`logging_enable=True` をクライアントまたは資格情報オブジェクト コンストラクター、あるいは特定のメソッドに明確に渡す必要があります。
 
-### <a name="enable-logging-for-a-client-object"></a>クライアント オブジェクトのログを有効にする
+**注意**:HTTP ログによって、ヘッダー内のアカウント キーやその他の資格情報などの機密情報が漏洩する場合があります。 セキュリティ侵害を避けるため、これらのログは必ず保護するようにしてください。
+
+### <a name="enable-http-logging-for-a-client-object-debug-level"></a>クライアント オブジェクトの HTTP ログを有効にする (DEBUG レベル)
 
 ```python
 from azure.storage.blob import BlobClient
 from azure.identity import DefaultAzureCredential
 
+# Enable HTTP logging on the client object when using DEBUG level
 # endpoint is the Blob storage URL.
 client = BlobClient(endpoint, DefaultAzureCredential(), logging_enable=True)
 ```
 
-クライアント オブジェクトのログを有効にすると、そのオブジェクトを通じて呼び出されたすべての操作のログが有効になります。
+クライアント オブジェクトの HTTP ログを有効にすると、そのオブジェクトを通じて呼び出されたすべての操作のログが有効になります。
 
-### <a name="enable-logging-for-an-operation"></a>操作のログを有効にする
+### <a name="enable-http-logging-for-a-credential-object-debug-level"></a>資格情報オブジェクトの HTTP ログを有効にする (DEBUG レベル)
 
 ```python
 from azure.storage.blob import BlobClient
 from azure.identity import DefaultAzureCredential
 
-# Logging is not enabled on this client.
+# Enable HTTP logging on the credential object when using DEBUG level
+credential = DefaultAzureCredential(logging_enable=True)
+
+# endpoint is the Blob storage URL.
+client = BlobClient(endpoint, credential)
+```
+
+資格情報オブジェクトの HTTP ログを有効にすると、特にそのオブジェクトを通じて呼び出されたすべての操作のログが有効になります。ただし、認証を必要としないクライアント オブジェクトでの操作は除外されます。
+
+### <a name="enable-logging-for-an-individual-method-debug-level"></a>個々のメソッドのログを有効にする (DEBUG レベル)
+
+```python
+from azure.storage.blob import BlobClient
+from azure.identity import DefaultAzureCredential
+
 # endpoint is the Blob storage URL.
 client = BlobClient(endpoint, DefaultAzureCredential())
 
-# Enable logging for only this operation
+# Enable HTTP logging for only this operation when using DEBUG level
 client.create_container("container01", logging_enable=True)
 ```
 
 ## <a name="example-logging-output"></a>ログ出力の例
 
-次のコードは、[例: ストレージ アカウントの使用](azure-sdk-example-storage-use.md)で示されているものに、DEBUG ログの有効を追加したものです (簡潔にするためにコメントは省略しています)。
+次のコードは、[例: ストレージ アカウントの使用](azure-sdk-example-storage-use.md)で示されているものに、DEBUG と HTTP ログの有効化を追加したものです (簡潔にするためにコメントは省略しています)。
 
 ```python
 import os, sys, logging

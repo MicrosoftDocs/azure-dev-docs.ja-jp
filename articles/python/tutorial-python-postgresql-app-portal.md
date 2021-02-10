@@ -3,14 +3,14 @@ title: チュートリアル:Azure portal を使用して PostgreSQL で Django 
 description: Azure で Web アプリと PostgreSQL データベースをプロビジョニングし、GitHub からアプリ コードをデプロイします。
 ms.devlang: python
 ms.topic: tutorial
-ms.date: 01/04/2021
+ms.date: 02/02/2021
 ms.custom: devx-track-python
-ms.openlocfilehash: 65f8558aa81e839b3701669a0274419cd2143e49
-ms.sourcegitcommit: 4f9ce09cbf9663203c56f5b12ecbf70ea68090ed
+ms.openlocfilehash: e3ee95a80d833ce9e99ebc1c5a3fbc6f14166e19
+ms.sourcegitcommit: 71847ee0a1fee3f3320503629d9a8c82319a1f6a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/06/2021
-ms.locfileid: "97911462"
+ms.lasthandoff: 02/03/2021
+ms.locfileid: "99511122"
 ---
 # <a name="tutorial-deploy-a-django-web-app-with-postgresql-using-the-azure-portal"></a>チュートリアル:Azure portal を使用して PostgreSQL で Django Web アプリをデプロイする
 
@@ -206,6 +206,12 @@ Azure portal を使用して、データ ドリブンの Python [Django](https:/
     source /antenv/bin/activate
     ```
 
+1. 依存関係をインストールします。
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
 1. データベースの移行を実行します。
 
     ```bash
@@ -253,6 +259,8 @@ Azure portal を使用して、データ ドリブンの Python [Django](https:/
 1. `cd $APP_PATH` を使用してアプリ フォルダーに移動します。
 
 1. `source /antenv/bin/activate` を使用して仮想環境をアクティブにします。
+
+1. `pip install -r requirements.txt` を使用して要件をインストールします。
 
 1. `python manage.py migrate` を使用して移行を再実行します。
 

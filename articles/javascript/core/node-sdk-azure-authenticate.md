@@ -4,12 +4,12 @@ description: Node.js 用 Azure 管理モジュールへの認証にサービス 
 ms.topic: how-to
 ms.date: 01/04/2021
 ms.custom: devx-track-js
-ms.openlocfilehash: b0e39b14e8f96c58e1e5fb4f2bbf12f07180db8b
-ms.sourcegitcommit: 3d906f265b748fbc0a070fce252098675674c8d9
+ms.openlocfilehash: e5774f0453960b41679a01170882fad1d9f50bad
+ms.sourcegitcommit: b09d3aa79113af04a245b05cec2f810e43062152
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/22/2021
-ms.locfileid: "98699910"
+ms.lasthandoff: 02/02/2021
+ms.locfileid: "99476438"
 ---
 # <a name="authenticate-with-the-azure-management-modules-for-javascript"></a>JavaScript 用 Azure 管理モジュールを使用した認証
 
@@ -31,7 +31,7 @@ ms.locfileid: "98699910"
 
 ## <a name="azure-identity-library"></a>Azure ID ライブラリ
 
-Azure ID ライブラリは、Azure 用の最新の認証パッケージです。 Azure ID を使用する、[サポートされているライブラリの一覧](https://www.npmjs.com/package/@azure/identity#client-libraries-supporting-authentication-with-azure-identity)を確認してください。
+Azure ID ライブラリは、Azure 用の最新の認証パッケージです。 ご使用のクライアント ライブラリの Readme で、この新しいライブラリの使用がサポートされているかどうかを確認してください。
 
 [@azure/identity](https://www.npmjs.com/package/@azure/identity) ライブラリにより、Azure SDK ライブラリの Azure Active Directory に対する認証が簡略化されます。 これには、API 要求を認証するために SDK ライブラリに渡すことができる TokenCredential 実装のセットが用意されています。 これは、Azure Active Directory サービス プリンシパルまたはマネージド ID を使用するトークン認証をサポートしています。
 
