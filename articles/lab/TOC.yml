@@ -4,7 +4,7 @@
     - name: ヒント
       items:
         - name: ヒント付きの Python クイックスタート
-          href: tool-tip-metric.md
+          href: tool-tip-metrics.md
     - name: チュートリアル形式ラボ
       items:
         - name: Python flask のシングル ページ
