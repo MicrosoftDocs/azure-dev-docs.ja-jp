@@ -1,6 +1,10 @@
 - name: 開発者エクスペリエンス ラボ
   href: index.yml
   items:
+    - name: ヒント
+      items:
+        - name: ヒント付きの Python クイックスタート
+          href: tool-tip-metric.md
     - name: チュートリアル形式ラボ
       items:
         - name: Python flask のシングル ページ
