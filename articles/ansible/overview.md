@@ -5,12 +5,13 @@ keywords: Ansible, Azure, DevOps, 概要, クラウド プロビジョニング,
 ms.topic: overview
 ms.date: 08/13/2020
 ms.custom: devx-track-ansible
-ms.openlocfilehash: 9943dd0dbdd1b352d245bc471538e1a05d464c99
-ms.sourcegitcommit: 8eb1c379b2bbc2acdd82fc9d24d8ed948e5a6847
+adobe-target: true
+ms.openlocfilehash: fb5ec18491a4d6220f188547f012e93d61b2831f
+ms.sourcegitcommit: b380f6e637b47e6e3822b364136853e1d342d5cd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/26/2021
-ms.locfileid: "98811099"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "100395167"
 ---
 # <a name="using-ansible-with-azure"></a>Azure での Ansible の使用
 

@@ -4,12 +4,13 @@ description: このチュートリアルでは、拡張機能と JavaScript を�
 ms.topic: tutorial
 ms.date: 11/05/2020
 ms.custom: devx-track-js, contperf-fy21q2
-ms.openlocfilehash: dba446d20b8300ea97b5186b2d4cc3a3006e8811
-ms.sourcegitcommit: c8330128d5d6a71859933a890ecdf047cb950996
+adobe-target: true
+ms.openlocfilehash: eca2ed72b6a1b712626913907b782c1535a50e0f
+ms.sourcegitcommit: b380f6e637b47e6e3822b364136853e1d342d5cd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/15/2020
-ms.locfileid: "97522364"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "100395357"
 ---
 # <a name="1-create-and-deploy-azure-functions-from-visual-studio-code"></a>1.Visual Studio Code で Azure Functions を作成してデプロイする
 

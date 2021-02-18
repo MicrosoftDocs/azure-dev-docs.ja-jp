@@ -5,12 +5,13 @@ keywords: Azure DevOps Terraform インストール 構成 Cloud Shell 初期化
 ms.topic: quickstart
 ms.date: 09/27/2020
 ms.custom: devx-track-terraform, devx-track-azurecli
-ms.openlocfilehash: 70a7c1dc9db76c51d5923fc3b82200eca2976b2c
-ms.sourcegitcommit: 1ddcb0f24d2ae3d1f813ec0f4369865a1c6ef322
+adobe-target: true
+ms.openlocfilehash: 6befee6004b23410693f82c83f62e52318fd1c08
+ms.sourcegitcommit: b380f6e637b47e6e3822b364136853e1d342d5cd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92688918"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "100395407"
 ---
 # <a name="quickstart-configure-terraform-using-azure-cloud-shell"></a>クイック スタート:Azure Cloud Shell を使用して Terraform を構成する
  
@@ -44,7 +45,7 @@ ms.locfileid: "92688918"
 
 1. Cloud Shell を以前に使用したことがない場合は、環境とストレージの設定を構成します。 この記事では、Bash 環境を使用します。
 
-**注** :
+**注**:
 - Cloud Shell には、Terraform の最新バージョンが自動的にインストールされます。 また、Terraform は、現在の Azure サブスクリプションの情報を自動的に使用します。 そのため、インストールや構成は必要ありません。
 
 ## <a name="authenticate-to-azure"></a>Azure に対して認証します
@@ -64,18 +65,18 @@ Terraform では、Azure に対して認証を行うためのオプションが�
 az login
 ```
 
-**注** :
+**注**:
 
 - ログインが成功すると、`az login` により、ログインした Microsoft アカウントに関連付けられている Azure サブスクリプションの一覧が表示されます。
 - 使用可能な Azure サブスクリプションごとにプロパティの一覧が表示されます。 `isDefault` プロパティは、使用している Azure サブスクリプションを識別します。 別の Azure サブスクリプションに切り替える方法については、「[現在の Azure サブスクリプションを設定する](#set-the-current-azure-subscription)」セクションを参照してください。
 
 ### <a name="authenticate-via-azure-service-principal"></a>Azure サービス プリンシパルを使用した認証
 
-**Azure サービス プリンシパルを作成する** :サービス プリンシパルを使用して Azure サブスクリプションにログインするには、まずサービス プリンシパルへのアクセスが必要です。 サービス プリンシパルを既にお持ちの場合は、セクションのこの部分を省略できます。
+**Azure サービス プリンシパルを作成する**:サービス プリンシパルを使用して Azure サブスクリプションにログインするには、まずサービス プリンシパルへのアクセスが必要です。 サービス プリンシパルを既にお持ちの場合は、セクションのこの部分を省略できます。
 
 Azure サービスをデプロイまたは使用する自動化ツール (Terraform など) のアクセス許可は、常に制限されている必要があります。 完全な特権を持つユーザーとしてアプリケーションをログインさせる代わりに、Azure にはサービス プリンシパルが用意されています。 しかし、ログインに使用するサービス プリンシパルがない場合はどうすればよいでしょうか。 そのようなシナリオの場合、ユーザー資格情報を使用してログインしてから、サービス プリンシパルを作成できます。 サービス プリンシパルが作成されると、その情報を今後のログイン試行に使用できるようになります。
 
-[Azure CLI でサービス プリンシパルを作成](/cli/azure/create-an-azure-service-principal-azure-cli?)するときは、多くのオプションがあります。 この記事では、 [az ad sp create-for-rbac](/cli/azure/ad/sp?#az-ad-sp-create-for-rbac) を作成して、 **共同作成者** ロールを持つサービス プリンシパルを作成します。 **共同作成者** ロール (既定) には、Azure アカウントに対して読み取りと書き込みを行うための完全なアクセス許可があります。 ロールベースのアクセス制御 (RBAC) とロールの詳細については、[RBAC の組み込みのロール](/azure/active-directory/role-based-access-built-in-roles)に関するページをご覧ください。
+[Azure CLI でサービス プリンシパルを作成](/cli/azure/create-an-azure-service-principal-azure-cli?)するときは、多くのオプションがあります。 この記事では、[az ad sp create-for-rbac](/cli/azure/ad/sp?#az-ad-sp-create-for-rbac) を作成して、**共同作成者** ロールを持つサービス プリンシパルを作成します。 **共同作成者** ロール (既定) には、Azure アカウントに対して読み取りと書き込みを行うための完全なアクセス許可があります。 ロールベースのアクセス制御 (RBAC) とロールの詳細については、[RBAC の組み込みのロール](/azure/active-directory/role-based-access-built-in-roles)に関するページをご覧ください。
 
 次のコマンドを入力します。`<subscription_id>` を、使用するサブスクリプションアカウントの ID に置き換えます。
 
@@ -83,12 +84,12 @@ Azure サービスをデプロイまたは使用する自動化ツール (Terraf
 az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/<subscription_id>"
 ```
 
-**注** :
+**注**:
 
 - 正常に完了すると、`az ad sp create-for-rbac` によっていくつかの値が表示されます。 `name`、`password`、および `tenant` の値は、次のステップで使用します。
 - このパスワードは、紛失した場合、取得できません。 したがって、パスワードは安全な場所に保管してください。 パスワードを忘れた場合は、[サービス プリンシパルの資格情報をリセット](/cli/azure/create-an-azure-service-principal-azure-cli#reset-credentials)する必要があります。
 
-**Azure サービス プリンシパルを使用してログインする** : 次の `az login` への呼び出しで、プレースホルダーをご自身のサービス プリンシパルの情報に置き換えます。
+**Azure サービス プリンシパルを使用してログインする**: 次の `az login` への呼び出しで、プレースホルダーをご自身のサービス プリンシパルの情報に置き換えます。
 
 ```azurecli
 az login --service-principal -u <service_principal_name> -p "<service_principal_password>" --tenant "<service_principal_tenant>"
@@ -116,7 +117,7 @@ Microsoft アカウントは、複数の Azure サブスクリプションに関
     az account set --subscription="<subscription_id>"
     ```
 
-    **注** :
+    **注**:
 
     - `az account set` を呼び出すと、指定した Azure サブスクリプションに切り替えた結果が表示されません。 ただし、`az account show` を使用して、現在の Azure サブスクリプションが変更されたことを確認できます。
 

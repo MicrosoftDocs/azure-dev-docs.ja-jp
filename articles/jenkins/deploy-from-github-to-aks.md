@@ -3,16 +3,18 @@ title: チュートリアル - Jenkins を使用して GitHub から Azure Kuber
 description: GitHub からの継続的インテグレーション (CI) と Azure Kubernetes Service (AKS) への継続的配置 (CD) のために Jenkins 構成する方法について説明します。
 keywords: jenkins, azure, devops, aks, azure kubernetes service, github
 ms.topic: article
-ms.date: 10/29/2019
+ms.date: 02/05/2021
 ms.custom: devx-track-jenkins, devx-track-azurecli
-ms.openlocfilehash: 137f7cf050c9d31adc9e56a70fbb98e29342e142
-ms.sourcegitcommit: 3d906f265b748fbc0a070fce252098675674c8d9
+ms.openlocfilehash: b64037f6a6113208182fa6c9f28e53005928dbab
+ms.sourcegitcommit: bccbab4883e6b6b4926fc194c35ad948b11ccc3f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/22/2021
-ms.locfileid: "98699970"
+ms.lasthandoff: 02/08/2021
+ms.locfileid: "99822755"
 ---
 # <a name="tutorial-deploy-from-github-to-azure-kubernetes-service-using-jenkins"></a>チュートリアル:Jenkins を使用して GitHub から Azure Kubernetes Service にデプロイする
+
+[!INCLUDE [jenkins-integration-with-azure.md](includes/jenkins-integration-with-azure.md)]
 
 このチュートリアルでは、Jenkins で継続的インテグレーション (CI) と継続的デプロイ (CD) を設定して、GitHub から [Azure Kubernetes Service (AKS)](/azure/aks/intro-kubernetes) クラスターにサンプル アプリをデプロイします。 このように、GitHub にコミットをプッシュすることでご利用のアプリを更新するときに、Jenkins では新しいコンテナー ビルドを自動的に実行し、Azure Container Registry (ACR) にコンテナー イメージをプッシュして、AKS で自分のアプリを実行します。 
 
