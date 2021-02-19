@@ -2,14 +2,16 @@
 title: チュートリアル:Microsoft ログイン ボタンを React SPA に追加する
 description: このチュートリアルで示されている Azure Active Directory 認証は、ログインとログアウトのボタンであり、ユーザーのユーザー名　(メールアドレス) へのアクセスを提供します。 シングルページ アプリケーション (SPA) でのユーザーの操作を管理するために、Azure クライアント側 SDK (`@azure/msal-browser`) を使用して TypeScript アプリケーションを開発します。
 ms.topic: tutorial
-ms.date: 12/01/2020
+ms.date: 02/16/2020
 ms.custom: devx-track-js, "azure-sdk-javascript-@azure/msal-browser-2.7.0"
-ms.openlocfilehash: ffbc8ea2824f7bbfaef3a3ae3579537633f9455b
-ms.sourcegitcommit: 593d177cfb5f56f236ea59389e43a984da30f104
+ms.history:
+- 20210216:fix public issue 443
+ms.openlocfilehash: d5d64f1de3637c79a081e64dbf3cd632e15a3ef3
+ms.sourcegitcommit: 450cfb580f0fef7aabd38a7db17ecf7502126ce4
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/18/2021
-ms.locfileid: "98561658"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100548843"
 ---
 # <a name="add-microsoft-login-button-to-a-single-page-application-for-authentication"></a>認証用のシングルページ アプリケーションに Microsoft ログイン ボタンを追加する
 
@@ -31,7 +33,7 @@ ms.locfileid: "98561658"
 
 ## <a name="1-set-up-development-environment"></a>1.開発環境をセットアップする
 
-次のものがローカル コンピューターにインストールされていることを確認します。
+次のソフトウェアがローカル コンピューターにインストールされていることを確認します。
 
 - アクティブなサブスクリプションが含まれる Azure アカウント。 [無料で作成できます](https://azure.microsoft.com/free/)。
 - [Node.js および npm](https://nodejs.org/en/download) - ローカル コンピューターにインストール済み。

@@ -4,12 +4,12 @@ description: 統合テストと、Azure DevOps を使用した Terraform プロ�
 ms.topic: tutorial
 ms.date: 10/08/2020
 ms.custom: devx-track-terraform
-ms.openlocfilehash: b9a533475bd291cc0d1fd9fffa418b0ce4498fb0
-ms.sourcegitcommit: 4dac39849ba2e48034ecc91ef578d11aab796e58
+ms.openlocfilehash: 7b10693907feedf94db60315d8819d45fdd47412
+ms.sourcegitcommit: b19420d1a8d526a81e0835012cccc46717fadd69
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "94983991"
+ms.lasthandoff: 02/15/2021
+ms.locfileid: "100524897"
 ---
 # <a name="tutorial-configure-integration-tests-for-terraform-projects-in-azure"></a>チュートリアル:Azure で Terraform プロジェクトの統合テストを構成する
 

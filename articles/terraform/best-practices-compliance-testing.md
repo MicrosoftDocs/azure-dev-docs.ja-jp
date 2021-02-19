@@ -4,12 +4,12 @@ description: 振る舞い駆動開発 (BDD) スタイルのコンプライアン
 ms.topic: tutorial
 ms.date: 07/31/2020
 ms.custom: devx-track-terraform
-ms.openlocfilehash: 26b32beabaa4526a79c28639fd6f7c68b7a7d49d
-ms.sourcegitcommit: e20f6c150bfb0f76cd99c269fcef1dc5ee1ab647
+ms.openlocfilehash: d19c1cfa2c794910d65f98ba71f108e478b1c52b
+ms.sourcegitcommit: b19420d1a8d526a81e0835012cccc46717fadd69
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/28/2020
-ms.locfileid: "91401692"
+ms.lasthandoff: 02/15/2021
+ms.locfileid: "100524887"
 ---
 # <a name="tutorial-compliance-testing-with-terraform-and-azure"></a>チュートリアル:Terraform と Azure を使用したコンプライアンス テスト
 

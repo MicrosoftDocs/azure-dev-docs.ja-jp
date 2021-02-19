@@ -5,14 +5,16 @@ keywords: Ansible, Azure, DevOps, Bash, Cloud Shell, 動的インベントリ
 ms.topic: tutorial
 ms.date: 10/30/2020
 ms.custom: devx-track-ansible, devx-track-azurecli
-ms.openlocfilehash: d5d3095384fb3f192f7e8cd74b2a49b41b47f239
-ms.sourcegitcommit: 3f8aa923e4626b31cc533584fe3b66940d384351
+ms.openlocfilehash: ff23b6d4d363e8b83e33414c6518560fa82b8ee0
+ms.sourcegitcommit: b380f6e637b47e6e3822b364136853e1d342d5cd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/01/2021
-ms.locfileid: "99224736"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "100395267"
 ---
 # <a name="tutorial-configure-dynamic-inventories-of-your-azure-resources-using-ansible"></a>チュートリアル:Ansible を使用して Azure リソースの動的インベントリを構成する
+
+[!INCLUDE [ansible-28-note.md](includes/ansible-28-note.md)]
 
 Ansible を使用して、(Azure などのクラウド ソースを含む) さまざまなソースから "*動的インベントリ*" にインベントリ情報をプルすることができます。 
 
@@ -68,53 +70,21 @@ Ansible を使用して、(Azure などのクラウド ソースを含む) さ�
 
 [タグを使用して、Azure リソースをユーザー定義のカテゴリ別に整理](/azure/azure-resource-manager/resource-group-using-tags#azure-cli)できます。
 
-### <a name="using-ansible-version--28"></a>Ansible バージョン 2.8 未満を使用する
-次の [az resource tag](/cli/azure/resource#az-resource-tag) コマンドを入力して、仮想マシン `ansible-inventory-test-vm1` にキー `nginx` を使用してタグを付けます。
-
-```azurecli
-az resource tag --tags nginx --id /subscriptions/<YourAzureSubscriptionID>/resourceGroups/ansible-inventory-test-rg/providers/Microsoft.Compute/virtualMachines/ansible-inventory-test-vm1
-```
-
-### <a name="using-ansible-version--28"></a>Ansible バージョン 2.8 以上を使用する
 次の [az resource tag](/cli/azure/resource#az-resource-tag) コマンドを入力して、仮想マシン `ansible-inventory-test-vm1` にキー `Ansible=nginx` を使用してタグを付けます。
 
 ```azurecli
 az resource tag --tags Ansible=nginx --id /subscriptions/<YourAzureSubscriptionID>/resourceGroups/ansible-inventory-test-rg/providers/Microsoft.Compute/virtualMachines/ansible-inventory-test-vm1
 ```
 
+`<YourAzureSubscriptionID>` をサブスクリプション ID に置き換えます。
+
 ## <a name="generate-a-dynamic-inventory"></a>動的インベントリの生成
 
 仮想マシンを定義 (およびタグ付け) した後は、動的インベントリを生成します。
 
-### <a name="using-ansible-version--28"></a>Ansible バージョン 2.8 未満を使用する
+Ansible では [Azure 動的インベントリ プラグイン](https://github.com/ansible/ansible/blob/stable-2.9/lib/ansible/plugins/inventory/azure_rm.py)が提供されています。 次の手順でこのプラグインの使用方法を示します。
 
-Ansible には、Azure リソースの動的インベントリを生成する [azure_rm.py](https://github.com/ansible-collections/community.general/blob/main/scripts/inventory/azure_rm.py) という名前の Python スクリプトが用意されています。 `azure_rm.py` スクリプトを使用して 2 つのテスト用 Azure 仮想マシンに接続する手順を次に示します。
-
-1. GNU `wget` コマンドを使用して、`azure_rm.py` スクリプトを取得します。
-
-    ```bash
-    wget https://raw.githubusercontent.com/ansible-collections/azure/dev/plugins/inventory/azure_rm.py
-    ```
-
-1. `chmod` コマンドを使用して、`azure_rm.py` スクリプトへのアクセス許可を変更します。 次のコマンドでは、`+x` パラメーターを使用して、指定されたファイル (`azure_rm.py`) の実行を許可しています。
-
-    ```bash
-    chmod +x azure_rm.py
-    ```
-
-1. [ansible コマンド](https://docs.ansible.com/ansible/2.4/ansible.html)を使用して、リソース グループに接続します。
-
-    ```bash
-    ansible -i azure_rm.py ansible-inventory-test-rg -m ping
-    ```
-
-1. 接続されると、作成される仮想マシンの結果を示す結果が表示されます。
-
-### <a name="ansible-version--28"></a>Ansible バージョン 2.8 以上
-
-Ansible 2.8 以降、Ansible では [Azure 動的インベントリ プラグイン](https://github.com/ansible/ansible/blob/stable-2.9/lib/ansible/plugins/inventory/azure_rm.py)が提供されています。 次の手順でこのプラグインの使用方法を示します。
-
-1. インベントリ プラグインには構成ファイルが必要です。 構成ファイルは、末尾が `azure_rm` で、`yml` または `yaml` の拡張子を持っている必要があります。 このチュートリアルの例として、次のプレイブックを `myazure_rm.yml` として保存します。
+1. 動的インベントリは `azure_rm` で終わる必要があり、`yml` または `yaml` のいずれかの拡張子を持つ必要があります。そうでないと、Ansible では適切なインベントリ プラグインが検出されません。 このチュートリアルの例として、次のプレイブックを `myazure_rm.yml` として保存します。
 
     ```yml
         plugin: azure_rm
@@ -154,32 +124,6 @@ Ansible 2.8 以降、Ansible では [Azure 動的インベントリ プラグイ
 
 ## <a name="enable-the-vm-tag"></a>VM タグを有効にする
 
-### <a name="if-youre-using-ansible--28"></a>Ansible 2.8 未満を使用している場合
-
-- タグを設定した後は、そのタグを "有効" にする必要があります。 タグを有効にする 1 つの方法は、`export` コマンドを使用して `AZURE_TAGS` という名前の環境変数にタグをエクスポートするという方法です。
-
-    ```console
-    export AZURE_TAGS=nginx
-    ```
-    
-- 次のコマンドを実行します。
-
-    ```bash
-    ansible -i azure_rm.py ansible-inventory-test-rg -m ping
-    ```
-    
-    現在は 1 つの仮想マシン (`AZURE_TAGS` 環境変数にエクスポートされた値とタグが一致する仮想マシン) しか表示されません。
-
-    ```output
-       ansible-inventory-test-vm1 | SUCCESS => {
-        "changed": false,
-        "failed": false,
-        "ping": "pong"
-    }
-    ```
-
-### <a name="if-youre-using-ansible---28"></a>Ansible 2.8 以上を使用している場合
-
 - コマンド `ansible-inventory -i myazure_rm.yml --graph` を実行して、次の出力を取得します。
 
     ```output
@@ -195,7 +139,6 @@ Ansible 2.8 以降、Ansible では [Azure 動的インベントリ プラグイ
     ```bash
     ansible -i ./myazure_rm.yml -m ping tag_Ansible_nginx
     ```
-
 
 ## <a name="set-up-nginx-on-the-tagged-vm"></a>タグ付けされた VM での Nginx の設定
 
@@ -228,14 +171,6 @@ Ansible 2.8 以降、Ansible では [Azure 動的インベントリ プラグイ
 1. ファイルを保存し、エディターを終了します。
 
 1. [ansible-playbook](https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html) を使用してプレイブックを実行します
-
-   - Ansible 2.8 未満:
-
-     ```bash
-     ansible-playbook -i azure_rm.py nginx.yml
-     ```
-
-   - Ansible 2.8 以上:
 
      ```bash
      ansible-playbook  -i ./myazure_rm.yml  nginx.yml --limit=tag_Ansible_nginx
@@ -307,5 +242,5 @@ Ansible 2.8 以降、Ansible では [Azure 動的インベントリ プラグイ
 
 ## <a name="next-steps"></a>次のステップ
 
-> [!div class="nextstepaction"] 
+> [!div class="nextstepaction"]
 > [クイック スタート: Ansible を使用して Azure で Linux 仮想マシンを構成する](./vm-configure.md)

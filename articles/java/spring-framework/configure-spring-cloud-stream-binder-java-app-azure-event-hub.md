@@ -3,17 +3,17 @@ title: Azure Event Hubs を使用する Spring Cloud Stream Binder アプリケ�
 description: Spring Boot Initializr を使用して作成された Java ベースの Spring Cloud Stream Binder アプリケーションを、Azure Event Hubs を使用するように構成する方法について説明します。
 services: event-hubs
 documentationcenter: java
-ms.date: 10/13/2020
+ms.date: 02/08/2021
 ms.service: event-hubs
 ms.tgt_pltfrm: na
 ms.topic: article
 ms.custom: devx-track-java, devx-track-azurecli
-ms.openlocfilehash: 0cc3289243c1a146cf59ecb15c5150327f49c236
-ms.sourcegitcommit: 8e1d3a384ccb0e083589418d65a70b3a01afebff
+ms.openlocfilehash: d0c87ce32caddc0100b91abd800a18179ba4101e
+ms.sourcegitcommit: bccbab4883e6b6b4926fc194c35ad948b11ccc3f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94560305"
+ms.lasthandoff: 02/08/2021
+ms.locfileid: "99822721"
 ---
 # <a name="how-to-create-a-spring-cloud-stream-binder-application-with-azure-event-hubs"></a>Azure Event Hubs を使用する Spring Cloud Stream Binder アプリケーションを作成する方法
 
@@ -26,7 +26,7 @@ ms.locfileid: "94560305"
 * [Apache Maven](http://maven.apache.org/) バージョン 3.0 以降。
 
 > [!IMPORTANT]
-> この記事の手順を完了するには、Spring Boot 2.2 以上のバージョンが必要です。
+> この記事の手順を完了するには、Spring Boot バージョン 2.2 または 2.3 が必要です。
 
 ## <a name="create-an-azure-event-hub-using-the-azure-portal"></a>Azure portal を使用して Azure イベント ハブを作成する
 
@@ -103,7 +103,7 @@ ms.locfileid: "94560305"
 1. 次のオプションを指定します。
 
    * **Java** で **Maven** プロジェクトを生成します。
-   * **Spring Boot** のバージョンとして、2.2 以上を指定します。
+   * **Spring Boot** のバージョンとして、**2.3** を指定します。
    * アプリケーションの **グループ (Group)** と **成果物 (Artifact)** の名前を指定します。
    * Java バージョンとして **8** を選択します。
    * *Web* 依存関係を追加します。
@@ -134,9 +134,9 @@ ms.locfileid: "94560305"
 
    ```xml
    <dependency>
-      <groupId>com.microsoft.azure</groupId>
-      <artifactId>spring-cloud-azure-eventhubs-stream-binder</artifactId>
-      <version>1.2.7</version>
+     <groupId>com.azure.spring</groupId>
+     <artifactId>azure-spring-cloud-stream-binder-eventhubs</artifactId>
+     <version>2.1.0</version>
    </dependency>
    ```
 
@@ -158,118 +158,65 @@ ms.locfileid: "94560305"
 
 1. *pom.xml* ファイルを保存して閉じます。
 
-## <a name="create-an-azure-credential-file"></a>Azure 資格情報ファイルを作成する
-
-1. コマンド プロンプトを開きます。
-
-1. Spring Boot アプリの *resources* ディレクトリに移動します。次に例を示します。
-
-   ```cmd
-   cd C:\SpringBoot\eventhubs-sample\src\main\resources
-   ```
-
-   または
-
-   ```bash
-   cd /users/example/home/eventhubs-sample/src/main/resources
-   ```
-
-1. Azure アカウントにサインインします。
-
-   ```azurecli
-   az login
-   ```
-
-1. サブスクリプションを一覧表示します。
-
-   ```azurecli
-   az account list
-   ```
-   Azure からサブスクリプションの一覧が返されます。使用するサブスクリプションの GUID をコピーする必要があります。次に例を示します。
-
-   ```json
-   [
-     {
-       "cloudName": "AzureCloud",
-       "id": "11111111-1111-1111-1111-111111111111",
-       "isDefault": true,
-       "name": "Converted Windows Azure MSDN - Visual Studio Ultimate",
-       "state": "Enabled",
-       "tenantId": "22222222-2222-2222-2222-222222222222",
-       "user": {
-         "name": "user@contoso.com",
-         "type": "user"
-       }
-     }
-   ]
-   ```
-   
-1. Azure で使用するサブスクリプションの GUID を指定します。次に例を示します。
-
-   ```azurecli
-   az account set -s 11111111-1111-1111-1111-111111111111
-   ```
-
-1. Azure 資格情報ファイルを作成します。
-
-   ```azurecli
-   az ad sp create-for-rbac --sdk-auth > my.azureauth
-   ```
-
-   このコマンドにより、*resources* ディレクトリに、次の例のような内容の *my.azureauth* ファイルが作成されます。
-
-   ```json
-   {
-     "clientId": "33333333-3333-3333-3333-333333333333",
-     "clientSecret": "44444444-4444-4444-4444-444444444444",
-     "subscriptionId": "11111111-1111-1111-1111-111111111111",
-     "tenantId": "22222222-2222-2222-2222-222222222222",
-     "activeDirectoryEndpointUrl": "https://login.microsoftonline.com",
-     "resourceManagerEndpointUrl": "https://management.azure.com/",
-     "activeDirectoryGraphResourceId": "https://graph.windows.net/",
-     "sqlManagementEndpointUrl": "https://management.core.windows.net:8443/",
-     "galleryEndpointUrl": "https://gallery.azure.com/",
-     "managementEndpointUrl": "https://management.core.windows.net/"
-   }
-   ```
-
 ## <a name="configure-your-spring-boot-app-to-use-your-azure-event-hub"></a>Azure イベント ハブを使用するように Spring Boot アプリを構成する
 
-1. アプリの *resources* ディレクトリで *application.properties* を探します。次に例を示します。
+1. アプリの *resources* ディレクトリで *application.yaml* を探します。次に例を示します。
 
-   *C:\SpringBoot\eventhubs-sample\src\main\resources\application.properties*
+   *C:\SpringBoot\eventhubs-sample\src\main\resources\application.yaml*
 
    - または -
 
-   */users/example/home/eventhubs-sample/src/main/resources/application.properties*
+   */users/example/home/eventhubs-sample/src/main/resources/application.yaml*
 
-2. テキスト エディターで *application.properties* ファイルを開きます。次の行を追加し、サンプルの値をイベント ハブの適切なプロパティに置き換えます。
+2. テキスト エディターで *application.yaml* ファイルを開きます。次の行を追加し、サンプルの値をイベント ハブの適切なプロパティに置き換えます。
 
    ```yaml
-   spring.cloud.azure.credential-file-path=my.azureauth
-   spring.cloud.azure.resource-group=wingtiptoysresources
-   spring.cloud.azure.region=West US
-   spring.cloud.azure.eventhub.namespace=wingtiptoysnamespace
-   spring.cloud.azure.eventhub.checkpoint-storage-account=wingtiptoysstorage
-   spring.cloud.stream.bindings.input.destination=wingtiptoyshub
-   spring.cloud.stream.bindings.input.group=$Default
-   spring.cloud.stream.eventhub.bindings.input.consumer.checkpoint-mode=MANUAL
-   spring.cloud.stream.bindings.output.destination=wingtiptoyshub
+    spring:
+      cloud:
+        azure:
+          eventhub:
+            connection-string: [eventhub-namespace-connection-string]
+            checkpoint-storage-account: wingtiptoysstorage
+            checkpoint-access-key: [checkpoint-access-key]
+            checkpoint-container: wingtiptoyscontainer
+            
+        stream:
+          bindings:
+            consume-in-0:
+              destination: wingtiptoyshub
+              group: $Default
+            supply-out-0:
+              destination: wingtiptoyshub
+   
+          eventhub:
+            bindings:
+              consume-in-0:
+                consumer:
+                  checkpoint-mode: MANUAL
+          function:
+            definition: consume;supply;
+          poller:
+            initial-delay: 0
+            fixed-delay: 1000
    ```
+
    各値の説明:
 
    |                          フィールド                           |                                                                                   説明                                                                                    |
    |----------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-   |        `spring.cloud.azure.credential-file-path`         |                                                    このチュートリアルで作成した Azure 資格情報ファイルを指定します。                                                    |
-   |           `spring.cloud.azure.resource-group`            |                                                      Azure イベント ハブを含む Azure リソース グループを指定します。                                                      |
-   |               `spring.cloud.azure.region`                |                                           Azure イベント ハブの作成時に指定した地理的リージョンを指定します。                                            |
-   |         `spring.cloud.azure.eventhub.namespace`          |                                          Azure イベント ハブの名前空間の作成時に指定した一意の名前を指定します。                                           |
-   | `spring.cloud.azure.eventhub.checkpoint-storage-account` |                                                    このチュートリアルで作成した Azure ストレージ アカウントを指定します。                                                    |
-   |     `spring.cloud.stream.bindings.input.destination`     |                            入力先の Azure イベント ハブを指定します。ここでは、このチュートリアルで作成したハブを指定します。                            |
-   |       `spring.cloud.stream.bindings.input.group `        | Azure イベント ハブのコンシューマー グループを指定します。Azure イベント ハブの作成時に作成された基本コンシューマー グループを使用するには、"$ Default" に設定します。 |
-   |    `spring.cloud.stream.bindings.output.destination`     |                               出力先の Azure イベント ハブを指定します。ここでは、入力先と同じものになります。                               |
+   |               `spring.cloud.azure.eventhub.connection-string`                |                                        Azure portal の自分のイベント ハブ名前空間で取得した接続文字列を指定します。                                   |
+   |               `spring.cloud.azure.function.definition`                |                                        バインドによって公開されている外部送信先にバインドする、機能 Bean を指定します。                                   |
+   |               `spring.cloud.azure.poller.fixed-delay`                |                                        既定のポーラーの固定の遅延 (ミリ秒単位) を指定します (既定値は 1000L)。                                   |
+   |               `spring.cloud.azure.poller.initial-delay`                |                                       定期的なトリガーの初期遅延を指定します (既定値は 0)。                                   |
+   |               `spring.cloud.stream.bindings.consume-in-0.destination`                 |                            このチュートリアルで使用したイベント ハブを指定します。                         |
+   |               `spring.cloud.stream.bindings.consume-in-0.group`                    |                               Event Hubs インスタンスのコンシューマー グループを指定します。                                |
+   |               `spring.cloud.stream.bindings.supply-out-0.destination`                |                             このチュートリアルで使用したのと同じイベント ハブを指定します。                        |
+   | `spring.cloud.stream.eventhub.bindings.consume-in-0.consumer.checkpoint-mode` |                                                       `MANUAL`を指定します。                                                   |
+   |               `spring.cloud.stream.eventhub.checkpoint-access-key` |                                                      ストレージ アカウントのアクセス キーを指定します。                                                   |
+   |               `spring.cloud.stream.eventhub.checkpoint-container` |                                                       ストレージ アカウントのコンテナーを指定します。                                                   |
+   |               `spring.cloud.stream.eventhub.checkpoint-storage-account` |                                                 このチュートリアルで作成したストレージ アカウントを指定します。                                               |
 
-3. *application.properties* ファイルを保存して閉じます。
+3. *application.yaml* ファイルを保存して閉じます。
 
 ## <a name="add-sample-code-to-implement-basic-event-hub-functionality"></a>イベント ハブの基本的な機能を実装するサンプル コードを追加する
 
@@ -279,25 +226,48 @@ ms.locfileid: "94560305"
 
 1. アプリのパッケージ ディレクトリでメイン アプリケーションの Java ファイルを探します。次に例を示します。
 
-   *C:\SpringBoot\eventhubs-sample\src\main\java\com\wingtiptoys\eventhub\EventhubApplication.java*
+   *C:\SpringBoot\eventhubs-sample\src\main\java\com\contoso\eventhubs\sample\EventhubSampleApplication.java*
 
    - または -
 
-   */users/example/home/eventhubs-sample/src/main/java/com/wingtiptoys/eventhub/EventhubApplication.java*
+   */users/example/home/eventhubs-sample/src/main/java/com/contoso/eventhubs/sample/EventhubSampleApplication.java*
 
 1. テキスト エディターでメイン アプリケーションの Java ファイルを開き、ファイルに次の行を追加します。
 
    ```java
     package com.contoso.eventhubs.sample;
     
+    import com.azure.spring.integration.core.api.reactor.Checkpointer;
+    import org.slf4j.Logger;
+    import org.slf4j.LoggerFactory;
     import org.springframework.boot.SpringApplication;
     import org.springframework.boot.autoconfigure.SpringBootApplication;
+    import org.springframework.context.annotation.Bean;
+    import org.springframework.messaging.Message;
+    
+    import java.util.function.Consumer;
+    
+    import static com.azure.spring.integration.core.AzureHeaders.CHECKPOINTER;
     
     @SpringBootApplication
-    public class EventhubsSampleApplication {
+    public class EventhubSampleApplication {
+    
+        public static final Logger LOGGER = LoggerFactory.getLogger(EventhubSampleApplication.class);
     
         public static void main(String[] args) {
-            SpringApplication.run(EventhubsSampleApplication.class, args);
+            SpringApplication.run(EventhubSampleApplication.class, args);
+        }
+    
+        @Bean
+        public Consumer<Message<String>> consume() {
+            return message -> {
+                Checkpointer checkpointer = (Checkpointer) message.getHeaders().get(CHECKPOINTER);
+                LOGGER.info("New message received: '{}'", message);
+                checkpointer.success()
+                            .doOnSuccess(success -> LOGGER.info("Message '{}' successfully checkpointed", message))
+                            .doOnError(error -> LOGGER.error("Exception: {}", error.getMessage()))
+                            .subscribe();
+            };
         }
     
     }
@@ -305,72 +275,79 @@ ms.locfileid: "94560305"
 
 1. メイン アプリケーションの Java ファイルを保存して閉じます。
 
-### <a name="create-a-new-class-for-the-source-connector"></a>ソース コネクタの新しいクラスを作成する
+### <a name="create-a-new-configuration-class"></a>新しい構成クラスを作成する
 
-1. アプリのパッケージ ディレクトリに *EventhubSource.java* という名前の新しい Java ファイルを作成し、テキスト エディターでファイルを開いて、次の行を追加します。
+1. アプリのパッケージ ディレクトリに *EventProducerConfiguration.java* という名前の新しい Java ファイルを作成し、テキスト エディターでファイルを開いて、次の行を追加します。
 
     ```java
     package com.contoso.eventhubs.sample;
     
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.cloud.stream.annotation.EnableBinding;
-    import org.springframework.cloud.stream.messaging.Source;
-    import org.springframework.messaging.support.GenericMessage;
-    import org.springframework.web.bind.annotation.PostMapping;
-    import org.springframework.web.bind.annotation.RequestBody;
-    import org.springframework.web.bind.annotation.RestController;
+    import org.slf4j.Logger;
+    import org.slf4j.LoggerFactory;
+    import org.springframework.context.annotation.Bean;
+    import org.springframework.context.annotation.Configuration;
+    import org.springframework.messaging.Message;
+    import reactor.core.publisher.EmitterProcessor;
+    import reactor.core.publisher.Flux;
     
-    @EnableBinding(Source.class)
-    @RestController
-    public class EventhubSource {
+    import java.util.function.Supplier;
     
-        @Autowired
-        private Source source;
+    @Configuration
+    public class EventProducerConfiguration {
     
-        @PostMapping("/messages")
-        public String postMessage(@RequestBody String message) {
-            this.source.output().send(new GenericMessage<>(message));
-            return message;
+        private static final Logger LOGGER = LoggerFactory.getLogger(EventProducerConfiguration.class);
+    
+        @Bean
+        public EmitterProcessor<Message<String>> emitter() {
+            return EmitterProcessor.create();
+        }
+    
+        @Bean
+        public Supplier<Flux<Message<String>>> supply(EmitterProcessor<Message<String>> emitter) {
+            return () -> Flux.from(emitter)
+                             .doOnNext(m -> LOGGER.info("Manually sending message {}", m))
+                             .doOnError(t -> LOGGER.error("Error encountered", t));
         }
     }
     ```
-1. *EventhubSource.java* ファイルを保存して閉じます。
+1. *EventProducerConfiguration.java* ファイルを保存して閉じます。
 
-### <a name="create-a-new-class-for-the-sink-connector"></a>シンク コネクタの新しいクラスを作成する
+### <a name="create-a-new-controller-class"></a>新しいコントローラー クラスを作成する
 
-1. アプリのパッケージ ディレクトリに *EventhubSink.java* という名前の新しい Java ファイルを作成し、テキスト エディターでファイルを開いて、次の行を追加します。
+1. アプリのパッケージ ディレクトリに *EventProducerController.java* という名前の新しい Java ファイルを作成し、テキスト エディターでファイルを開いて、次の行を追加します。
 
    ```java
    package com.contoso.eventhubs.sample;
-
-   import com.microsoft.azure.spring.integration.core.AzureHeaders;
-   import com.microsoft.azure.spring.integration.core.api.reactor.Checkpointer;
+   
    import org.slf4j.Logger;
    import org.slf4j.LoggerFactory;
-   import org.springframework.cloud.stream.annotation.EnableBinding;
-   import org.springframework.cloud.stream.annotation.StreamListener;
-   import org.springframework.cloud.stream.messaging.Sink;
-   import org.springframework.messaging.handler.annotation.Header;
-
-   @EnableBinding(Sink.class)
-   public class EventhubSink {
-
-      private static final Logger LOGGER = LoggerFactory.getLogger(EventhubSink.class);
-
-      @StreamListener(Sink.INPUT)
-      public void handleMessage(String message, @Header(AzureHeaders.CHECKPOINTER) Checkpointer checkpointer) {
-        LOGGER.info("New message received: '{}'", message);
-        checkpointer.success()
-                .doOnSuccess(s -> LOGGER.info("Message '{}' successfully checkpointed", message))
-                .doOnError((msg) -> {
-                    LOGGER.error(String.valueOf(msg));
-                })
-                .subscribe();
-      }
+   import org.springframework.beans.factory.annotation.Autowired;
+   import org.springframework.http.ResponseEntity;
+   import org.springframework.messaging.Message;
+   import org.springframework.messaging.support.MessageBuilder;
+   import org.springframework.web.bind.annotation.PostMapping;
+   import org.springframework.web.bind.annotation.RequestBody;
+   import org.springframework.web.bind.annotation.RestController;
+   import reactor.core.publisher.EmitterProcessor;
+   
+   @RestController
+   public class EventProducerController {
+   
+       public static final Logger LOGGER = LoggerFactory.getLogger(EventProducerController.class);
+   
+       @Autowired
+       private EmitterProcessor<Message<String>> emitterProcessor;
+   
+       @PostMapping("/messages")
+       public ResponseEntity<String> sendMessage(@RequestBody String message) {
+           LOGGER.info("Going to add message {} to emitter", message);
+           emitterProcessor.onNext(MessageBuilder.withPayload(message).build());
+           return ResponseEntity.ok("Sent!");
+       }
    }
    ```
 
-1. *EventhubSink.java* ファイルを保存して閉じます。
+1. *EventProducerController.java* ファイルを保存して閉じます。
 
 ## <a name="build-and-test-your-application"></a>アプリケーションをビルドしてテストする
 
@@ -402,8 +379,8 @@ ms.locfileid: "94560305"
    アプリケーションのログに送信された "hello" が表示されます。 次に例を示します。
 
    ```output
-   2020-09-11 15:11:12.138  INFO 7616 --- [      elastic-4] c.contoso.eventhubs.sample.EventhubSink  : New message received: 'hello'
-   2020-09-11 15:11:12.406  INFO 7616 --- [ctor-http-nio-1] c.contoso.eventhubs.sample.EventhubSink  : Message 'hello' successfully checkpointed
+   2020-09-11 15:11:12.138  INFO 7616 --- [      elastic-4] c.contoso.eventhubs.sample.EventhubSampleApplication  : New message received: 'hello'
+   2020-09-11 15:11:12.406  INFO 7616 --- [ctor-http-nio-1] c.contoso.eventhubs.sample.EventhubSampleApplication  : Message 'hello' successfully checkpointed
    ```
 
 ## <a name="next-steps"></a>次のステップ

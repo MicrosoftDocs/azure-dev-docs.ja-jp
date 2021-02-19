@@ -6,12 +6,12 @@ ms.date: 02/02/2021
 ms.topic: conceptual
 ms.custom: devx-track-java
 ms.author: savaity
-ms.openlocfilehash: 2dc2085ac71167cefd8fed5475dc9744cf520fea
-ms.sourcegitcommit: 71847ee0a1fee3f3320503629d9a8c82319a1f6a
+ms.openlocfilehash: e5ead01c22fdb80e7c5fc49c3a980add883eb6d9
+ms.sourcegitcommit: b380f6e637b47e6e3822b364136853e1d342d5cd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99528458"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "100395217"
 ---
 # <a name="configure-tracing-in-the-azure-sdk-for-java"></a>Azure SDK for Java でトレースを構成する
 
@@ -85,7 +85,7 @@ OpenTelemetry の[セマンティック規則](https://github.com/open-telemetry
 
 ### <a name="configure-tracing-exports"></a>トレースのエクスポートを構成する
 
-トレース情報を利用する必要があるアプリケーションでは、トレースを分散トレース ストア ([Zipkin](https://zipkin.io/)、[Jaeger](https://www.jaegertracing.io/)、[Azure Monitor](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/monitor/microsoft-opentelemetry-exporter-azuremonitor#azure-monitor-opentelemetry-exporter-client-library-for-java) など) にエクスポートする必要があります。 次の例では、Jaeger 固有の API を使用して、localhost ポート 14250 で実行されている Jaeger 分散トレース ストアにトレース情報をエクスポートするように構成します。
+トレース情報を利用する必要があるアプリケーションでは、トレースを分散トレース ストア ([Zipkin](https://zipkin.io/)、[Jaeger](https://www.jaegertracing.io/)、[Azure Monitor](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/monitor/azure-monitor-opentelemetry-exporter#azure-monitor-opentelemetry-exporter-client-library-for-java) など) にエクスポートする必要があります。 次の例では、Jaeger 固有の API を使用して、localhost ポート 14250 で実行されている Jaeger 分散トレース ストアにトレース情報をエクスポートするように構成します。
 
 ```java
 ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 14250).usePlaintext().build();

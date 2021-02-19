@@ -2,13 +2,13 @@
 title: JavaScript ドキュメントの新着情報
 description: デベロッパー センターの JavaScript ドキュメントの新着情報
 ms.topic: conceptual
-ms.date: 02/02/2021
-ms.openlocfilehash: 9bfb3b8b05861a50d82fc878b74e14ddd3402dae
-ms.sourcegitcommit: 71847ee0a1fee3f3320503629d9a8c82319a1f6a
+ms.date: 02/08/2021
+ms.openlocfilehash: 37d68d713c4b6ba51d35efb033f68fe2b2e60680
+ms.sourcegitcommit: 98a7e855206ff463c1d95f93c23dd665b26a0aa1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99510963"
+ms.lasthandoff: 02/09/2021
+ms.locfileid: "100004717"
 ---
 # <a name="javascript-docs-whats-new"></a>JavaScript ドキュメント:新機能
 
@@ -21,6 +21,9 @@ JavaScript および TypeScript 開発者向けの新規および更新された
 |名前|Notes|
 |---------------------------------------|--|
 |[Azure Cosmos DB での MongoDB の使用方法](./how-to/with-database/use-mongodb-as-cosmosdb.md)|MongoDB データベースを Azure で作成、移動、または使用するには、Cosmos DB リソースが必要です。 リソースを作成し、データベースを使用する方法について説明します。 |
+|[Azure での MariaDB の使用方法](./how-to/with-database/use-mariadb.md)|Azure で MariaDB データベースを作成、移動、または使用するには、**Azure Database for MariaDB** リソースが必要です。 リソースを作成し、データベースを使用する方法について説明します。|
+|[Azure での MySql の使用方法](./how-to/with-database/use-mysql-db.md)|Azure で MySQL データベースを作成、移動、または使用するには、**Azure Database for MySQL** リソースが必要です。 リソースを作成し、データベースを使用する方法について説明します。|
+|[Azure での PostgreSQL の使用方法](./how-to/with-database/use-postgresql-db.md)|Azure で PostgreSQL データベースを作成、移動、または使用するには、**Azure Database for PostgreSQL サーバー** リソースが必要です。 リソースを作成し、データベースを使用する方法について説明します。|
 
 ## <a name="2021-january"></a>2021 年 1 月
 

@@ -5,12 +5,12 @@ keywords: jenkins, azure, devops, container instances, ビルド エージェン
 ms.topic: article
 ms.date: 01/08/2021
 ms.custom: devx-track-jenkins,devx-track-azurecli
-ms.openlocfilehash: 7633d88897d76f4ed75fa1d7d6c5b0c620db4919
-ms.sourcegitcommit: 593d177cfb5f56f236ea59389e43a984da30f104
+ms.openlocfilehash: 6a7578818eb1f59fa2ce2bd46003f799045fc154
+ms.sourcegitcommit: b380f6e637b47e6e3822b364136853e1d342d5cd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/18/2021
-ms.locfileid: "98561598"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "100395387"
 ---
 # <a name="tutorial-use-azure-container-instances-as-a-jenkins-build-agent"></a>チュートリアル:Azure Container Instances を Jenkins ビルド エージェントとして使用する
 
@@ -63,7 +63,7 @@ Azure Container Instances の詳細については、「[Azure Container Instanc
 
 1. **リモート ルート ディレクトリ** の値を入力します。 たとえば、`/home/jenkins/work` のように指定します。
 
-1. 必要に応じて、ラベルを入力します。 ラベルは、複数のエージェントを 1 つの論理グループとしてグループ化するために使用します。 ラベルの例として、Linux エージェントをグループ化する `linux` があります。
+1. 追加 <abbr title="ラベルは、複数のエージェントを 1 つの論理グループとしてグループ化するために使用します。 ラベルの例として、Linux エージェントをグループ化する `linux` があります。">**Label**</abbr> `linux` の値を持つ。
 
 1. **[Launch method]\(起動方法\)** を **[Launch agent by connecting to the master]\(マスターに接続してエージェントを起動する\)** に設定します。
 
@@ -97,9 +97,14 @@ Azure Container Instances の詳細については、「[Azure Container Instanc
       --command-line "jenkins-agent -url http://jenkinsserver:port <JENKINS_SECRET> <AGENT_NAME>"
     ```
 
-    コンテナーは、起動すると自動的に Jenkins コントローラー サーバーに接続されます。
+    `http://jenkinsserver:port`、`<JENKINS_SECRET>`、および `<AGENT_NAME>` を Jenkins コントローラーとエージェントの情報に置き換えます。 コンテナーは、起動すると自動的に Jenkins コントローラー サーバーに接続されます。
+
+1. Jenkins ダッシュボードに戻り、エージェントの状態を確認します。
 
     ![エージェントが正常に起動しました](./media/azure-container-instances-as-jenkins-build-agent/agent-start.png)
+
+    > [!NOTE]
+    > Jenkins エージェントは、ポート `5000` 経由でコントローラーに接続し、ポートで Jenkins コントローラーへの受信が許可されていることを確認します。
 
 ## <a name="create-a-build-job"></a>ビルド ジョブを作成する
 
@@ -109,35 +114,31 @@ Jenkins のビルド ジョブが作成され、Azure コンテナー インス�
 
    ![ビルド ジョブの名前のボックスと、プロジェクトの種類の一覧](./media/azure-container-instances-as-jenkins-build-agent/jenkins-new-job.png)
 
-2. **[全般]** で、**[Restrict where this project can be run]\(このプロジェクトを実行できる場所を制限する\)** が選択されていることを確認します。 ラベル式に「**linux**」と入力します。 この構成により、このビルド ジョブが ACI クラウド上で実行されます。
+1. **[全般]** で、**[Restrict where this project can be run]\(このプロジェクトを実行できる場所を制限する\)** が選択されていることを確認します。 ラベル式に「**linux**」と入力します。 この構成により、このビルド ジョブが ACI クラウド上で実行されます。
 
    ![構成の詳細画表示された [全般] タブ](./media/azure-container-instances-as-jenkins-build-agent/jenkins-job-01.png)
 
-3. **[ビルド]** で **[ビルド ステップの追加]** を選択し、**[シェルの実行]** を選択します。 コマンドとして `echo "aci-demo"` を入力します。
+1. **[ビルド]** で **[ビルド ステップの追加]** を選択し、**[シェルの実行]** を選択します。 コマンドとして `echo "aci-demo"` を入力します。
 
    ![ビルド ステップが選ばれた [ビルド] タブ](./media/azure-container-instances-as-jenkins-build-agent/jenkins-job-02.png)
 
-5. **[保存]** を選択します。
+1. **[保存]** を選択します。
 
 ## <a name="run-the-build-job"></a>ビルド ジョブの実行
 
-ビルド ジョブをテストし、ビルド プラットフォームとしての Azure コンテナー インスタンスを確認するには、ビルドを手動で開始します。
+ビルド ジョブをテストし、Azure Container Instances を観察するには、ビルドを手動で開始します。
 
-1. **[Build Now]\(今すぐビルド\)** を選択してビルド ジョブを開始します。 ジョブが開始するまで､数分かかります｡ 次の図ような状態が表示されます。
+1. **[Build Now]\(今すぐビルド\)** を選択してビルド ジョブを開始します。 ジョブが開始されると、次の図のような状態が表示されます。
 
    ![ジョブの状態が表示された "ビルド履歴" 情報](./media/azure-container-instances-as-jenkins-build-agent/jenkins-job-status.png)
 
-2. ジョブの実行中に、Azure Portal を開き、Jenkins リソース グループを参照します。 コンテナー インスタンスが作成されています。 Jenkins ジョブはこのインスタンス内で実行されています。
+1. **[ビルド履歴]** のビルド **[#1]** をクリックします。
 
-   ![リソース グループ内のコンテナー インスタンス](./media/azure-container-instances-as-jenkins-build-agent/jenkins-aci.png)
+    ![コンソールからのビルド出力を表示する [コンソール出力]](./media/azure-container-instances-as-jenkins-build-agent/build-history.png)
 
-3. Jenkins が Jenkins 実行子の数 (既定値は 2) より多くのジョブを実行すると、複数のコンテナー インスタンスが作成されます。
+1. **[コンソール出力]** を選択して、ビルドの出力を表示します。
 
-   ![新しく作成されたコンテナー インスタンス](./media/azure-container-instances-as-jenkins-build-agent/jenkins-aci-multi.png)
-
-4. すべてのビルド ジョブが完了すると、コンテナー インスタンスは削除されます。
-
-   ![コンテナー インスタンスが削除されたリソース グループ](./media/azure-container-instances-as-jenkins-build-agent/jenkins-aci-none.png)
+    ![コンソールからのビルド出力を表示する [コンソール出力]](./media/azure-container-instances-as-jenkins-build-agent/build-console-output.png)
 
 ## <a name="next-steps"></a>次のステップ
 

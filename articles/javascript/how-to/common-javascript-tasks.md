@@ -4,18 +4,20 @@ description: 現在のタスクの例を参照してください。
 ms.topic: reference
 ms.date: 01/20/2021
 ms.custom: devx-track-js
-ms.openlocfilehash: cc5ca751b8d22612c63d26a46934eb5b4c057c69
-ms.sourcegitcommit: 71847ee0a1fee3f3320503629d9a8c82319a1f6a
+ms.openlocfilehash: 9da8ede8dfbf7ffc54fce9531f4b490ae9db1942
+ms.sourcegitcommit: 7287dff6bf4b30c2033924702c941bf520403e07
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99511000"
+ms.lasthandoff: 02/05/2021
+ms.locfileid: "99589438"
 ---
 # <a name="top-tasks-for-javascript-developers"></a>JavaScript 開発者向けの主要タスク
 
 現在のタスクの例を参照してください。 タスクが見つからない場合は、タスクを要求するフィードバックを残しておきます。 
 
 ## <a name="app-registration"></a>アプリの登録
+
+[アプリの登録のドキュメント](/azure/active-directory/develop/quickstart-register-app)
 
 |タスク|using|
 |--|--|
@@ -56,6 +58,8 @@ ms.locfileid: "99511000"
 
 ### <a name="static-web-apps"></a>静的 Web アプリ
 
+[サービスのドキュメント](/azure/static-web-apps/)
+
 |タスク|using|
 |--|--|
 |Angular アプリの作成|[Bash](../tutorial/tutorial-vscode-static-website-node/tutorial-vscode-static-website-node-02.md?tabs=angular)|
@@ -71,6 +75,8 @@ ms.locfileid: "99511000"
 
 ### <a name="function-serverless-apps"></a>関数 (サーバーレス) アプリ
 
+[サービスのドキュメント](/azure/azure-functions/)
+
 |タスク|using|
 |--|--|
 |Functions アプリをローカルで作成する|[Visual Studio Code 拡張機能](../tutorial/tutorial-vscode-serverless-node-create-local.md)|
@@ -81,6 +87,8 @@ ms.locfileid: "99511000"
 |関数アプリ リソースを削除する|[Visual Studio Code 拡張機能](../tutorial/tutorial-vscode-serverless-node-remove-resource.md)|
 
 ### <a name="app-service---full-stack-server-only-or-client-only-apps"></a>アプリ サービス - フル スタック、サーバーのみ、またはクライアントのみのアプリ
+
+[サービスのドキュメント](/azure/app-service/)
 
 |タスク|using|
 |--|--|
@@ -99,6 +107,8 @@ ms.locfileid: "99511000"
 |リモート ログをストリーミングする|[Visual Studio Code 拡張機能](../tutorial/deploy-nodejs-azure-app-service-with-visual-studio-code.md?tabs=bash#7-stream-remote-service-logs-in-visual-studio-code)<br>[Azure CLI](../tutorial/tutorial-vscode-azure-cli-node/tutorial-vscode-azure-cli-node-05.md)|
 
 ## <a name="cognitive-services"></a>Cognitive Services
+
+[サービス グループのドキュメント](/azure/cognitive-services/)
 
 |タスク|using|
 |--|--|
@@ -128,12 +138,29 @@ ms.locfileid: "99511000"
 
 ## <a name="databases"></a>データベース
 
+### <a name="mariadb"></a>MariaDB
+
+[サービスのドキュメント](/azure/mariadb/)
+
+|タスク|使用|
+|--|--|
+|MariaDB リソースを作成する|[Azure Portal](https://ms.portal.azure.com/#create/Microsoft.MariaDBServer)<br>[Azure CLI](./with-azure-cli/create-mariadb.md#create-a-mariadb-resource-with-azure-cli)<br>[@azure/arm-mariadb](https://www.npmjs.com/package/@azure/arm-mariadb)|
+|リソース上に MariaDB データベースを作成する|[Azure CLI](./with-azure-cli/create-mariadb.md#create-a-mariadb-resource-with-azure-cli)|
+|接続文字列を取得する|[Azure CLI](./with-azure-cli/create-mariadb.md#get-the-mariadb-connection-string-with-azure-cli)|
+|データベースを使用および表示する|[Azure Cloud Shell](https://shell.azure.com/) の _mysql_ CLI<br>[MySQL Workbench](https://www.mysql.com/products/workbench/)<br>[Visual Studio Code 拡張機能](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)<br>[npm mariadb](https://www.npmjs.com/package/mariadb)<br>[JavaScript](./with-database/use-mariadb.md#use-mariadb-sdk-to-connect-to-mariadb-on-azure)|
+
+### <a name="mongodb-on-cosmos-db"></a>Cosmos DB での MongoDB
+
+[サービスのドキュメント](/azure/cosmos-db/)
+
 |タスク|using|
 |--|--|
 |Cosmos DB の作成 - MongoDB リソース|[Visual Studio Code 拡張機能](../tutorial/deploy-nodejs-mongodb-app-service-from-visual-studio-code.md)<br>[Azure CLI](./with-azure-cli/create-mongodb-cosmosdb.md#create-a-cosmos-db-resource-for-mongodb)|
 |CosmosDB 接続文字列を取得する|[Visual Studio Code 拡張機能](../tutorial/deploy-nodejs-mongodb-app-service-from-visual-studio-code.md#get-cosmosdb-connection-string)<br>[Azure CLI](./with-azure-cli/create-mongodb-cosmosdb.md#get-the-mongodb-connection-string-for-your-resource)|
 |Cosmos DB の表示|[Cosmos DB Explorer](https://cosmos.azure.com/)|
 |Cosmos DB で MongoDB 用 Mongoose API を使用する|[JavaScript](./with-database/use-mongodb-as-cosmosdb.md#use-mongoose-sdk-to-connect-to-mongodb-on-azure)
+
+
 
 ## <a name="git"></a>Git
 
@@ -164,6 +191,8 @@ ms.locfileid: "99511000"
 
 ## <a name="storage"></a>ストレージ
 
+[サービスのドキュメント](/azure/storage/)
+
 |タスク|using|
 |--|--|
 |リソースを作成する|[Visual Studio Code 拡張機能](../tutorial/browser-file-upload-azure-storage-blob.md#3-create-storage-resource-with-visual-studio-extension)|
@@ -187,6 +216,8 @@ ms.locfileid: "99511000"
 
 ## <a name="virtual-machines"></a>仮想マシン
 
+[サービスのドキュメント](/azure/virtual-machines/)
+
 |タスク|using|
 |--|--|
 |SSH を使用して VM に接続する|[Bash](../tutorial/nodejs-virtual-machine-vm/connect-linux-virtual-machine-ssh.md#connect-with-ssh-and-change-web-app)|
@@ -199,6 +230,8 @@ ms.locfileid: "99511000"
 
 
 ## <a name="visual-studio-code-develop-and-debug-javascript-apps"></a>Visual Studio Code:JavaScript アプリの開発とデバッグ 
+
+[ツールのドキュメント](https://code.visualstudio.com/docs)
 
 |タスク|using|
 |--|--|
