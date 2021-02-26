@@ -4,12 +4,12 @@ ms.author: miparker
 ms.date: 07/27/2020
 ms.service: mobile-services
 ms.topic: include
-ms.openlocfilehash: 4dba0dcf6fe960b80e445f865644997669ce9b36
-ms.sourcegitcommit: 84f64dec74b4b041b8830a4e7489e22f0e943440
+ms.openlocfilehash: 87509c0201407eb603f776e8b4994fc6f984cb6c
+ms.sourcegitcommit: bccbab4883e6b6b4926fc194c35ad948b11ccc3f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97865970"
+ms.lasthandoff: 02/08/2021
+ms.locfileid: "99974631"
 ---
 ### <a name="configure-infoplist-and-entitlementsplist"></a>Info.plist と Entitlements.plist を構成する
 
@@ -65,7 +65,7 @@ ms.locfileid: "97865970"
                 if (!NotificationsSupported)
                     throw new Exception(GetNotificationsSupportError());
 
-                if (string.IsNullOrWhitespace(Token))
+                if (string.IsNullOrWhiteSpace(Token))
                     throw new Exception("Unable to resolve token for APNS");
 
                 var installation = new DeviceInstallation
@@ -96,7 +96,7 @@ ms.locfileid: "97865970"
     ```
 
     > [!NOTE]
-    > このクラスでは、一意の ID ([UIDevice.IdentifierForVendor](/dotnet/api/uikit.uidevice.identifierforvendor?view=xamarin-ios-sdk-12) 値を使用) と通知ハブの登録ペイロードが提供されます。
+    > このクラスでは、一意の ID ([UIDevice.IdentifierForVendor](/dotnet/api/uikit.uidevice.identifierforvendor) 値を使用) と通知ハブの登録ペイロードが提供されます。
 
 1. **PushDemo.iOS** プロジェクトに *Extensions* という名前の新しいフォルダーを追加してから、以下の実装を使用してそのフォルダーに *NSDataExtensions.cs* という名前の **空のクラス** を追加します。
 

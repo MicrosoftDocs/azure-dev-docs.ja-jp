@@ -6,12 +6,12 @@ ms.service: mobile-services
 ms.topic: tutorial
 ms.date: 07/27/2020
 ms.author: miparker
-ms.openlocfilehash: 308e727f57ed086899d4fb5906235cb5a17bda16
-ms.sourcegitcommit: ced8331ba36b28e6e2eacd23a64b39ddc7ffe6ab
+ms.openlocfilehash: d42f44226169232c18ebdd8039f0cf9ceb1018fc
+ms.sourcegitcommit: 54f976887d218aaabd94371e24809716da8cf86e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92337186"
+ms.lasthandoff: 02/04/2021
+ms.locfileid: "99554319"
 ---
 # <a name="tutorial-send-push-notifications-to-xamarinforms-apps-using-azure-notification-hubs-via-a-backend-service"></a>チュートリアル:バックエンド サービス経由で Azure Notification Hubs を使用して Xamarin.Forms アプリにプッシュ通知を送信する  
 
@@ -44,7 +44,7 @@ ms.locfileid: "92337186"
 
 * リソースを作成および管理できる [Azure サブスクリプション](https://azure.microsoft.com/free/dotnet)。
 * [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/) がインストールされている Mac または [Visual Studio 2019](https://visualstudio.microsoft.com/vs) を実行している PC。
-* [Visual Studio 2019](https://visualstudio.microsoft.com/vs) のユーザーは、 **.NET によるモバイル開発**と **ASP.NET および Web の開発**のワークロードもインストールしておく必要があります。
+* [Visual Studio 2019](https://visualstudio.microsoft.com/vs) のユーザーは、 **.NET によるモバイル開発** と **ASP.NET および Web の開発** のワークロードもインストールしておく必要があります。
 * **Android** (物理デバイスまたはエミュレーター デバイス) または **iOS** (物理デバイスのみ) のいずれかでアプリを実行する機能。
 
 Android の場合は次のものが必要です。
@@ -55,7 +55,7 @@ iOS の場合は次のものが必要です。
 
 * アクティブな [Apple Developer アカウント](https://developer.apple.com)。
 * [開発者アカウントに登録](https://help.apple.com/developer-account/#/dev40df0d9fa)されている物理 iOS デバイス *(iOS 13.0 以降を実行しているもの)* 。
-* [物理デバイスでアプリを実行](https://help.apple.com/xcode/mac/current/#/dev5a825a1ca)できるように **.p12** [開発証明書](https://help.apple.com/developer-account/#/dev04fd06d56)が**キーチェーン**にインストールされている。
+* [物理デバイスでアプリを実行](https://help.apple.com/xcode/mac/current/#/dev5a825a1ca)できるように **.p12** [開発証明書](https://help.apple.com/developer-account/#/dev04fd06d56)が **キーチェーン** にインストールされている。
 
 > [!NOTE]
 > iOS シミュレーターではリモート通知がサポートされていないため、このサンプルを iOS で試すときには物理デバイスが必要です。 ただし、このチュートリアルを完了するために、アプリを **Android** と **iOS** の両方で実行する必要はありません。
@@ -63,7 +63,7 @@ iOS の場合は次のものが必要です。
 以前に経験がなくとも、この第一原理の例に記載されている手順に従うことができます。 ただし、以下の面について知識があると役立ちます。
 
 * [Apple Developer ポータル](https://developer.apple.com)
-* [ASP.NET Core](/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-3.1) と [Web API](https://dotnet.microsoft.com/apps/aspnet/apis)
+* [ASP.NET Core](/aspnet/core/introduction-to-aspnet-core) と [Web API](https://dotnet.microsoft.com/apps/aspnet/apis)
 * [Google Firebase Console](https://console.firebase.google.com/u/0/)
 * [Microsoft Azure](https://portal.azure.com) と、[Azure Notification Hubs を使用して iOS アプリにプッシュ通知を送信すること](/azure/notification-hubs/ios-sdk-get-started)。
 * [Xamarin](https://dotnet.microsoft.com/apps/xamarin) と [Xamarin.Forms](https://dotnet.microsoft.com/apps/xamarin/xamarin-forms)。
@@ -120,7 +120,7 @@ iOS の場合は次のものが必要です。
 ## <a name="related-links"></a>関連リンク
 
 * [Azure Notification Hubs の概要](/azure/notification-hubs/notification-hubs-push-notification-overview)
-* [Visual Studio for Mac のインストール](/visualstudio/mac/installation?view=vsmac-2019)
+* [Visual Studio for Mac のインストール](/visualstudio/mac/installation)
 * [Windows への Xamarin のインストール](/xamarin/get-started/installation/windows)
 * [バックエンド操作用の Notification Hubs SDK](https://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/)
 * [GitHub 上の Notification Hubs SDK](https://github.com/Azure/azure-notificationhubs)

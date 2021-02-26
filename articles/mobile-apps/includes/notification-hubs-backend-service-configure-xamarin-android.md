@@ -4,12 +4,12 @@ ms.author: miparker
 ms.date: 07/27/2020
 ms.service: mobile-services
 ms.topic: include
-ms.openlocfilehash: faacb54f9e8a16cf4ef5b39aed0a3e42a4b3f255
-ms.sourcegitcommit: 84f64dec74b4b041b8830a4e7489e22f0e943440
+ms.openlocfilehash: f69c6287d0d4904c1c19ba7e9a115b85bc621185
+ms.sourcegitcommit: bccbab4883e6b6b4926fc194c35ad948b11ccc3f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97866070"
+ms.lasthandoff: 02/08/2021
+ms.locfileid: "99974488"
 ---
 ### <a name="validate-package-name-and-permissions"></a>パッケージ名とアクセス許可を検証する
 
@@ -80,7 +80,7 @@ ms.locfileid: "97866070"
                 if (!NotificationsSupported)
                     throw new Exception(GetPlayServicesError());
 
-                if (string.IsNullOrWhitespace(Token))
+                if (string.IsNullOrWhiteSpace(Token))
                     throw new Exception("Unable to resolve token for FCM");
 
                 var installation = new DeviceInstallation
@@ -111,7 +111,7 @@ ms.locfileid: "97866070"
     ```
 
     > [!NOTE]
-    > このクラスでは、通知ハブの登録ペイロードの一部として一意の ID ([Secure.AndroidId](/dotnet/api/android.provider.settings.secure.androidid?view=xamarin-android-sdk-9) を使用) が提供されます。
+    > このクラスでは、通知ハブの登録ペイロードの一部として一意の ID ([Secure.AndroidId](/dotnet/api/android.provider.settings.secure.androidid) を使用) が提供されます。
 
 1. *PushNotificationFirebaseMessagingService.cs* という名前の別の **空のクラス** を **Services** フォルダーに追加してから、次の実装を追加します。
 

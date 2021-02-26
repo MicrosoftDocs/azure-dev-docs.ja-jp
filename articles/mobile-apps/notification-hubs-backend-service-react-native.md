@@ -6,12 +6,12 @@ ms.service: mobile-services
 ms.topic: tutorial
 ms.date: 07/27/2020
 ms.author: alstrakh
-ms.openlocfilehash: b8846a2171c6f99a4796d288774c3b525093238a
-ms.sourcegitcommit: e97cb81a245ce7dcabeac3260abc3db7c30edd79
+ms.openlocfilehash: ac6b1cc183cd06f8186a678e006602c57a54238e
+ms.sourcegitcommit: 54f976887d218aaabd94371e24809716da8cf86e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91493248"
+ms.lasthandoff: 02/04/2021
+ms.locfileid: "99554333"
 ---
 # <a name="tutorial-send-push-notifications-to-react-native-apps-using-azure-notification-hubs-via-a-backend-service"></a>チュートリアル:バックエンド サービス経由で Azure Notification Hubs を使用して React Native アプリにプッシュ通知を送信する  
 
@@ -43,7 +43,7 @@ ms.locfileid: "91493248"
 手順を進めてゆくには、以下が必要です。
 
 * リソースを作成および管理できる [Azure サブスクリプション](https://portal.azure.com)。
-* [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/) がインストールされている Mac (または **.NET によるモバイル開発**のワークロードを備えた、[Visual Studio 2019](https://visualstudio.microsoft.com/vs) を実行している PC)。
+* [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/) がインストールされている Mac (または **.NET によるモバイル開発** のワークロードを備えた、[Visual Studio 2019](https://visualstudio.microsoft.com/vs) を実行している PC)。
 * **Android** (物理デバイスまたはエミュレーター デバイス) または **iOS** (物理デバイスのみ) のいずれかでアプリを実行する機能。
 
 Android の場合は次のものが必要です。
@@ -54,7 +54,7 @@ iOS の場合は次のものが必要です。
 
 * アクティブな [Apple Developer アカウント](https://developer.apple.com)。
 * [開発者アカウントに登録](https://help.apple.com/developer-account/#/dev40df0d9fa)されている物理 iOS デバイス *(iOS 13.0 以降を実行しているもの)* 。
-* [物理デバイスでアプリを実行](https://help.apple.com/xcode/mac/current/#/dev5a825a1ca)できるように **.p12** [開発証明書](https://help.apple.com/developer-account/#/dev04fd06d56)が**キーチェーン**にインストールされている。
+* [物理デバイスでアプリを実行](https://help.apple.com/xcode/mac/current/#/dev5a825a1ca)できるように **.p12** [開発証明書](https://help.apple.com/developer-account/#/dev04fd06d56)が **キーチェーン** にインストールされている。
 
 > [!NOTE]
 > iOS シミュレーターではリモート通知がサポートされていないため、このサンプルを iOS で試すときには物理デバイスが必要です。 ただし、このチュートリアルを完了するために、アプリを **Android** と **iOS** の両方で実行する必要はありません。
@@ -62,7 +62,7 @@ iOS の場合は次のものが必要です。
 以前に経験がなくとも、この第一原理の例に記載されている手順に従うことができます。 ただし、以下の面について知識があると役立ちます。
 
 * [Apple Developer ポータル](https://developer.apple.com)
-* [ASP.NET Core](/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-3.1)
+* [ASP.NET Core](/aspnet/core/introduction-to-aspnet-core)
 * [Google Firebase Console](https://console.firebase.google.com/u/0/)
 * [Microsoft Azure](https://portal.azure.com) と、[Azure Notification Hubs を使用して iOS アプリにプッシュ通知を送信すること](/azure/notification-hubs/ios-sdk-get-started)。
 * [React Native](https://reactnative.dev/docs/getting-started)
@@ -118,7 +118,7 @@ iOS の場合は次のものが必要です。
 ## <a name="related-links"></a>関連リンク
 
 * [Azure Notification Hubs の概要](/azure/notification-hubs/notification-hubs-push-notification-overview)
-* [Visual Studio for Mac のインストール](/visualstudio/mac/installation?view=vsmac-2019)
+* [Visual Studio for Mac のインストール](/visualstudio/mac/installation)
 * [Visual Studio Code のインストール](https://code.visualstudio.com/download)
 * [React Native 開発環境の設定](https://reactnative.dev/docs/environment-setup)
 * [バックエンド操作用の Notification Hubs SDK](https://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/)
