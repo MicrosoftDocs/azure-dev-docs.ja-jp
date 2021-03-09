@@ -5,6 +5,8 @@
       href: whats-new-docs.md
     - name: デベロッパー アドボケイトの最新情報
       href: whats-new-developer-advocacy.md
+    - name: 開発者向けの主要タスク
+      href: how-to/common-javascript-tasks.md
     - name: JavaScript を使用した Azure の概要
       items:
         - name: JavaScript 開発者向けの Azure とは
@@ -157,23 +159,33 @@
               href: how-to/with-visual-studio-code/create-azure-database.md
         - name: Azure CLI の場合
           items:
-            - name: コンテナー レジストリを作成および使用する
+            - name: コンテナー レジストリ
               href: how-to/with-azure-cli/create-container-registry-resource.md
             - name: Web アプリのドメイン名を構成する
               href: how-to/with-azure-cli/configure-app-service-custom-domain-name.md
-            - name: MongoDB 用 Cosmos DB リソースを使用する
+            - name: Cassandra 用 Cosmos DB リソース
+              href: how-to/with-azure-cli/create-cassandra-db.md
+            - name: Cache for Redis
+              href: how-to/with-azure-cli/create-cache-for-redis-db.md
+            - name: MongoDB 用 Cosmos DB リソース
               href: how-to/with-azure-cli/create-mongodb-cosmosdb.md
-            - name: MariaDB リソースを使用する
+            - name: MariaDB リソース
               href: how-to/with-azure-cli/create-mariadb.md
-            - name: MySQL リソースを使用する
+            - name: MySQL リソース
               href: how-to/with-azure-cli/create-mysql-db.md
-            - name: PostgreSQL リソースを使用する
+            - name: PostgreSQL リソース
               href: how-to/with-azure-cli/create-postgresql-server-resource.md
+            - name: Cosmos DB での SQL API
+              href: how-to/with-azure-cli/create-cosmos-sql-api-resource.md
         - name: データベースの場合
           items:
             - name: 作業の開始
               href: how-to/with-database/getting-started.md
-            - name: CosmosDB での MongoDB
+            - name: Cache for Redis
+              href: how-to/with-database/use-azure-cache-for-redis-db.md
+            - name: Cosmos DB での Cassandra
+              href: how-to/with-database/use-cassandra-as-cosmos-db.md
+            - name: Cosmos DB での MongoDB
               href: how-to/with-database/use-mongodb-as-cosmosdb.md
             - name: MariaDB
               href: how-to/with-database/use-mariadb.md
@@ -181,6 +193,8 @@
               href: how-to/with-database/use-mysql-db.md
             - name: PostgreSQL
               href: how-to/with-database/use-postgresql-db.md
+            - name: Cosmos DB での SQL API
+              href: how-to/with-database/use-sql-api-as-cosmos-db.md
         - name: Web アプリをデプロイする
           href: how-to/deploy-web-app.md
         - name: コンテナーをデプロイする
