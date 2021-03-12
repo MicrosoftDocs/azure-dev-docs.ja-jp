@@ -8,12 +8,12 @@ ms.date: 02/04/2021
 ms.service: key-vault
 ms.subservice: secrets
 ms.topic: quickstart
-ms.openlocfilehash: 385889e067b375c80744c8f798d62c1b05468aab
-ms.sourcegitcommit: 7287dff6bf4b30c2033924702c941bf520403e07
+ms.openlocfilehash: 157439b0405f86fa8940e4500e1a43257e5e83eb
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "99589724"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118374"
 ---
 # <a name="use-key-vault-secrets-in-github-actions-workflows"></a>Key Vault のシークレットを GitHub Actions ワークフローで使用する
 
@@ -25,7 +25,7 @@ Key Vault と GitHub Actions を使用すると、一元化されたシークレ
 ## <a name="prerequisites"></a>前提条件 
 - GitHub アカウント。 お持ちでない場合は、[無料](https://github.com/join)でサインアップしてください。  
 - アクティブなサブスクリプションが含まれる Azure アカウント。 [無料でアカウントを作成できます](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)。
-- GitHub リポジトリに接続された Azure アプリ。 この例では、「[Azure App Service にコンテナーをデプロイする](/azure/developer/javascript/tutorial-vscode-docker-node-01)」を使用します。 
+- GitHub リポジトリに接続された Azure アプリ。 この例では、「[Azure App Service にコンテナーをデプロイする](../javascript/tutorial/tutorial-vscode-docker-node/tutorial-vscode-docker-node-01.md)」を使用します。 
 - Azure Key Vault。  Azure portal、Azure CLI、または Azure PowerShell を使用して、Azure Key Vault を作成できます。
 
 ## <a name="workflow-file-overview"></a>ワークフロー ファイルの概要

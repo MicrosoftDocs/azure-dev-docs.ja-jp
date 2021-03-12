@@ -6,12 +6,12 @@ ms.date: 02/02/2021
 ms.topic: conceptual
 ms.custom: devx-track-java
 ms.author: srnagar
-ms.openlocfilehash: 48fa4dac679e8b39139e03ae65f331072a063710
-ms.sourcegitcommit: 71847ee0a1fee3f3320503629d9a8c82319a1f6a
+ms.openlocfilehash: ca3a431debec21bad2099371e711c1df73d9b344
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99528503"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118584"
 ---
 # <a name="log-with-the-azure-sdk-for-java-and-javautillogging"></a>Azure SDK for Java と java.util.logging によるログ
 
@@ -74,4 +74,4 @@ java.util.logging.FileHandler.level = INFO
 
 この記事では、`java.util.logging` の構成と、Azure SDK for Java でこれをログに使用する方法について説明しました。 Azure SDK for Java はすべての SLF4J ログ記録フレームワークで機能するため、「[SLF4J ユーザー マニュアル](http://www.slf4j.org/manual.html)」で詳細を参照してください。
 
-ログ記録について習得した後は、Azure が提供する、[Spring](/azure/developer/java/spring-framework/spring-boot-starters-for-azure) や [MicroProfile](/azure/developer/java/eclipse-microprofile/) などのフレームワークへの統合を検討してください。
+ログ記録について習得した後は、Azure が提供する、[Spring](../spring-framework/spring-boot-starters-for-azure.md) や [MicroProfile](../eclipse-microprofile/index.yml) などのフレームワークへの統合を検討してください。

@@ -1,15 +1,15 @@
 ---
 title: Azure と JavaScript を使用した開発について学習する
 description: Microsoft Learn プラットフォームを使用して、JavaScript を使用した Azure の理解を深める
-ms.topic: reference
+ms.topic: conceptual
 ms.date: 01/14/2021
 ms.custom: devx-track-js
-ms.openlocfilehash: 80c0a9d285c1701369f8c7518f42220662759d86
-ms.sourcegitcommit: 3f8aa923e4626b31cc533584fe3b66940d384351
+ms.openlocfilehash: 7647c4503457d53ccae30021c847ae3057702542
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/01/2021
-ms.locfileid: "99224826"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118384"
 ---
 # <a name="learn-to-develop-with-azure-and-javascript"></a>Azure と JavaScript を使用した開発について学習する 
 

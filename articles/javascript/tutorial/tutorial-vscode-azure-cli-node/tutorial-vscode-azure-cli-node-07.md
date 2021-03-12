@@ -4,12 +4,12 @@ description: チュートリアル パート 7、 Azure CLI で ソースをク�
 ms.topic: tutorial
 ms.date: 09/24/2019
 ms.custom: devx-track-js, devx-track-azurecli
-ms.openlocfilehash: 247edae2c61b8c42f9ed99932ce8bdf567e0cb1e
-ms.sourcegitcommit: 1dfcc022a3098b1a1505e9458eada35f527ef070
+ms.openlocfilehash: d2b45ae60a7ad1270547289d1ea8480d14fedd95
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97658387"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102117966"
 ---
 # <a name="part-7-clean-up-resources"></a>パート 7: リソースをクリーンアップする
 
@@ -20,8 +20,6 @@ ms.locfileid: "97658387"
 ```azurecli
 az group delete --name myResourceGroup
 ```
-
-[Azure portal](https://portal.azure.com) にアクセスし、左側にあるナビゲーション ウィンドウから **[リソース グループ]** を選択し、このチュートリアルで作成したリソース グループを選択し、 **[リソース グループの削除]** コマンドを使用することもできます。
 
 > [!div class="nextstepaction"]
 > [終わりました](../../how-to/deploy-web-app.md) [問題が発生しました](https://www.research.net/r/PWZWZ52?tutorial=node-deployment&step=clean-up-resources)

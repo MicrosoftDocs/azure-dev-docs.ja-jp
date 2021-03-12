@@ -6,12 +6,12 @@ ms.date: 02/02/2021
 ms.topic: conceptual
 ms.custom: devx-track-java
 ms.author: vigera
-ms.openlocfilehash: 2a09b4ccaf39564c1cd2547417d722472ed9017c
-ms.sourcegitcommit: 71847ee0a1fee3f3320503629d9a8c82319a1f6a
+ms.openlocfilehash: e0349297bed9ee2e499c904483d9c3e018a6cddf
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99528521"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118554"
 ---
 # <a name="azure-authentication-with-java-and-azure-identity"></a>Java と Azure ID を使用した Azure 認証
 
@@ -20,7 +20,7 @@ ms.locfileid: "99528521"
 Azure Identity ライブラリの現在のサポート内容を以下に示します。
 
 * [Java 開発環境での Azure 認証](identity-dev-env-auth.md)によって、以下が可能になります。
-  * IDEA IntelliJ 認証。[Azure Toolkit for IntelliJ](/azure/developer/java/toolkit-for-intellij/) から取得したログイン情報を使用。
+  * IDEA IntelliJ 認証。[Azure Toolkit for IntelliJ](../toolkit-for-intellij/index.yml) から取得したログイン情報を使用。
   * Visual Studio Code 認証。[Visual Studio Code 用の Azure プラグイン](https://code.visualstudio.com/docs/azure/extensions)に保存されたログイン情報を使用。
   * Azure CLI 認証。[Azure CLI](/cli/azure/what-is-azure-cli) に保存されたログイン情報を使用。
 * [Azure でホストされているアプリケーションの認証](identity-azure-hosted-auth.md)によって、以下が可能になります。

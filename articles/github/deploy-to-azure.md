@@ -5,14 +5,14 @@ author: N-Usha
 ms.author: ushan
 ms.topic: reference
 ms.service: azure
-ms.date: 11/19/2020
+ms.date: 02/17/2021
 ms.custom: github-actions-azure
-ms.openlocfilehash: b77386d4fe688c67d448f3f0d5835e697f90313b
-ms.sourcegitcommit: 7287dff6bf4b30c2033924702c941bf520403e07
+ms.openlocfilehash: f40b5c8993673c00086d753652e976e6cbbfb92e
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "99589408"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118200"
 ---
 # <a name="deploy-apps-from-github-to-azure"></a>GitHub から Azure にアプリをデプロイする
 
@@ -42,6 +42,7 @@ ms.locfileid: "99589408"
 - [GitHub Actions ワークフローを設定して、静的 Web サイトを Azure Storage にデプロイする](/azure/storage/blobs/storage-blobs-static-site-github-actions)
 
 ## <a name="azure-container-instances"></a>Azure Container Instances
+
 - [GitHub アクションを構成してコンテナー インスタンスを作成する](/azure/container-instances/container-instances-github-action)
 
 ## <a name="azure-kubernetes-service"></a>Azure Kubernetes Service
@@ -58,4 +59,9 @@ ms.locfileid: "99589408"
 - [GitHub Actions を使用した Azure Resource Manager テンプレートのデプロイ](/azure/azure-resource-manager/templates/deploy-github-actions)
 
 ## <a name="azure-machine-learning"></a>Azure Machine Learning
+
 - [Azure Machine Learning で GitHub Actions を使用する](/azure/machine-learning/how-to-github-actions-machine-learning)
+
+## <a name="azure-stack"></a>Azure Stack
+
+- [Azure Stack Hub 上で Azure CLI と PowerShell による Azure ログイン アクションを使用する](/azure-stack/user/ci-cd-github-action-login-cli)

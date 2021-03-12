@@ -4,12 +4,12 @@ description: Cognitive Services Speech を使用してテキストを音声に�
 ms.topic: tutorial
 ms.date: 01/20/2021
 ms.custom: languages:JavaScript, devx-track-javascript
-ms.openlocfilehash: 911d38854856f2add28958454f7ce020c1cf2a31
-ms.sourcegitcommit: 6fbf9e489b194586887a2c11152044be5b3a2b99
+ms.openlocfilehash: 028871f55a7be2e38191efef37a65ad41ab9c3dc
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/25/2021
-ms.locfileid: "98760070"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102117886"
 ---
 # <a name="expressjs-app-converts-text-to-speech-with-cognitive-services-speech"></a>Express.js アプリで Cognitive Services Speech を使用してテキストから音声への変換を行う
 
@@ -90,11 +90,11 @@ npm install microsoft-cognitiveservices-speech-sdk
     :::code language="javascript" source="~/../js-e2e-express-server-cognitive-services/text-to-speech/src/azure-cognitiveservices-speech.js" highlight="3,21,32" :::
 
     * パラメーター - このファイルは、SDK、ストリーム、バッファー、ファイル システム (fs) を使用するための依存関係を取得します。 `textToSpeech` 関数は、4 つの引数を受け取ります。 ローカル パスを含むファイル名が送信された場合、テキストはオーディオ ファイルに変換されます。 ファイル名が送信されない場合は、インメモリ オーディオ ストリームが作成されます。 
-    * Speech SDK メソッド - Speech SDK メソッド [synthesizer.speakTextAsync](https://docs.microsoft.com/javascript/api/microsoft-cognitiveservices-speech-sdk/speechsynthesizer#speakTextAsync_string___e__SpeechSynthesisResult_____void___e__string_____void__AudioOutputStream___PushAudioOutputStreamCallback___PathLike_) は、受信した構成に基づいて異なる型を返します。 
+    * Speech SDK メソッド - Speech SDK メソッド [synthesizer.speakTextAsync](/javascript/api/microsoft-cognitiveservices-speech-sdk/speechsynthesizer#speakTextAsync_string___e__SpeechSynthesisResult_____void___e__string_____void__AudioOutputStream___PushAudioOutputStreamCallback___PathLike_) は、受信した構成に基づいて異なる型を返します。 
         このメソッドは結果を返します。返される結果は、メソッドで実行するように要求された内容によって異なります。
         * [ファイルの作成] 
         * インメモリ ストリームをバッファーの配列として作成する
-    * オーディオ形式 - 選択されているオーディオ形式は MP3 ですが、[別の形式](https://docs.microsoft.com/javascript/api/microsoft-cognitiveservices-speech-sdk/speechsynthesisoutputformat?preserve-view=true&view=azure-node-latest)や、別の[オーディオ構成メソッド](https://docs.microsoft.com/javascript/api/microsoft-cognitiveservices-speech-sdk/audioconfig?preserve-view=true&view=azure-node-latest#methods)も存在します。 
+    * オーディオ形式 - 選択されているオーディオ形式は MP3 ですが、[別の形式](/javascript/api/microsoft-cognitiveservices-speech-sdk/speechsynthesisoutputformat?preserve-view=true&view=azure-node-latest)や、別の[オーディオ構成メソッド](/javascript/api/microsoft-cognitiveservices-speech-sdk/audioconfig?preserve-view=true&view=azure-node-latest#methods)も存在します。 
 
     ローカルメソッド `textToSpeech` は、SDK のコールバック関数をラップし、Promise に変換します。 
 

@@ -2,18 +2,18 @@
 title: チュートリアル - Terraform を使用して Azure でハブ仮想ネットワーク アプライアンスを作成する
 description: 他のネットワーク間の共通接続ポイントとして機能するハブ仮想ネットワーク (VNet) を作成する方法について説明します。
 ms.topic: tutorial
-ms.date: 10/26/2019
+ms.date: 03/08/2021
 ms.custom: devx-track-terraform
-ms.openlocfilehash: b7276d3807f00e828c89ee00ffcde2e6e2f0b9a5
-ms.sourcegitcommit: e20f6c150bfb0f76cd99c269fcef1dc5ee1ab647
+ms.openlocfilehash: b8deb50c29a0fd1cdd317dc2edfe0bd3bf21d8da
+ms.sourcegitcommit: 7991f748720673d2dc50baaa8658348ff6cc1044
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/28/2020
-ms.locfileid: "91401459"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102604163"
 ---
 # <a name="tutorial-create-a-hub-virtual-network-appliance-in-azure-using-terraform"></a>チュートリアル:Terraform を使用して Azure でハブ仮想ネットワーク アプライアンスを作成する
 
-*VPN デバイス*は、オンプレミス ネットワークとの外部接続を実現するデバイスです。 VPN デバイスには、ハードウェア デバイスとソフトウェア ソリューションとがあります。 ソフトウェア ソリューションとしては、たとえば Windows Server 2012 のルーティングとリモート アクセス サービス (RRAS) があります。 VPN アプライアンスの詳細については、[サイト間 VPN Gateway 接続の VPN デバイス](/azure/vpn-gateway/vpn-gateway-about-vpn-devices)に関するページを参照してください。
+*VPN デバイス* は、オンプレミス ネットワークとの外部接続を実現するデバイスです。 VPN デバイスには、ハードウェア デバイスとソフトウェア ソリューションとがあります。 ソフトウェア ソリューションとしては、たとえば Windows Server 2012 のルーティングとリモート アクセス サービス (RRAS) があります。 VPN アプライアンスの詳細については、[サイト間 VPN Gateway 接続の VPN デバイス](/azure/vpn-gateway/vpn-gateway-about-vpn-devices)に関するページを参照してください。
 
 Azure では、さまざまなネットワーク仮想アプライアンスがサポートされ、その豊富な選択肢から選ぶことができます。 この記事では、Ubuntu イメージを使用しています。 Azure でサポートされる幅広いデバイス ソリューションについて詳しくは、[Network Appliances のホーム ページ](https://azure.microsoft.com/solutions/network-appliances/)を参照してください。
 
@@ -66,7 +66,7 @@ Azure では、さまざまなネットワーク仮想アプライアンスが�
     ```hcl
     locals {
       prefix-hub-nva         = "hub-nva"
-      hub-nva-location       = "CentralUS"
+      hub-nva-location       = "eastus"
       hub-nva-resource-group = "hub-nva-rg"
     }
 
@@ -135,12 +135,11 @@ Azure では、さまざまなネットワーク仮想アプライアンスが�
 
     resource "azurerm_virtual_machine_extension" "enable-routes" {
       name                 = "enable-iptables-routes"
-      location             = azurerm_resource_group.hub-nva-rg.location
-      resource_group_name  = azurerm_resource_group.hub-nva-rg.name
-      virtual_machine_name = azurerm_virtual_machine.hub-nva-vm.name
+      virtual_machine_id   = azurerm_virtual_machine.hub-nva-vm.id
       publisher            = "Microsoft.Azure.Extensions"
       type                 = "CustomScript"
       type_handler_version = "2.0"
+
 
       settings = <<SETTINGS
         {
@@ -264,7 +263,6 @@ Azure では、さまざまなネットワーク仮想アプライアンスが�
       route_table_id = azurerm_route_table.spoke2-rt.id
       depends_on = [azurerm_subnet.spoke2-workload]
     }
-
     ```
 
 1. ファイルを保存し、エディターを終了します。

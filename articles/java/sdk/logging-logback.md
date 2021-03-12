@@ -6,12 +6,12 @@ ms.date: 02/02/2021
 ms.topic: conceptual
 ms.custom: devx-track-java
 ms.author: srnagar
-ms.openlocfilehash: ca59b7dc9f861dd833788c88c18ce8b14a016e70
-ms.sourcegitcommit: 71847ee0a1fee3f3320503629d9a8c82319a1f6a
+ms.openlocfilehash: 785bb65a1a6f55314246d4c1410891717f8bbd6f
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99528490"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118160"
 ---
 # <a name="log-with-the-azure-sdk-for-java-and-logback"></a>Azure SDK for Java と Logback によるログ
 
@@ -123,4 +123,4 @@ logging.config=classpath:logback.xml
 
 この記事では、Logback の構成と、Azure SDK for Java でこれをログに使用する方法について説明しました。 Azure SDK for Java はすべての SLF4J ログ記録フレームワークで動作するため、詳細については、「[SLF4J ユーザー マニュアル](http://www.slf4j.org/manual.html)」を確認することを検討してください。 Logback を使用する場合は、その Web サイトにも数多くの構成ガイダンスがあります。 詳細については、Logback のドキュメントの「[logbackの設定](http://logback.qos.ch/manual/configuration.html)」を参照してください。
 
-ログについて理解できたら、Azure が提供する、[Spring](/azure/developer/java/spring-framework/spring-boot-starters-for-azure) や [MicroProfile](/azure/developer/java/eclipse-microprofile/) などのフレームワークへの統合を調査することを検討してください。
+ログについて理解できたら、Azure が提供する、[Spring](../spring-framework/spring-boot-starters-for-azure.md) や [MicroProfile](../eclipse-microprofile/index.yml) などのフレームワークへの統合を調査することを検討してください。

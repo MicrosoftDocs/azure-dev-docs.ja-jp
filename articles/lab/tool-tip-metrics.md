@@ -4,12 +4,12 @@ description: Azure App Service で Linux コンテナーに初めての Python �
 ms.topic: quickstart
 ms.date: 09/22/2020
 robots: noindex
-ms.openlocfilehash: 46a96ff6ef0f6b506eeb74afb701deb26387d9f6
-ms.sourcegitcommit: b19420d1a8d526a81e0835012cccc46717fadd69
+ms.openlocfilehash: d0933be956218039c2501b4e64380499f3e20c22
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/15/2021
-ms.locfileid: "100525589"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118190"
 ---
 # <a name="quickstart-create-a-python-app-in-azure-app-service"></a>クイックスタート: Azure App Service で Python アプリを作成する 
 
@@ -21,4 +21,4 @@ Mac、Linux、または Windows コンピューター上でローカル [Azure �
 
 ## <a name="next-steps"></a>次のステップ
 
-* [Azure での Python](/azure/developer/python/) に関する詳細情報
+* [Azure での Python](../python/index.yml) に関する詳細情報
