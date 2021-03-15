@@ -4,12 +4,12 @@ description: Azure SDK for Python のリソース管理ライブラリを使用�
 ms.date: 01/28/2021
 ms.topic: conceptual
 ms.custom: devx-track-python
-ms.openlocfilehash: 37e912e9fed6edabc966034a6411e7786875bf3f
-ms.sourcegitcommit: 3843092e47691fbd32452c93d51f894a0cab31db
+ms.openlocfilehash: 503ed658fd216edb6308f39b7a721398d6d1fc3a
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99069089"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102117806"
 ---
 # <a name="example-use-the-azure-libraries-to-provision-a-resource-group"></a>例:Azure ライブラリを使用してリソース グループをプロビジョニングする
 
@@ -31,6 +31,8 @@ ms.locfileid: "99069089"
 azure-mgmt-resource>=1.15.0
 azure-identity>=1.5.0
 ```
+
+これらのバージョンのライブラリを使用するようにしてください。 以前のバージョンを使用すると、"'AzureCliCredential' オブジェクトに属性 'signed_session' が含まれていません" などのエラーが発生します。
 
 仮想環境をアクティブ化し、ターミナルまたはコマンド プロンプトで要件をインストールします。
 

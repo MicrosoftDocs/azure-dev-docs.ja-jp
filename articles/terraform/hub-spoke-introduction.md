@@ -2,16 +2,16 @@
 title: チュートリアル - Terraform を使用して Azure でハブ スポーク ハイブリッド ネットワーク トポロジを作成する
 description: Azure で Terraform を使用して、ハイブリッド ネットワーク参照アーキテクチャ全体を作成する方法について説明します。
 ms.topic: tutorial
-ms.date: 10/26/2019
+ms.date: 03/08/2021
 ms.custom: devx-track-terraform
-ms.openlocfilehash: 5a9c4541d0dc04413e088587791488133fe61ff9
-ms.sourcegitcommit: e20f6c150bfb0f76cd99c269fcef1dc5ee1ab647
+ms.openlocfilehash: 13c5d1a12ad0e2cf03c84c34c97ffac0a5d575bd
+ms.sourcegitcommit: 7991f748720673d2dc50baaa8658348ff6cc1044
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/28/2020
-ms.locfileid: "91401492"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102604153"
 ---
-# <a name="tutorial-create-a-hub-and-spoke-hybrid-network-topology-in-azure-using-terraform"></a>チュートリアル:Terraform を使用して Azure でハブ スポーク ハイブリッド ネットワーク トポロジを作成する
+# <a name="tutorial-create-a-hub-and-spoke-hybrid-network-topology-in-azure-using-terraform"></a>チュートリアル: Terraform を使用して Azure でハブ スポーク ハイブリッド ネットワーク トポロジを作成する
 
 このチュートリアル シリーズでは、Azure で Terraform を使用して、[ハブ スポーク ネットワーク トポロジ](/azure/architecture/reference-architectures/hybrid-networking/hub-spoke)を実装する方法を示します。 
 
@@ -31,7 +31,7 @@ ms.locfileid: "91401492"
 
 [!INCLUDE [open-source-devops-prereqs-azure-subscription.md](../includes/open-source-devops-prereqs-azure-subscription.md)]
 
-- **Terraform のインストールと構成**: Azure 上に VM とその他のインフラストラクチャをプロビジョニングするには、[Terraform をインストールして構成](get-started-cloud-shell.md)します。
+- **Terraform のインストールと構成**: VM などのインフラストラクチャを Azure にプロビジョニングするための [Terraform のインストールと構成](get-started-cloud-shell.md)
 
 ## <a name="hub-and-spoke-topology-architecture"></a>ハブ スポーク トポロジ アーキテクチャ
 
@@ -44,7 +44,7 @@ ms.locfileid: "91401492"
 ハブ スポーク ネットワーク トポロジは、一般的なサービスを共有しながらワークロードを分離する方法です。 これらのサービスには、ID とセキュリティが含まれます。 ハブは、オンプレミス ネットワークへの中心となる接続ポイントとして機能する VNet です。 スポークはハブとピア接続する Vnet です。 共有サービスはハブにデプロイされ、個々のワークロードはスポーク ネットワークにデプロイされます。 ハブ スポーク ネットワーク トポロジのいくつかの利点を次に示します。
 
 - **コストの削減**: 複数のワークロードによって共有できる単一の場所にサービスを一元化します。 これらのワークロードには、ネットワーク仮想アプライアンスと DNS サーバーが含まれます。
-- **サブスクリプション数の上限の解消**: 中央のハブに別のサブスクリプションから VNet をピアリングします。
+- **サブスクリプション数の上限の解消**: 中央のハブにささまざまなサブスクリプションの VNet をピアリングします。
 - **問題の分離**: 中央の IT (SecOps、InfraOps) とワークロード (DevOps) の間で実施します。
 
 ## <a name="typical-uses-for-the-hub-and-spoke-architecture"></a>ハブ スポーク アーキテクチャの一般的な用途
@@ -62,15 +62,15 @@ ms.locfileid: "91401492"
 
 - **オンプレミス ネットワーク**。 組織内で運用されているプライベート ローカル エリア ネットワーク。 ハブ スポーク参照アーキテクチャでは、Azure 上の VNet を使用してオンプレミス ネットワークがシミュレートされます。
 
-- **VPN デバイス**。 VPN デバイスまたはサービスによって、オンプレミス ネットワークへの外部接続が提供されます。 VPN デバイスは、ハードウェア アプライアンスまたはソフトウェア ソリューションが可能です。 
+- **VPN デバイス**: VPN デバイスまたはサービスによって、オンプレミス ネットワークへの外部接続が提供されます。 VPN デバイスは、ハードウェア アプライアンスまたはソフトウェア ソリューションが可能です。 
 
-- **ハブ VNet**。 ハブは、オンプレミス ネットワークの中心となる接続ポイントであり、サービスをホストする場所です。 スポーク VNet でホストされているさまざまなワークロードで、これらのサービスを使用できます。
+- **ハブ VNet**: ハブは、オンプレミス ネットワークの中心となる接続ポイントであり、サービスをホストする場所です。 スポーク VNet でホストされているさまざまなワークロードで、これらのサービスを使用できます。
 
 - **ゲートウェイ サブネット**。 VNet ゲートウェイは、同じサブネット内に保持されます。
 
-- **スポーク VNet**。 スポークを使用すると、独自の VNet にワークロードを分離して、その他のスポークから個別に管理できます。 各ワークロードには複数の階層が含まれる場合があります。これらの階層には、Azure ロード バランサーを使用して接続されている複数のサブネットがあります。 
+- **スポーク VNet**: スポークを使用すると、独自の VNet にワークロードを分離して、他のスポークとは別に管理できます。 各ワークロードには複数の階層が含まれる場合があります。これらの階層には、Azure ロード バランサーを使用して接続されている複数のサブネットがあります。 
 
-- **VNet ピアリング**。 ピアリング接続を使用して、2 つの VNet を接続できます。 ピアリング接続は、VNet 間の待機時間の短い非推移的な接続です。 ピアリングが完了すると、VNet では、ルーターがなくても Azure バックボーンを使用してトラフィックを交換します。 ハブ スポーク ネットワーク トポロジでは、VNet ピアリングを使用して、ハブを各スポークに接続します。 同じリージョンまたは異なるリージョンの VNet をピアリングできます。
+- **VNet ピアリング**: ピアリング接続を使用して、2 つの VNet を接続できます。 ピアリング接続は、VNet 間の非推移的な低遅延の接続です。 ピアリングが完了すると、VNet では、ルーターがなくても Azure バックボーンを使用してトラフィックを交換します。 ハブ スポーク ネットワーク トポロジでは、VNet ピアリングを使用して、ハブを各スポークに接続します。 同じリージョンまたは異なるリージョンの VNet をピアリングできます。
 
 ## <a name="create-the-directory-structure"></a>ディレクトリ構造を作成する
 
@@ -113,8 +113,16 @@ Azure プロバイダーを宣言する Terraform 構成ファイルを作成し
 1. 以下のコードをエディターに貼り付けます。
 
     ```hcl
+    terraform {
+      required_providers {
+          azurerm = {
+            source  = "hashicorp/azurerm"
+            version = "~>2.0"
+          }
+      }
+    }
     provider "azurerm" {
-        version = "~>1.22"
+      features {}
     }
     ```
 
@@ -135,7 +143,7 @@ Azure プロバイダーを宣言する Terraform 構成ファイルを作成し
     ```hcl
     variable "location" {
       description = "Location of the network"
-      default     = "centralus"
+      default     = "eastus"
     }
     
     variable "username" {
@@ -153,6 +161,8 @@ Azure プロバイダーを宣言する Terraform 構成ファイルを作成し
       default     = "Standard_DS1_v2"
     }
     ```
+
+    **メモ**: このチュートリアルでは、わかりやすくするために、変数ファイルにハードコーディングされたパスワードを使用します。 実際のアプリでは、SSH 公開および秘密キーのペアを使用することを検討してください。 SSH キーと Azure の詳細については、「[Azure 上の Windows で SSH キーを使用する方法](/azure/virtual-machines/linux/ssh-from-windows)」を参照してください。
 
 1. ファイルを保存し、エディターを終了します。
 

@@ -2,18 +2,18 @@
 title: チュートリアル - Terraform を使用して Azure でスポーク ネットワークを作成する
 description: ハブスポーク トポロジのハブに接続される 2 つのスポーク仮想ネットワーク (VNet) を実装する方法について説明します。
 ms.topic: tutorial
-ms.date: 10/26/2019
+ms.date: 03/08/2021
 ms.custom: devx-track-terraform
-ms.openlocfilehash: 265c410d8fc8bdb51803406cc8003e6e349014d9
-ms.sourcegitcommit: e20f6c150bfb0f76cd99c269fcef1dc5ee1ab647
+ms.openlocfilehash: 15f5c14af653354b7c741bc5fcf1a1d4c443e83c
+ms.sourcegitcommit: 7991f748720673d2dc50baaa8658348ff6cc1044
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/28/2020
-ms.locfileid: "91401482"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102604023"
 ---
-# <a name="tutorial-create-a-spoke-network-in-azure-using-terraform"></a>チュートリアル:Terraform を使用して Azure でスポーク ネットワークを作成する
+# <a name="tutorial-create-a-spoke-network-in-azure-using-terraform"></a>チュートリアル: Terraform を使用して Azure でスポーク ネットワークを作成する
 
-このチュートリアルでは、ワークロードの分離を示すために 2 つの別個のスポーク ネットワークを実装します。 このネットワークでは、ハブ仮想ネットワークを使用して共通のリソースを共有します。 スポークを使用すると、独自の VNet にワークロードを分離して、その他のスポークから個別に管理できます。 各ワークロードには複数の階層が含まれる場合があります。これらの階層には、Azure ロード バランサーを使用して接続されている複数のサブネットがあります。
+このチュートリアルでは、ワークロードの分離を示すために 2 つの別個のスポーク ネットワークを実装します。 このネットワークでは、ハブ仮想ネットワークを使用して共通のリソースを共有します。 スポークを使用すると、独自の VNet にワークロードを分離して、他のスポークとは別に管理できます。 各ワークロードには複数の階層が含まれる場合があります。これらの階層には、Azure ロード バランサーを使用して接続されている複数のサブネットがあります。
 
 このチュートリアルに含まれるタスクは次のとおりです。
 
@@ -63,7 +63,7 @@ ms.locfileid: "91401482"
 
     ```hcl
     locals {
-      spoke1-location       = "CentralUS"
+      spoke1-location       = "eastus"
       spoke1-resource-group = "spoke1-vnet-rg"
       prefix-spoke1         = "spoke1"
     }
@@ -88,14 +88,14 @@ ms.locfileid: "91401482"
       name                 = "mgmt"
       resource_group_name  = azurerm_resource_group.spoke1-vnet-rg.name
       virtual_network_name = azurerm_virtual_network.spoke1-vnet.name
-      address_prefix       = "10.1.0.64/27"
+      address_prefixes     = ["10.1.0.64/27"]
     }
 
     resource "azurerm_subnet" "spoke1-workload" {
       name                 = "workload"
       resource_group_name  = azurerm_resource_group.spoke1-vnet-rg.name
       virtual_network_name = azurerm_virtual_network.spoke1-vnet.name
-      address_prefix       = "10.1.1.0/24"
+      address_prefixes     = ["10.1.1.0/24"]
     }
 
     resource "azurerm_virtual_network_peering" "spoke1-hub-peer" {
@@ -185,7 +185,7 @@ ms.locfileid: "91401482"
     
     ```hcl
     locals {
-      spoke2-location       = "CentralUS"
+      spoke2-location       = "eastus"
       spoke2-resource-group = "spoke2-vnet-rg"
       prefix-spoke2         = "spoke2"
     }
@@ -210,14 +210,14 @@ ms.locfileid: "91401482"
       name                 = "mgmt"
       resource_group_name  = azurerm_resource_group.spoke2-vnet-rg.name
       virtual_network_name = azurerm_virtual_network.spoke2-vnet.name
-      address_prefix       = "10.2.0.64/27"
+      address_prefixes     = ["10.2.0.64/27"]
     }
 
     resource "azurerm_subnet" "spoke2-workload" {
       name                 = "workload"
       resource_group_name  = azurerm_resource_group.spoke2-vnet-rg.name
       virtual_network_name = azurerm_virtual_network.spoke2-vnet.name
-      address_prefix       = "10.2.1.0/24"
+      address_prefixes     = ["10.2.1.0/24"]
     }
 
     resource "azurerm_virtual_network_peering" "spoke2-hub-peer" {

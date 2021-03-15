@@ -1,15 +1,15 @@
 ---
 title: JavaScript 開発者向けの Azure の主要タスク
 description: 現在のタスクの例を参照してください。
-ms.topic: reference
-ms.date: 01/20/2021
+ms.topic: how-to
+ms.date: 03/03/2021
 ms.custom: devx-track-js
-ms.openlocfilehash: 9da8ede8dfbf7ffc54fce9531f4b490ae9db1942
-ms.sourcegitcommit: 7287dff6bf4b30c2033924702c941bf520403e07
+ms.openlocfilehash: 22196c4e31c184748408dbbb340c59533ca8811f
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "99589438"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118180"
 ---
 # <a name="top-tasks-for-javascript-developers"></a>JavaScript 開発者向けの主要タスク
 
@@ -138,6 +138,18 @@ ms.locfileid: "99589438"
 
 ## <a name="databases"></a>データベース
 
+### <a name="cassandra-api-on-cosmos-db"></a>Cosmos DB での Cassandra API
+
+[サービスのドキュメント](/azure/cosmos-db/)
+
+|タスク|使用|
+|--|--|
+|リソースを作成する|[Azure Portal](https://ms.portal.azure.com/#create/Microsoft.DocumentDB)<br>[Azure CLI](./with-azure-cli/create-cassandra-db.md#create-a-cosmos-db-resource-for-cassandra-db)|
+|リソースにキーストアを作成する|[Azure CLI](./with-azure-cli/create-cassandra-db.md#create-a-keyspace-on-the-server-with-azure-cli)|
+|キーストアにテーブルを作成する|[Azure CLI](./with-azure-cli/create-cassandra-db.md#create-a-table-on-the-keyspace-with-azure-cli)|
+|接続情報の取得|[Azure CLI](./with-azure-cli/create-cassandra-db.md#get-the-cassandra-connection-string-with-azure-cli)|
+|Cosmos DB で cassandra-driver API を使用する|[JavaScript](/azure/developer/javascript/how-to/with-database/use-cassandra-as-cosmos-db.md#use-cassandra-driver-sdk-to-connect-to-cassandra-db-on-azure)|
+
 ### <a name="mariadb"></a>MariaDB
 
 [サービスのドキュメント](/azure/mariadb/)
@@ -149,16 +161,53 @@ ms.locfileid: "99589438"
 |接続文字列を取得する|[Azure CLI](./with-azure-cli/create-mariadb.md#get-the-mariadb-connection-string-with-azure-cli)|
 |データベースを使用および表示する|[Azure Cloud Shell](https://shell.azure.com/) の _mysql_ CLI<br>[MySQL Workbench](https://www.mysql.com/products/workbench/)<br>[Visual Studio Code 拡張機能](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)<br>[npm mariadb](https://www.npmjs.com/package/mariadb)<br>[JavaScript](./with-database/use-mariadb.md#use-mariadb-sdk-to-connect-to-mariadb-on-azure)|
 
-### <a name="mongodb-on-cosmos-db"></a>Cosmos DB での MongoDB
+### <a name="mongodb-api-on-cosmos-db"></a>Cosmos DB での MongoDB API
 
 [サービスのドキュメント](/azure/cosmos-db/)
 
 |タスク|using|
 |--|--|
 |Cosmos DB の作成 - MongoDB リソース|[Visual Studio Code 拡張機能](../tutorial/deploy-nodejs-mongodb-app-service-from-visual-studio-code.md)<br>[Azure CLI](./with-azure-cli/create-mongodb-cosmosdb.md#create-a-cosmos-db-resource-for-mongodb)|
-|CosmosDB 接続文字列を取得する|[Visual Studio Code 拡張機能](../tutorial/deploy-nodejs-mongodb-app-service-from-visual-studio-code.md#get-cosmosdb-connection-string)<br>[Azure CLI](./with-azure-cli/create-mongodb-cosmosdb.md#get-the-mongodb-connection-string-for-your-resource)|
+|Cosmos DB の接続文字列を取得する|[Visual Studio Code 拡張機能](../tutorial/deploy-nodejs-mongodb-app-service-from-visual-studio-code.md#get-cosmos-db-connection-string)<br>[Azure CLI](./with-azure-cli/create-mongodb-cosmosdb.md#get-the-mongodb-connection-string-for-your-resource)|
 |Cosmos DB の表示|[Cosmos DB Explorer](https://cosmos.azure.com/)|
 |Cosmos DB で MongoDB 用 Mongoose API を使用する|[JavaScript](./with-database/use-mongodb-as-cosmosdb.md#use-mongoose-sdk-to-connect-to-mongodb-on-azure)
+
+### <a name="mysql"></a>MySQL
+
+[サービスのドキュメント](/azure/mysql/)
+
+|タスク|使用|
+|--|--|
+|リソースを作成する|[Azure Portal](https://ms.portal.azure.com/#create/Microsoft.MySQLServer)<br>[Azure CLI](./with-azure-cli/create-mysql-db.md#create-an-azure-database-for-mysql-resource-with-azure-cli)<br>[@azure/arm-mysql](https://www.npmjs.com/package/@azure/arm-mysql)|
+|リソースにデータベースを作成する|[Azure CLI](./with-database/use-mysql-db.md#create-a-database-on-the-server-with-azure-cli)|
+|接続文字列を取得する|[Azure CLI](./with-database/use-mysql-db.md#get-the-mysql-connection-string-with-azure-cli)|
+|データベースを使用および表示する|[MySQL Workbench](https://www.mysql.com/products/workbench/)<br>[Visual Studio Code 拡張機能](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)<br>[npm mysql](https://www.npmjs.com/package/MySQL)<br>[npm promise-mysql](https://www.npmjs.com/package/promise-mysql)|
+|promise-mysql API を使用する|[JavaScript](./with-database/use-mysql-db.md#use-promise-mysql-sdk-to-connect-to-mysql-on-azure)|
+
+### <a name="postgresql"></a>PostgreSQL
+
+[サービスのドキュメント](/azure/postgresql/)
+
+|タスク|using|
+|--|--|
+|リソースを作成する|[Visual Studio Code 拡張機能](./with-visual-studio-code/create-azure-database.md#create-a-postgresql-database)<br>[Azure CLI](./with-azure-cli/create-postgresql-server-resource.md#create-an-azure-database-for-postgresql-server-resource-with-azure-cli)<br>[Azure Portal](https://ms.portal.azure.com/#create/Microsoft.PostgreSQLServer)<br>[@azure/arm-postgresql](https://www.npmjs.com/package/@azure/arm-postgresql)|
+|接続文字列を取得する|[Azure CLI](./with-azure-cli/create-postgresql-server-resource.md#get-the-postgresql-connection-string-with-azure-cli)|
+|DB を表示する|[Visual Studio Code 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-cosmosdb)<br>[Azure Cloud Shell の psql](https://shell.azure.com/)|
+|DB に pg API を使用する|[JavaScript](./with-database/use-postgresql-db.md#use-pg-sdk-to-connect-to-postgresql-on-azure)
+
+### <a name="sql-api-on-cosmos-db"></a>Cosmos DB での SQL API
+
+* [サービスのドキュメント](/azure/cosmos-db/)
+* [@azure/cosmosdb](https://www.npmjs.com/package/@azure/cosmos) npm パッケージ
+
+|タスク|using|
+|--|--|
+|クライアント IP アドレスのファイアウォール規則を追加する|[Azure CLI](./with-database/use-sql-api-as-cosmos-db.md#add-firewall-rule-for-your-client-ip-address)
+|Cosmos DB を作成する - SQL API リソース|[Visual Studio Code 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-cosmosdb)<br>[Azure CLI](./with-database/use-sql-api-as-cosmos-db.md#create-a-cosmos-db-resource-for-sql-api)|
+|Cosmos DB キーを取得する|[Azure CLI](./with-database/use-sql-api-as-cosmos-db.md#get-the-cosmos-db-keys-for-your-resource)|
+|Cosmos DB の接続文字列を取得する|[Visual Studio Code 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-cosmosdb)|
+|Cosmos DB の表示|[Cosmos DB Explorer](https://cosmos.azure.com/)|
+|Cosmos DB に SQL API を使用する|[JavaScript](./with-database/use-sql-api-as-cosmos-db.md#use--sdk-to-connect-to-database)
 
 
 

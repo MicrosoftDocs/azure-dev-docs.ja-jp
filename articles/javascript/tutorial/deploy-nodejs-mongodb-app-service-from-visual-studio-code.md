@@ -1,19 +1,19 @@
 ---
-title: VSCode を使用して Express.js/MongoDB アプリをデプロイする - App Service/CosmosDB
+title: VSCode を使用して Express.js/MongoDB アプリをデプロイする - App Service/Cosmos DB
 description: このチュートリアルでは、MongoDB ネイティブ API を使用して、MongoDB データベースで Node.js アプリを使用します。 Node.js アプリケーションを (Linux 上の) Azure App Service にデプロイし、ホストされているアプリが動作することを確認します。
 ms.topic: tutorial
 ms.date: 01/12/2020
 ms.custom: scenarios:getting-started, languages:JavaScript, devx-track-javascript
-ms.openlocfilehash: e9c9b6cf624f646b3b41f9af95fcef95fa5841e6
-ms.sourcegitcommit: 657f43a5048cd17b080b40b5090d575c8d7f5eaf
+ms.openlocfilehash: 9765078f6afa79bf42b722784401f20b8e51b4bc
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/13/2021
-ms.locfileid: "98173202"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102117906"
 ---
 # <a name="deploy-expressjs-mongodb-app-to-app-service-from-visual-studio-code"></a>Visual Studio Code から App Service に Express.js MongoDB アプリをデプロイする
 
-MongoDB に接続する Express.js アプリケーションを、(Linux 上で) Azure App Service および CosmosDB にデプロイします。 
+MongoDB に接続する Express.js アプリケーションを、(Linux 上で) Azure App Service および Cosmos DB にデプロイします。 
 
 プログラミング作業は完了しており、このチュートリアルでは、Azure 拡張機能を使用して Visual Studio Code 内部からローカルおよびリモートの Azure 環境を正常に使用することに焦点を当てています。
 
@@ -23,7 +23,7 @@ MongoDB に接続する Express.js アプリケーションを、(Linux 上で) 
 
 このチュートリアルには、JavaScript 開発者向けの **上位の Azure タスク** がいくつか含まれています。
 
-* MongoDB データベースをホストするために CosmosDB リソースを作成する
+* MongoDB データベースをホストするために Cosmos DB リソースを作成する
 * Express.js アプリをホストするために App Service リソースを作成する
 * Express.js アプリを App Service にデプロイする
 
@@ -49,7 +49,7 @@ MongoDB に接続する Express.js アプリケーションを、(Linux 上で) 
     - Visual Studio Code 用の [Azure App Service 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice) (Visual Studio Code 内からインストールされます)。
     - [Azure のデータベース](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-cosmosdb)
 
-## <a name="create-a-cosmosdb-database-resource-for-mongodb"></a>MongoDB 用の CosmosDB データベース リソースを作成する
+## <a name="create-a-cosmos-db-database-resource-for-mongodb"></a>MongoDB 用の Cosmos DB データベース リソースを作成する
 
 最初に Cosmos リソースを作成します (これには数分かかるため)。 
 
@@ -71,7 +71,7 @@ MongoDB に接続する Express.js アプリケーションを、(Linux 上で) 
 
     リソースの作成には、最大で 15 分かかる場合があります。 時間に制限がある場合は次のセクションをスキップすることができますが、次のセクションは数分で完了できるため、忘れずに戻ってきてください。
 
-## <a name="get-cosmosdb-connection-string"></a>CosmosDB 接続文字列を取得する
+## <a name="get-cosmos-db-connection-string"></a>Cosmos DB の接続文字列を取得する
 
 引き続き Azure データベース エクスプローラーでリソース名を右クリックし、 **[接続文字列のコピー]** を選択して接続文字列をコピーします。 これは後で環境変数ファイルのチュートリアルで必要になります。
 
@@ -88,7 +88,7 @@ Express.js の Web アプリが用意されています。 アプリをダウン
     code .
     ```
 
-1. 環境ファイル `.env` を編集し、`DATABASE_URL` プロパティの値として CosmosDB の接続文字列プロパティを追加します。 
+1. 環境ファイル `.env` を編集し、`DATABASE_URL` プロパティの値として Cosmos DB の接続文字列プロパティを追加します。 
 
     ```bash
     ENVIRONMENT=development
@@ -156,7 +156,7 @@ App Service 用の Visual Studio Code 拡張機能を使用して App Service �
 
 ## <a name="next-steps"></a>次のステップ
 
-App Service と CosmosDB についての学習を続ける
+App Service と Cosmos DB についての学習を続ける
 * [アプリの設定を構成する方法について確認する](../how-to/configure-web-app-settings.md)
 * [Azure App Service 向けの Node.js アプリを構成する](/azure/app-service/configure-language-nodejs?pivots=platform-linux)
 * [SSH を使用した接続](/azure/app-service/configure-linux-open-ssh-session)

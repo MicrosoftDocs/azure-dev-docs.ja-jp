@@ -10,12 +10,12 @@ ms.service: azure-functions
 ms.tgt_pltfrm: multiple
 ms.topic: article
 ms.custom: devx-track-java
-ms.openlocfilehash: f4fa9df0edf0fbb6b748f9bf3010be9115ad1ffd
-ms.sourcegitcommit: d5dabc6dde727ed167a9dc8a4eaaf21025b3efa8
+ms.openlocfilehash: 5c13a69769bef56c2b67607118b0a20c4f59cd5c
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/12/2020
-ms.locfileid: "91947527"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118435"
 ---
 # <a name="getting-started-with-spring-cloud-function-in-azure"></a>Azure での Spring Cloud Function の概要
 
@@ -65,13 +65,18 @@ Azure Functions 上で実行される古典的な "Hello, World" 関数をビル
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <azure.functions.maven.plugin.version>1.9.0</azure.functions.maven.plugin.version>
+
+    <azure.functions.java.library.version>1.4.0</azure.functions.java.library.version>
+    <azure.functions.maven.plugin.version>1.9.1</azure.functions.maven.plugin.version>
+
+    <!-- customize those two properties. The functionAppName should be unique across Azure -->
+    <functionResourceGroup>my-spring-function-resource-group</functionResourceGroup>
     <functionAppName>my-spring-function</functionAppName>
-    <functionAppRegion>westus</functionAppRegion>
+
+    <functionAppRegion>eastus</functionAppRegion>
     <stagingDirectory>${project.build.directory}/azure-functions/${functionAppName}</stagingDirectory>
-    <functionResourceGroup>my-resource-group</functionResourceGroup>
-    <start-class>com.example.HelloFunction</start-class>
-    <spring.boot.wrapper.version>1.0.25.RELEASE</spring.boot.wrapper.version>
+    <start-class>com.example.DemoApplication</start-class>
+    <spring.boot.wrapper.version>1.0.26.RELEASE</spring.boot.wrapper.version>
 </properties>
 ```
 
@@ -96,6 +101,7 @@ Azure Functions 上で実行される古典的な "Hello, World" 関数をビル
   "Values": {
     "AzureWebJobsStorage": "",
     "FUNCTIONS_WORKER_RUNTIME": "java",
+    "MAIN_CLASS":"com.example.DemoApplication",
     "AzureWebJobsDashboard": ""
   }
 }
@@ -171,6 +177,25 @@ public class Greeting {
 
 *src/main/java/com/example* フォルダーで次のファイルを作成します。これは通常の Spring Boot アプリケーションです。
 
+*DemoApplication.java*:
+
+```java
+package com.example;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DemoApplication {
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(HelloFunction.class, args);
+    }
+}
+```
+
+次に、以下のファイルを作成します。これには、実行する関数を表す Spring Boot コンポーネントが含まれています。
+
 *HelloFunction.java*:
 
 ```java
@@ -178,31 +203,25 @@ package com.example;
 
 import com.example.model.Greeting;
 import com.example.model.User;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
 
-@SpringBootApplication
-public class HelloFunction {
+@Component
+public class HelloFunction implements Function<User, Greeting> {
 
-    public static void main(String[] args) throws Exception {
-        SpringApplication.run(HelloFunction.class, args);
-    }
-
-    @Bean
-    public Function<User, Greeting> hello() {
-        return user -> new Greeting("Welcome, " + user.getName());
+    @Override
+    public Greeting apply(User user) {
+        return new Greeting("Hello, " + user.getName() + "!\n");
     }
 }
 ```
 
-> [!NOTE] 
-> `hello()` は、非常に具体的な関数です。
-> 
-> - これは、このクイックスタートで使用される関数である `java.util.function.Function` を返します。 これにはビジネス ロジックが含まれており、標準の Java API を使用して、あるオブジェクトを別のオブジェクトに変換します。
-> - これは `@Bean` 注釈を備えているため、Spring Bean です。既定では、メソッドのいずれか (`hello`) がその名前になっています。 これは自分のアプリケーションに他の関数を作成したい場合に重要です。この名前が、次のセクションで作成する Azure 関数の名前と一致する必要があるためです。
+> [!NOTE]
+> `HelloFunction` は、非常に具体的な関数です。
+>
+> - これは、このクイックスタートで使用される関数である `java.util.function.Function` です。 これにはビジネス ロジックが含まれており、標準の Java API を使用して、あるオブジェクトを別のオブジェクトに変換します。
+> - これは `@Component` 注釈を備えているため、Spring Bean です。既定では、小文字で始まるクラスのいずれか (`helloFunction`) がその名前になっています。 これは自分のアプリケーションに他の関数を作成したい場合に重要です。この名前が、次のセクションで作成する Azure 関数の名前と一致する必要があるためです。
 
 ## <a name="create-the-azure-function"></a>Azure 関数を作成する
 
@@ -231,11 +250,15 @@ public class HelloHandler extends AzureSpringBootRequestHandler<User, Greeting> 
     public HttpResponseMessage execute(
             @HttpTrigger(name = "request", methods = {HttpMethod.GET, HttpMethod.POST}, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<User>> request,
             ExecutionContext context) {
-
-        context.getLogger().info("Greeting user name: " + request.getBody().get().getName());
+        User user = request.getBody()
+                .filter((u -> u.getName() != null))
+                .orElseGet(() -> new User(
+                        request.getQueryParameters()
+                                .getOrDefault("name", "world")));
+        context.getLogger().info("Greeting user name: " + user.getName());
         return request
                 .createResponseBuilder(HttpStatus.OK)
-                .body(handleRequest(request.getBody().get(), context))
+                .body(handleRequest(user, context))
                 .header("Content-Type", "application/json")
                 .build();
     }
@@ -244,8 +267,8 @@ public class HelloHandler extends AzureSpringBootRequestHandler<User, Greeting> 
 
 この Java クラスは Azure 関数であり、次のような興味深い機能を備えています。
 
-- これによって、`AzureSpringBootRequestHandler` が拡張され、Azure Functions と Spring Cloud Function のリンクが行われます。 これは、`execute()` メソッドで使用される `handleRequest()` メソッドを提供します。
-- 関数の名前は、`@FunctionName("hello")` 注釈で定義されているように、前の手順で構成した Spring Bean (`hello`) と同じです。
+- これによって、`AzureSpringBootRequestHandler` が拡張され、Azure Functions と Spring Cloud Function のリンクが行われます。 これは、`body()` メソッドで使用される `handleRequest()` メソッドを提供します。
+- `@FunctionName("hello")` で定義されているように、関数の名前は `hello` です。
 - これは本物の Azure 関数であるため、ここでは完全な Azure Functions API を使用できます。
 
 ## <a name="add-unit-tests"></a>単体テストを追加する
@@ -261,7 +284,7 @@ package com.example;
 
 import com.example.model.Greeting;
 import com.example.model.User;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.cloud.function.adapter.azure.AzureSpringBootRequestHandler;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -270,8 +293,8 @@ public class HelloFunctionTest {
 
     @Test
     public void test() {
-        Greeting result = new HelloFunction().hello().apply(new User("foo"));
-        assertThat(result.getMessage()).isEqualTo("Welcome, foo");
+        Greeting result = new HelloFunction().apply(new User("foo"));
+        assertThat(result.getMessage()).isEqualTo("Hello, foo!\n");
     }
 
     @Test
@@ -280,7 +303,7 @@ public class HelloFunctionTest {
                 HelloFunction.class);
         Greeting result = handler.handleRequest(new User("foo"), null);
         handler.close();
-        assertThat(result.getMessage()).isEqualTo("Welcome, foo");
+        assertThat(result.getMessage()).isEqualTo("Hello, foo!\n");
     }
 }
 ```
@@ -344,7 +367,7 @@ mvn azure-functions:deploy
 関数をクリックします。
 
 - 関数の概要で、関数の URL をメモします。
-- **[プラットフォーム機能]** タブを選択して**ログ ストリーミング** サービスを見つけます。次に、そのサービスを選択して、自分が実行している関数を確認します。
+- **[プラットフォーム機能]** タブを選択して **ログ ストリーミング** サービスを見つけます。次に、そのサービスを選択して、自分が実行している関数を確認します。
 
 ここで、前のセクションで行ったように cURL を使用して、実行中の関数にアクセスします。 `your-function-name` は実際の関数名に置き換えてください。
 

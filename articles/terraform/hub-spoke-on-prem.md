@@ -2,18 +2,18 @@
 title: チュートリアル - Terraform を使用して Azure でオンプレミスの仮想ネットワークを作成する
 description: ローカル リソースを格納するオンプレミス仮想ネットワーク (VNet) を Azure で実装する方法について説明します。
 ms.topic: tutorial
-ms.date: 10/26/2019
+ms.date: 03/08/2021
 ms.custom: devx-track-terraform
-ms.openlocfilehash: 4faf366a585c7652584e5b70cf10b150a91d1b0e
-ms.sourcegitcommit: e20f6c150bfb0f76cd99c269fcef1dc5ee1ab647
+ms.openlocfilehash: 08f6f7b9c3c3e73f0d240d568b4049c47d7c5796
+ms.sourcegitcommit: 7991f748720673d2dc50baaa8658348ff6cc1044
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/28/2020
-ms.locfileid: "91401472"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102604113"
 ---
-# <a name="tutorial-create-on-premises-virtual-network-in-azure-using-terraform"></a>チュートリアル:Terraform を使用して Azure でオンプレミスの仮想ネットワークを作成する
+# <a name="tutorial-create-on-premises-virtual-network-in-azure-using-terraform"></a>チュートリアル: Terraform を使用して Azure でオンプレミスの仮想ネットワークを作成する
 
-このチュートリアルでは、Azure 仮想ネットワーク (VNet) を使用して、オンプレミス ネットワークを実装する方法について説明します。 Azure VNet は、ご自身のプライベート仮想ネットワークに置き換えることができます。 これを行うには、サブネット内の適切な IP アドレスをマップします。
+このチュートリアルでは、Azure にオンプレミス ネットワークを実装する方法について説明します。 サンプル ネットワークをプライベート仮想ネットワークに置き換えることができます。 これを行うには、お使いの環境に合わせてサブネットの IP アドレスを変更します。
 
 次のタスクについて説明します。
 
@@ -63,7 +63,7 @@ ms.locfileid: "91401472"
 
     ```hcl
     locals {
-      onprem-location       = "SouthCentralUS"
+      onprem-location       = "eastus"
       onprem-resource-group = "onprem-vnet-rg"
       prefix-onprem         = "onprem"
     }
@@ -88,14 +88,14 @@ ms.locfileid: "91401472"
       name                 = "GatewaySubnet"
       resource_group_name  = azurerm_resource_group.onprem-vnet-rg.name
       virtual_network_name = azurerm_virtual_network.onprem-vnet.name
-      address_prefix       = "192.168.255.224/27"
+      address_prefixes     = ["192.168.255.224/27"]
     }
 
     resource "azurerm_subnet" "onprem-mgmt" {
       name                 = "mgmt"
       resource_group_name  = azurerm_resource_group.onprem-vnet-rg.name
       virtual_network_name = azurerm_virtual_network.onprem-vnet.name
-      address_prefix       = "192.168.1.128/25"
+      address_prefixes     = ["192.168.1.128/25"]
     }
 
     resource "azurerm_public_ip" "onprem-pip" {

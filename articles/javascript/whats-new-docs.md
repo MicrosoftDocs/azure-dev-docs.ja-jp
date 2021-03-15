@@ -2,13 +2,13 @@
 title: JavaScript ドキュメントの新着情報
 description: デベロッパー センターの JavaScript ドキュメントの新着情報
 ms.topic: conceptual
-ms.date: 02/08/2021
-ms.openlocfilehash: 37d68d713c4b6ba51d35efb033f68fe2b2e60680
-ms.sourcegitcommit: 98a7e855206ff463c1d95f93c23dd665b26a0aa1
+ms.date: 02/17/2021
+ms.openlocfilehash: b51630af0808255b3c8cbcb54319a59c00263af9
+ms.sourcegitcommit: 7991f748720673d2dc50baaa8658348ff6cc1044
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/09/2021
-ms.locfileid: "100004717"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102604123"
 ---
 # <a name="javascript-docs-whats-new"></a>JavaScript ドキュメント:新機能
 
@@ -20,10 +20,36 @@ JavaScript および TypeScript 開発者向けの新規および更新された
 
 |名前|Notes|
 |---------------------------------------|--|
+|[Azure Cosmos DB での Cassandra の使用方法](./how-to/with-database/use-cassandra-as-cosmos-db.md)|Cassandra DB データベースを Azure で作成、移動、または使用するには、Cosmos DB リソースが必要です。 リソースを作成し、データベースを使用する方法について説明します。 |
 |[Azure Cosmos DB での MongoDB の使用方法](./how-to/with-database/use-mongodb-as-cosmosdb.md)|MongoDB データベースを Azure で作成、移動、または使用するには、Cosmos DB リソースが必要です。 リソースを作成し、データベースを使用する方法について説明します。 |
 |[Azure での MariaDB の使用方法](./how-to/with-database/use-mariadb.md)|Azure で MariaDB データベースを作成、移動、または使用するには、**Azure Database for MariaDB** リソースが必要です。 リソースを作成し、データベースを使用する方法について説明します。|
 |[Azure での MySql の使用方法](./how-to/with-database/use-mysql-db.md)|Azure で MySQL データベースを作成、移動、または使用するには、**Azure Database for MySQL** リソースが必要です。 リソースを作成し、データベースを使用する方法について説明します。|
 |[Azure での PostgreSQL の使用方法](./how-to/with-database/use-postgresql-db.md)|Azure で PostgreSQL データベースを作成、移動、または使用するには、**Azure Database for PostgreSQL サーバー** リソースが必要です。 リソースを作成し、データベースを使用する方法について説明します。|
+|[Azure Cache for Redis 用の JavaScript アプリケーションを開発する](.//how-to/with-database/use-azure-cache-for-redis-db.md)|Azure で Redis データベースを作成、移動、または使用するには、Azure Cache for Redis リソースが必要です。 リソースを作成し、データベースを使用する方法について説明します。|
+|[SQL API を使用して Cosmos DB 用の JavaScript アプリケーションを開発する](.//how-to/with-database/use-sql-api-as-cosmos-db.md)|SQL API で Cosmos DB を作成または使用するには、Cosmos DB リソースを使用します。 Cosmos リソースを作成し、データベースを使用する方法について説明します。|
+
+### <a name="whats-updated"></a>更新内容
+
+|名前|Notes|
+|---------------------------------------|--|
+|[JavaScript 開発者向けの主要タスク](/azure/azure-monitor/app/api-custom-events-metrics)|
+
+
+
+### <a name="top-10-documents-by-page-view-for-javascript-developers"></a><a name="top-10"></a>JavaScript 開発者向けの、ページ ビューによる上位 10 件のドキュメント
+
+|#|名前|
+|---------------------------------------|--|
+|1|[カスタムのイベントとメトリックのための Application Insights API](how-to/common-javascript-tasks.md)|
+|2|[Azure Storage での静的な Web サイトのホスティング](/azure/storage/blobs/storage-blob-static-website)|
+|3|[JavaScript と Node.js アプリのビルド、テスト、デプロイ - Azure Pipelines](/azure/devops/pipelines/ecosystems/javascript?view=azure-devops&tabs=code)|
+|4|[Azure Functions を監視する](/azure/azure-functions/functions-monitoring)|
+|5|[音声変換の概要](/azure/cognitive-services/speech-service/get-started-speech-to-text?tabs=script%2Cbrowser%2Cwindowsinstall&pivots=programming-language-javascript)|
+|6|[JavaScript を使用して ASP.NET Core Web API を呼び出す](/aspnet/core/tutorials/web-api-javascript?view=aspnetcore-5.0)|
+|7|[ASP.NET Core SignalR JavaScript クライアント](/aspnet/core/signalr/javascript-client?view=aspnetcore-5.0)|
+|8|[Azure Functions の JavaScript 開発者向けガイド](/azure/azure-functions/functions-reference-node?tabs=v2)|
+|9|[Angular シングルページ アプリケーションからユーザーをサインインさせて Microsoft Graph API を呼び出す](/azure/active-directory/develop/tutorial-v2-angular)|
+|10|[Web ページ向けの Application Insights](/azure/azure-monitor/app/javascript)|
 
 ## <a name="2021-january"></a>2021 年 1 月
 

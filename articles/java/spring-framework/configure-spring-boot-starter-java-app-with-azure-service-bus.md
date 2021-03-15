@@ -7,12 +7,12 @@ ms.author: seal
 ms.date: 10/13/2019
 ms.topic: article
 ms.custom: devx-track-java
-ms.openlocfilehash: c1b8baa716fbe24efbf635bc5f8a17833590137a
-ms.sourcegitcommit: 709fa38a137b30184a7397e0bfa348822f3ea0a7
+ms.openlocfilehash: 6c87add44d1573d0df91432c934b3fdc3eba0a17
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96442143"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118564"
 ---
 # <a name="how-to-use-the-spring-boot-starter-for-azure-service-bus-jms"></a>Azure Service Bus JMS 用の Spring Boot スターターの使用方法
 
@@ -61,13 +61,12 @@ Azure Service Bus JMS 用の Spring Boot スターターを使用すると、Spr
 
     ```xml
     <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-servicebus-jms-spring-boot-starter</artifactId>
-        <version>2.3.5</version>
+        <groupId>com.azure.spring</groupId>
+        <artifactId>azure-spring-boot-starter-servicebus-jms</artifactId>
+        <version>3.1.0</version>
     </dependency>
     ```
 
-    ![pom.xml ファイルに dependency セクションを追加します。](media/configure-spring-boot-starter-java-app-with-azure-service-bus/add-dependency-section-new.png)
 
 1. *pom.xml* ファイルを保存して閉じます。
 
@@ -92,6 +91,7 @@ Azure Service Bus JMS 用の Spring Boot スターターを使用すると、Spr
     ```yml
     spring.jms.servicebus.connection-string=<ServiceBusNamespaceConnectionString>
     spring.jms.servicebus.idle-timeout=<IdleTimeout>
+    spring.jms.servicebus.pricing-tier=<ServiceBusPricingTier> 
     ```
 
     **フィールドの説明**
@@ -100,6 +100,7 @@ Azure Service Bus JMS 用の Spring Boot スターターを使用すると、Spr
     |-------------------------------------------|-------------------------------------------------------------------------------------------------|
     | `spring.jms.servicebus.connection-string` | Azure portal の自分の Service Bus 名前空間で取得した接続文字列を指定します。 |
     | `spring.jms.servicebus.idle-timeout`      | アイドル タイムアウトをミリ秒単位で指定します。 このチュートリアルで推奨される値は 1800000 です。   |
+    | `spring.jms.servicebus.pricing-tie`       | Service Bus の価格レベルを指定します。 サポートされている値は、*premium*、*standard*、*basic* です。 |
 
 1. *application.properties* ファイルを保存して閉じます。
 
@@ -121,6 +122,7 @@ Azure Service Bus JMS 用の Spring Boot スターターを使用すると、Spr
     spring.jms.servicebus.connection-string=<ServiceBusNamespaceConnectionString>
     spring.jms.servicebus.topic-client-id=<ServiceBusSubscriptionID>
     spring.jms.servicebus.idle-timeout=<IdleTimeout>
+    spring.jms.servicebus.pricing-tier=<ServiceBusPricingTier> 
     ```
 
     **フィールドの説明**
@@ -130,6 +132,7 @@ Azure Service Bus JMS 用の Spring Boot スターターを使用すると、Spr
     | `spring.jms.servicebus.connection-string` | Azure portal の自分の Service Bus 名前空間で取得した接続文字列を指定します。   |
     | `spring.jms.servicebus.topic-client-id`   | JMS クライアント ID を指定します。これは、Azure portal 内の Service Bus のサブスクリプション ID です。                | 
     | `spring.jms.servicebus.idle-timeout`      | アイドル タイムアウトをミリ秒単位で指定します。 このチュートリアルで推奨される値は 1800000 です。     |
+    | `spring.jms.servicebus.pricing-tie`       | Service Bus の価格レベルを指定します。 サポートされている値は、*premium*、*standard*、*basic* です。 |
 
 1. *application.properties* ファイルを保存して閉じます。
 
@@ -316,6 +319,55 @@ Azure Service Bus JMS 用の Spring Boot スターターを使用すると、Spr
     ```
 
 1. *TopicReceiveController.java* ファイルを保存して閉じます。
+
+## <a name="optional-service-bus-functionality"></a>オプションの Service Bus 機能
+
+カスタマイズされた `MessageConverter` Bean を使用して、Java オブジェクトと JMS メッセージの間で変換を行うことができます。
+
+### <a name="set-the-content-type-of-messages"></a>メッセージのコンテンツ タイプを設定する
+
+次のコード例では、`BytesMessage` コンテンツ タイプを `application/json` に設定します。 詳細については、「[メッセージ、ペイロード、およびシリアル化](/azure/service-bus-messaging/service-bus-messages-payloads)」を参照してください。
+
+```java
+package com.wingtiptoys.servicebus;
+
+import com.fasterxml.jackson.databind.ObjectWriter;
+import org.apache.qpid.jms.message.JmsBytesMessage;
+import org.apache.qpid.jms.provider.amqp.message.AmqpJmsMessageFacade;
+import org.apache.qpid.proton.amqp.Symbol;
+import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
+import org.springframework.jms.support.converter.MessageType;
+import org.springframework.stereotype.Component;
+
+import javax.jms.BytesMessage;
+import javax.jms.JMSException;
+import javax.jms.Session;
+import java.io.IOException;
+
+@Component
+public class CustomMessageConverter extends MappingJackson2MessageConverter {
+
+    private static final String TYPE_ID_PROPERTY = "_type";
+    private static final Symbol CONTENT_TYPE = Symbol.valueOf("application/json");
+
+    public CustomMessageConverter() {
+        this.setTargetType(MessageType.BYTES);
+        this.setTypeIdPropertyName(TYPE_ID_PROPERTY);
+    }
+
+    @Override
+    protected BytesMessage mapToBytesMessage(Object object, Session session, ObjectWriter objectWriter)
+        throws JMSException, IOException {
+        final BytesMessage bytesMessage = super.mapToBytesMessage(object, session, objectWriter);
+        JmsBytesMessage jmsBytesMessage = (JmsBytesMessage) bytesMessage;
+        AmqpJmsMessageFacade facade = (AmqpJmsMessageFacade) jmsBytesMessage.getFacade();
+        facade.setContentType(CONTENT_TYPE);
+        return jmsBytesMessage;
+    }
+}
+```
+
+`MessageConverter` の詳細については、公式の [Spring JMS ガイド](https://spring.io/guides/gs/messaging-jms/)を参照してください。
 
 ## <a name="build-and-test-your-application"></a>アプリケーションをビルドしてテストする
 

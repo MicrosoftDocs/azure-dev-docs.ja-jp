@@ -2,14 +2,14 @@
 title: Visual Studio Code から Docker コンテナーを Azure App Service にデプロイする
 description: Docker チュートリアル パート 1、概要と前提条件。
 ms.topic: tutorial
-ms.date: 09/20/2019
+ms.date: 03/04/2021
 ms.custom: devx-track-js
-ms.openlocfilehash: b2dfe0c42b7c0ae1afc34f431715031893afbaf1
-ms.sourcegitcommit: f723980ade4cbc13548a5d8ac3f3fa681b8a2dbd
+ms.openlocfilehash: a6058d682a8dec3b06d0854fed09534454270171
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/16/2020
-ms.locfileid: "97609382"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102117986"
 ---
 # <a name="deploy-containers-to-azure-app-service"></a>Azure App Service にコンテナーをデプロイする
 
@@ -25,8 +25,11 @@ ms.locfileid: "97609382"
 
 - [Azure サブスクリプション](#azure-subscription)。
 - [Visual Studio Code](https://code.visualstudio.com/)。
-- [Docker 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)。
-- [Azure App Service 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)。
+- Visual Studio Code 拡張機能
+    - [Azure Account 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azure-account)
+    - [Azure App Service 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)。
+    - [Azure Resources 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureresourcegroups)
+    - [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)。
 - [Node.js と npm](https://nodejs.org/en/download)、Node.js パッケージ マネージャー。
 - [Docker](https://www.docker.com/community-edition)。
 

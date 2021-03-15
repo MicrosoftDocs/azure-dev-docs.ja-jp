@@ -5,12 +5,12 @@ keywords: jenkins, azure, devops, container instances, ビルド エージェン
 ms.topic: article
 ms.date: 01/08/2021
 ms.custom: devx-track-jenkins,devx-track-azurecli
-ms.openlocfilehash: 6a7578818eb1f59fa2ce2bd46003f799045fc154
-ms.sourcegitcommit: b380f6e637b47e6e3822b364136853e1d342d5cd
+ms.openlocfilehash: cc0e38dbad8056f8c511f2c76713891d842dddb8
+ms.sourcegitcommit: 737d95fe31e9db55c2d42a93f194a3f3e4bd3c7d
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/14/2021
-ms.locfileid: "100395387"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102622310"
 ---
 # <a name="tutorial-use-azure-container-instances-as-a-jenkins-build-agent"></a>チュートリアル:Azure Container Instances を Jenkins ビルド エージェントとして使用する
 
@@ -134,11 +134,11 @@ Jenkins のビルド ジョブが作成され、Azure コンテナー インス�
 
 1. **[ビルド履歴]** のビルド **[#1]** をクリックします。
 
-    ![コンソールからのビルド出力を表示する [コンソール出力]](./media/azure-container-instances-as-jenkins-build-agent/build-history.png)
+    ![[ビルド履歴] のコンソールからのビルド出力を表示する [コンソール出力]](./media/azure-container-instances-as-jenkins-build-agent/build-history.png)
 
 1. **[コンソール出力]** を選択して、ビルドの出力を表示します。
 
-    ![コンソールからのビルド出力を表示する [コンソール出力]](./media/azure-container-instances-as-jenkins-build-agent/build-console-output.png)
+    ![ビルドの出力のコンソールからのビルド出力を表示する [コンソール出力]](./media/azure-container-instances-as-jenkins-build-agent/build-console-output.png)
 
 ## <a name="next-steps"></a>次のステップ
 

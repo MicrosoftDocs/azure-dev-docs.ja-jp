@@ -5,12 +5,12 @@ author: edburns
 ms.author: edburns
 ms.topic: tutorial
 ms.date: 08/10/2020
-ms.openlocfilehash: f97d9d57b85550c1e28f58fb24a27a4da4205266
-ms.sourcegitcommit: 3f8aa923e4626b31cc533584fe3b66940d384351
+ms.openlocfilehash: 58a36de1e52415fc563b294215818b1860cd7ba2
+ms.sourcegitcommit: b0a119a624e9cb6b76d968951543a414bd08eaa0
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/01/2021
-ms.locfileid: "99224726"
+ms.lasthandoff: 03/05/2021
+ms.locfileid: "102220381"
 ---
 # <a name="end-user-authorization-and-authentication-for-migrating-java-apps-on-weblogic-server-to-azure"></a>WebLogic Server 上の Java アプリを Azure に移行するためのエンドユーザーの認可と認証
 
@@ -172,7 +172,7 @@ az resource update --ids $AADDS_ID --set properties.domainSecuritySettings.tlsV1
 | `wlsLDAPGroupBaseDN` および `wlsLDAPUserBaseDN` | ユーザー ベース DN とグループ ベース DN | このチュートリアルでは、これらの両方のプロパティの値は同じです。最初のコンマの後の **wlsLDAPPrincipal** の部分です。|
 | `wlsLDAPPrincipalPassword` | プリンシパルのパスワード | この値は、**AAD DC Administrators** グループに追加されたユーザーのパスワードです。 |
 | `wlsLDAPProviderName` | プロバイダー名 | この値は、既定値のままにしておくことができます。  これは、WLS で認証プロバイダーの名前として使用されます。 |
-| `wlsLDAPSSLCertificate` | SSL 構成のトラスト キーストア | この値は、「[クライアント コンピューター用の証明書をエクスポートする](/azure/active-directory-domain-services/tutorial-configure-ldaps#export-a-certificate-for-client-computers)」手順の完了時に別に保存しておくように求められた *.cer* ファイルです。
+| `wlsLDAPSSLCertificate` | Azure AD DS LDAPS 接続の公開キー | この値は、「[クライアント コンピューター用の証明書をエクスポートする](/azure/active-directory-domain-services/tutorial-configure-ldaps#export-a-certificate-for-client-computers)」手順の完了時に別に保存しておくように求められた *.cer* ファイルです。
 
 ### <a name="integrating-azure-ad-ds-ldap-with-wls"></a>Azure AD DS LDAP と WLS の統合
 

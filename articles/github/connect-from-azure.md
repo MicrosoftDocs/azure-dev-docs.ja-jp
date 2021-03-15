@@ -5,14 +5,14 @@ author: N-Usha
 ms.author: ushan
 ms.topic: reference
 ms.service: azure
-ms.date: 11/17/2020
+ms.date: 02/17/2021
 ms.custom: github-actions-azure, devx-track-azurecli
-ms.openlocfilehash: 6310254e450c7e0fc648459ddad2c08b1bba555b
-ms.sourcegitcommit: 6fbf9e489b194586887a2c11152044be5b3a2b99
+ms.openlocfilehash: 136e11c6059ab8c25af85212f0f0f96b88652a56
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/25/2021
-ms.locfileid: "98759517"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118240"
 ---
 # <a name="use-github-actions-to-connect-to-azure"></a>GitHub Actions を使用して Azure に接続する
 
@@ -21,9 +21,9 @@ ms.locfileid: "98759517"
 GitHub Actions ワークフローで Azure PowerShell または Azure CLI を使用するには、まず、[Azure login](https://github.com/marketplace/actions/azure-login) アクションを使用してログインする必要があります。
 Azure login アクションを使用すると、[Azure AD サービス プリンシパル](/azure/active-directory/develop/app-objects-and-service-principals#service-principal-object)のコンテキストでワークフロー内のコマンドを実行できます。
 
-login アクションを設定したら、Azure CLI または Azure PowerShell を使用できます。
-
 既定では、このアクションは Azure CLI を使用してログインし、Azure CLI に対して GitHub アクション ランナー環境を設定します。 Azure login アクションの `enable-AzPSSession` プロパティを使用すると、Azure PowerShell を使用できます。 これは、Azure PowerShell モジュールを使用して GitHub アクション ランナー環境を設定します。
+
+Azure ログインを使用して、Azure Government や Azure Stack Hub などのパブリックまたはソブリン クラウドに接続できます。
 
 ## <a name="create-a-service-principal-and-add-it-to-github-secret"></a>サービス プリンシパルを作成して GitHub シークレットに追加する
 
@@ -42,14 +42,20 @@ login アクションを設定したら、Azure CLI または Azure PowerShell �
         --identifier-uris http://localhost/$appName
     ```
 
-1. Azure portal でアプリ用の[新しいサービス プリンシパルを作成します](/cli/azure/create-an-azure-service-principal-azure-cli)。 
+1. Azure portal または [Azure CLI](/cli/azure/install-azure-cli) でローカルに [Azure Cloud Shell](/azure/cloud-shell/overview) を開きます。
+
+    > [!NOTE]
+    > Azure Stack Hub を使用している場合は、SQL 管理エンドポイントを `not supported` に設定する必要があります。
+    > `az cloud update -n {environmentName} --endpoint-sql-management https://notsupported`
+
+1. Azure portal でアプリ用の[新しいサービス プリンシパルを作成します](/cli/azure/create-an-azure-service-principal-azure-cli)。 サービス プリンシパルには、共同作成者ロールが割り当てられている必要があります。
 
     ```azurecli-interactive
         az ad sp create-for-rbac --name "myApp" --role contributor \
                                     --scopes /subscriptions/{subscription-id}/resourceGroups/{resource-group} \
                                     --sdk-auth
     ```
-
+    
 1. サービス プリンシパルの JSON オブジェクトをコピーします。
 
     ```json
@@ -151,6 +157,25 @@ build-and-deploy:
         inlineScript: |
             az account show
             az storage -h
+```
+
+## <a name="connect-to-azure-government-and-azure-stack-hub-clouds"></a>Azure Government および Azure Stack Hub クラウドに接続する
+
+いずれかの Azure Government クラウドにログインするには、サポートされているクラウド名 `AzureUSGovernment` または `AzureChinaCloud` を使用して、オプションのパラメーター環境を設定する必要があります。 このパラメーターを指定しないと、既定値の `AzureCloud` が使用され、Azure パブリック クラウドに接続されます。
+
+```yaml
+   - name: Login to Azure US Gov Cloud with CLI
+     uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_US_GOV_CREDENTIALS }}
+          environment: 'AzureUSGovernment'
+          enable-AzPSSession: false
+   - name: Login to Azure US Gov Cloud with Az Powershell
+      uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_US_GOV_CREDENTIALS }}
+          environment: 'AzureUSGovernment'
+          enable-AzPSSession: true
 ```
 
 ## <a name="connect-with-other-azure-services"></a>他の Azure サービスと接続する

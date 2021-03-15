@@ -4,12 +4,12 @@ description: Azure ライブラリを使用して、Azure サービスで Python
 ms.date: 01/19/2021
 ms.topic: conceptual
 ms.custom: devx-track-python
-ms.openlocfilehash: 19a69cf0379dd290893724db6527ebd30b5bab63
-ms.sourcegitcommit: 6fbf9e489b194586887a2c11152044be5b3a2b99
+ms.openlocfilehash: 9a33dc8c98655f78e7e433081655d96137d9d8d8
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/25/2021
-ms.locfileid: "98759462"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102117846"
 ---
 # <a name="how-to-authenticate-and-authorize-python-apps-on-azure"></a>Azure で Python アプリを認証および認可する方法
 
@@ -165,11 +165,11 @@ print(list(sub_list))
 
 ライブラリが更新されていない場合、次のセクションで説明するように、`DefaultAzureCredential` を使用したコードを実行すると、「object has no attribute 'signed-session' (オブジェクトに属性 'signed-session' がありません)」というメッセージが表示されます。
 
-### <a name="defaultazurecredential-object-has-no-attribute-signed-session"></a>「'DefaultAzureCredential' object has no attribute 'signed-session' ('DefaultAzureCredential' オブジェクトに属性 'signed-session' がありません)」
+### <a name="credential-object-has-no-attribute-signed_session"></a>資格情報オブジェクトに属性 'signed-session' がない
 
-azure.core を使用するように更新されていないライブラリで `DefaultAzureCredential` を使用しようとした場合、クライアント オブジェクトを通じた呼び出しは、「'DefaultAzureCredential' object has no attribute 'signed-session' ('DefaultAzureCredential' オブジェクトに属性 'signed-session' がありません)」というあいまいなエラーで失敗します。 このようなエラーが発生するのは、たとえば、前のセクションでバージョン 15 より下の azure-mgmt-resource ライブラリを利用するコードを使用した場合です。
+azure.core を使用するように更新されていないライブラリで `DefaultAzureCredential` (または `AzureCliCredential` と azure.identity からのその他の資格情報オブジェクト) を使用しようとした場合、クライアント オブジェクトを通じた呼び出しは、「'DefaultAzureCredential' object has no attribute 'signed-session' ('DefaultAzureCredential' オブジェクトに属性 'signed-session' がありません)」というあいまいなエラーで失敗します。 このようなエラーが発生するのは、たとえば、前のセクションでバージョン 15 より下の azure-mgmt-resource ライブラリを利用するコードを使用した場合です。
 
-azure.core バージョンでない SDK 管理ライブラリは、資格情報オブジェクトに `signed_session` プロパティが存在することを前提としていますが、`DefaultAzureCredential` にはこれが欠落しています。このエラーが発生するのは、そのためです。
+このエラーが発生するのは、SDK 管理ライブラリの azure.core 以外のバージョンでは、資格情報オブジェクトに `signed_session` プロパティが含まれていると想定されているためです。これは、`DefaultAzureCredential` および azure.identity のその他の資格情報オブジェクトには存在しません。
 
 使用する管理ライブラリがまだ更新されていない場合は、次の代替方法を使用できます。
 
@@ -471,4 +471,4 @@ print(subscription.subscription_id)
 - [例:MySQL データベースをプロビジョニングして使用する](azure-sdk-example-database.md)
 - [例:仮想マシンをプロビジョニングする](azure-sdk-example-virtual-machines.md)
 - [仮想マシンで Azure Managed Disks を使用する](azure-sdk-samples-managed-disks.md)
-- [Azure SDK for Python に関する簡単なアンケートを完了する](https://microsoft.qualtrics.com/jfe/form/SV_bNFX0HECjzPWMiG?Q_CHL=docs)
+- [Azure SDK for Python に関する簡単なアンケートに回答する](https://microsoft.qualtrics.com/jfe/form/SV_bNFX0HECjzPWMiG?Q_CHL=docs)

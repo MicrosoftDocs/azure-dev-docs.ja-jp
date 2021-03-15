@@ -4,12 +4,12 @@ description: Visual Studio を使用して JavaScript Node.js プロジェクト
 ms.topic: how-to
 ms.date: 01/28/2021
 ms.custom: devx-track-js
-ms.openlocfilehash: 4a0aa42a51d76a8d4aaa9ae703e0ff3aa8b15fc0
-ms.sourcegitcommit: 3f8aa923e4626b31cc533584fe3b66940d384351
+ms.openlocfilehash: b61bfaf9cc6b57a8a481e56841b584550e9a9b99
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/01/2021
-ms.locfileid: "99230132"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118230"
 ---
 # <a name="how-to-develop-and-debug-nodejs-with-visual-studio-code"></a>Visual Studio Code を使用して Node.js の開発とデバッグを行う方法
 
@@ -18,13 +18,13 @@ Visual Studio を使用して JavaScript Node.js プロジェクトを開発し�
 ## <a name="prepare-your-environment"></a>環境を準備する
 
 1. [Visual Studio Code](https://code.visualstudio.com/) をインストールします。 
-1. [Git](https://git-scm.com/) をインストールします。 Visual Studio Code は Git と統合されており、"*ソース管理*" の管理を[サイド バー](https://code.visualstudio.com/docs/getstarted/userinterface)で行えます。
+1. [Git](https://git-scm.com/) をインストールします。 Visual Studio Code は Git と統合されており、"*ソース管理*" の管理を [サイド バー](https://code.visualstudio.com/docs/getstarted/userinterface)で行えます。
 
 1. MongoDB データベース接続文字列を取得します。
 
     使用できる MongoDB データベースがない場合は、以下を行うことができます。
     * コンテナーのいずれかが MongoDB データベースであるマルチコンテナー構成内でこのローカル プロジェクトを実行することを選択します。 [Docker](https://www.docker.com/) と [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) 拡張機能をインストールして、ローカル MongoDB データベースを実行しているコンテナーのいずれかを使用してマルチコンテナー構成を取得します。 
-    * MongoDB データベース用の [Azure CosmosDB](/azure/cosmos-db/) リソースを作成することを選択します。 詳細については、こちらの[チュートリアル](../../tutorial/deploy-nodejs-mongodb-app-service-from-visual-studio-code.md#create-a-cosmosdb-database-resource-for-mongodb)を参照してください。
+    * MongoDB データベース用の [Azure Cosmos DB](/azure/cosmos-db/) リソースを作成することを選択します。 詳細については、こちらの[チュートリアル](../../tutorial/deploy-nodejs-mongodb-app-service-from-visual-studio-code.md#create-a-cosmos-db-database-resource-for-mongodb)を参照してください。
 
 ## <a name="clone-sample-project-to-local-computer"></a>サンプル プロジェクトをローカル コンピューターに複製する
 

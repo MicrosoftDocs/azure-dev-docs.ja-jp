@@ -3,14 +3,14 @@ title: クイック スタート - Azure PowerShell を使用して Terraform �
 description: このクイックスタートでは、Azure PowerShell を使用して Terraform をインストールして構成する方法について説明します。
 keywords: Azure DevOps Terraform インストール 構成 Windows 初期化 プラン 適用 実行 ログイン RBAC サービス プリンシパル 自動スクリプト PowerShell
 ms.topic: quickstart
-ms.date: 09/27/2020
+ms.date: 02/18/2021
 ms.custom: devx-track-terraform
-ms.openlocfilehash: 8f95d0bb09d7e9e7ea789b90a27178cdf5426d74
-ms.sourcegitcommit: e20f6c150bfb0f76cd99c269fcef1dc5ee1ab647
+ms.openlocfilehash: c89689c53251010d37245cafdb61cfa60729cd47
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/28/2020
-ms.locfileid: "91401556"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102117996"
 ---
 # <a name="quickstart-configure-terraform-using-azure-powershell"></a>クイック スタート:Azure PowerShell を使用して Terraform を構成する
  
@@ -43,24 +43,23 @@ ms.locfileid: "91401556"
     $PSVersionTable.PSVersion
     ```
 
-1. [PowerShell をインストールします](/powershell/scripting/install/installing-powershell-core-on-windows)。 このデモは、Windows 10 で PowerShell v7.0.2 を使用してテストされました。
+1. [PowerShell をインストールします](/powershell/scripting/install/installing-powershell-core-on-windows)。 このデモは、Windows 10 で PowerShell 7.1.2 を使用してテストされました。
 
-1. [Terraform で Azure に対して認証を行う](https://www.terraform.io/docs/providers/azurerm/guides/azure_cli.html)には、[Azure CLI をインストールする](/cli/azure/install-azure-cli-windows)必要があります。 このデモは、Azure CLI バージョン 2.9.1 を使用してテストされました。
+1. [Terraform で Azure に対して認証を行う](https://www.terraform.io/docs/providers/azurerm/guides/azure_cli.html)には、[Azure CLI をインストールする](/cli/azure/install-azure-cli-windows)必要があります。 このデモは、Azure CLI バージョン2.19.1 を使用してテストされました。
 
-1. [Terraform をダウンロードします](https://www.terraform.io/downloads.html)。
+1. [Terraform をダウンロードします](https://www.terraform.io/downloads.html)。 このデモは、Terraform バージョン 0.14.7 を使用してテストされました。
 
-1. ダウンロードから、任意のディレクトリに実行可能ファイルを抽出します。
+1. ダウンロードから、任意のディレクトリ (例: `c:\terraform`) に実行可能ファイルを抽出します。
 
 1. [システムのグローバル パスを実行可能ファイルに更新](https://stackoverflow.com/questions/1618280/where-can-i-set-path-to-make-exe-on-windows)します。
+
+1. グローバル パスを設定したら、PowerShell を閉じて再度開きます。
 
 1. `terraform` コマンドでグローバル パス構成を確認します。
 
     ```powershell
-    terraform
+    terraform -version
     ```
-
-    **注**:
-    - Terraform 実行可能ファイルが見つかった場合は、構文と使用可能なコマンドが一覧表示されます。
 
 ## <a name="authenticate-to-azure"></a>Azure に対して認証します
 
@@ -74,7 +73,7 @@ PowerShell と Terraform を使用する場合は、サービス プリンシパ
 
 サービス プリンシパルを使用して Azure サブスクリプションにログインするには、まずサービス プリンシパルへのアクセスが必要です。 サービス プリンシパルが既にある場合は、このセクションを省略できます。
 
-[PowerShell でサービス プリンシパルを作成](/powershell/azure/create-azure-service-principal-azureps)する場合、数多くのオプションがあります。 この記事では、**共同作成者**ロールを使用してサービス プリンシパルを作成します。 **共同作成者**ロール (既定のロール) には、Azure アカウントに対して読み取りと書き込みを行うための完全なアクセス許可があります。 ロールベースのアクセス制御 (RBAC) とロールの詳細については、[RBAC の組み込みのロール](/azure/active-directory/role-based-access-built-in-roles)に関するページをご覧ください。
+[PowerShell でサービス プリンシパルを作成](/powershell/azure/create-azure-service-principal-azureps)する場合、数多くのオプションがあります。 この記事では、**共同作成者** ロールを使用してサービス プリンシパルを作成します。 **共同作成者** ロール (既定のロール) には、Azure アカウントに対して読み取りと書き込みを行うための完全なアクセス許可があります。 ロールベースのアクセス制御 (RBAC) とロールの詳細については、[RBAC の組み込みのロール](/azure/active-directory/role-based-access-built-in-roles)に関するページをご覧ください。
 
 [New-AzADServicePrincipal](/powershell/module/Az.Resources/New-AzADServicePrincipal) を呼び出すと、指定されたサブスクリプションのサービス プリンシパルが作成されます。 正常に完了すると、サービス プリンシパルの情報 (サービス プリンシパル名、表示名など) が表示されます。 認証資格情報を指定せずに `New-AzADServicePrincipal` を呼び出すと、パスワードが自動的に生成されます。 ただし、このパスワードは `SecureString` 型で返されるため、表示されません。 そのため、結果が変数に入るようにして `New-AzADServicePrincipal` を呼び出す必要があります。 その後、変数をプレーンテキストに変換して表示できます。
 
@@ -86,22 +85,18 @@ PowerShell と Terraform を使用する場合は、サービス プリンシパ
 
 1. PowerShell を開始します。
 
-1. [New-AzADServicePrincipal](/powershell/module/az.resources/new-azadserviceprincipal) を使用して新しいサービス プリンシパルを作成します。 `<azure_subscription_id>` は、使用する Azure サブスクリプションの ID に置き換えてください。
+1. [New-AzADServicePrincipal](/powershell/module/az.resources/new-azadserviceprincipal) を使用して新しいサービス プリンシパルを作成します。 `<azure_subscription_id>` は、使用する Azure サブスクリプションの ID に置き換えてください。 `<service_principal_name>` は、プリンシパルに付ける名前に置き換えます。
 
     ```powershell
-    $sp = New-AzADServicePrincipal -Scope /subscriptions/<azure_subscription_id>
+    $sp = New-AzADServicePrincipal -Scope /subscriptions/<azure_subscription_id> -DisplayName <service_principal_name>
     ```
 
-1. サービス プリンシパルの名前を表示します。
+1. 自動生成されたパスワードをテキストに変換して、表示します。
 
     ```powershell
-    $sp.ServicePrincipalNames
-    ```
-
-1. 自動生成されたパスワードをテキストとして表示します ([ConvertFrom-SecureString](/powershell/module/microsoft.powershell.security/convertfrom-securestring))。
-
-    ```powershell
-    $UnsecureSecret = ConvertFrom-SecureString -SecureString $sp.Secret -AsPlainText
+    $BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($sp.Secret)
+    $UnsecureSecret = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
+    $UnsecureSecret
     ```
 
 **注**:
@@ -120,32 +115,58 @@ PowerShell と Terraform を使用する場合は、サービス プリンシパ
     1. [Get-Credential](/powershell/module/microsoft.powershell.security/get-credential) を呼び出し、要求されたら、サービス プリンシパル名とパスワードを入力します。
 
         ```powershell
-        $spCredential = Get-Credential
+        $spCredentials = Get-Credential
         ```
 
     1. メモリ内に `PsCredential` オブジェクトを作成します。 プレースホルダーは、ご使用のサービス プリンシパルの適切な値に置き換えてください。 このパターンは、スクリプトからログインする方法です。
 
         ```powershell
-        $spName = "<service_principal_name>"
+        $spApplicationId = "<service_principal_application_id"
         $spPassword = ConvertTo-SecureString "<service_principal_password>" -AsPlainText -Force
-        $spCredential = New-Object System.Management.Automation.PSCredential($spName , $spPassword)
+        $spCredentials = New-Object System.Management.Automation.PSCredential($spApplicationId , $spPassword)
         ```
 
-1. `Connect-AzAccount` を呼び出し、`PsCredential` オブジェクトを渡します。 `<azure_subscription_tenant_id>` プレースホルダーは、Azure サブスクリプションのテナント ID に置き換えてください。
+1. `Connect-AzAccount` を呼び出し、`PsCredential` オブジェクトを渡します。 `<azure_subscription_tenant_id>` プレースホルダーは、Azure サブスクリプションのテナント ID に置き換えてください。 テナント ID がわからない場合は、「[Azure Active Directory のテナント ID を見つける方法](/azure/active-directory/fundamentals/active-directory-how-to-find-tenant)」で手順を参照してください。
 
     ```powershell
-    Connect-AzAccount -Credential $spCredential -Tenant "<azure_subscription_tenant_id>" -ServicePrincipal
+    Connect-AzAccount -ServicePrincipal -Credential $spCredentials -Tenant "<azure_subscription_tenant_id>" 
+    ```
+
+1. Azure CLI を使用して Azure にログインします。
+
+    ```azurecli
+    az login
     ```
 
 ## <a name="set-environment-variables"></a>環境変数の設定
 
-Terraform で目的の Azure サブスクリプションを使用するために、環境変数を設定します。 環境変数は、Windows システム レベルまたは特定の PowerShell セッション内で設定できます。 特定のセッションに環境変数を設定する場合は、次のコードを使用します。 プレースホルダーは、ご使用の環境の適切な値に置き換えてください。
+環境変数を設定すると、すべての Terraform 構成ファイルに情報を挿入することなく、Terraform で目的の Azure サブスクリプションを使用できます。
 
-```powershell
-$env:ARM_CLIENT_ID="<service_principal_app_id>"
-$env:ARM_SUBSCRIPTION_ID="<azure_subscription_id>"
-$env:ARM_TENANT_ID="<azure_subscription_tenant_id>"
-```
+1. すべての PowerShell インスタンス用の環境変数を設定するには、次の環境変数を作成します。 プレースホルダーは、ご使用の環境の適切な値に置き換えてください。
+
+    ```
+    ARM_CLIENT_ID = "<service_principal_app_id>"
+    ARM_SUBSCRIPTION_ID = "<azure_subscription_id>"
+    ARM_TENANT_ID = "<azure_subscription_tenant_id>"
+    ARM_CLIENT_PASSWORD = "<service_principal_password>"
+    ```
+
+    **注**: PowerShell セッションを開いている場合は、セッションを閉じ、環境変数を作成した後に再度開きます。
+
+1. 特定の PowerShell セッション内で環境変数を設定するには、次のコードを使用します。 プレースホルダーは、ご使用の環境の適切な値に置き換えてください。
+
+    ```powershell
+    $env:ARM_CLIENT_ID="<service_principal_app_id>"
+    $env:ARM_SUBSCRIPTION_ID="<azure_subscription_id>"
+    $env:ARM_TENANT_ID="<azure_subscription_tenant_id>"
+    $env:ARM_CLIENT_SECRET="<service_principal_password>"
+    ```
+
+1. 環境変数を確認するには、次の PowerShell コマンドを使用します。
+
+    ```powershell
+    gci env:ARM_*
+    ```
 
 [!INCLUDE [terraform-create-base-config-file.md](includes/terraform-create-base-config-file.md)]
 

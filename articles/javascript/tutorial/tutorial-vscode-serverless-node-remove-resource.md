@@ -4,12 +4,12 @@ description: リモートの Azure リソースを削除 (クリーンアップ)
 ms.topic: tutorial
 ms.date: 08/31/2020
 ms.custom: devx-track-js, contperf-fy21q2
-ms.openlocfilehash: 428330b34b3c315d01c2209840de62001caa747a
-ms.sourcegitcommit: c8330128d5d6a71859933a890ecdf047cb950996
+ms.openlocfilehash: cfb5941e6152a2919e3f2b7570d94df66e0c74f9
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/15/2020
-ms.locfileid: "97522055"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102117786"
 ---
 # <a name="5-clean-up-azure-resources-for-azure-functions-tutorial"></a>5.Azure Functions の Azure リソースをクリーンアップするチュートリアル
 
@@ -17,9 +17,12 @@ ms.locfileid: "97522055"
 
 ## <a name="remove-remote-azure-resources"></a>リモートの Azure リソースを削除する
 
-作成した Functions アプリには、最小限のコストが発生する可能性があるリソースが含まれます ([Functions の価格](https://azure.microsoft.com/pricing/details/functions/)に関するページを参照してください)。 リソースをクリーンアップするには、**Azure:Functions** エクスプローラーで Function App を右クリックし、 **[Delete Function App]\(関数アプリの削除\)** を選択します。
+作成した Functions アプリには、最小限のコストが発生する可能性があるリソースが含まれます ([Functions の価格](https://azure.microsoft.com/pricing/details/functions/)に関するページを参照してください)。 Visual Studio Code の拡張機能である Azure リソース グループを使用して、リソース グループとグループ内のすべてのリソースを削除します。 
 
-[Azure portal](https://portal.azure.com) にアクセスし、左側にあるナビゲーション ウィンドウから **[リソース グループ]** を選択し、このチュートリアルで作成したリソース グループを選択し、 **[リソース グループの削除]** コマンドを使用することもできます。
+1. 一覧でリソース グループ名を探します。
+1. リソース グループの名前を右クリックして、 **[削除]** を選択します。
+
+    :::image type="content" source="../media/visual-studio-code-azure-resources-extension-remove-resource-group.png" alt-text="Visual Studio Code の拡張機能である Azure リソース グループを使用して、リソース グループとグループ内のすべてのリソースを削除します。":::
 
 [!INCLUDE [Next steps for using VSCode extensions](../includes/tutorial-next-steps-vscode-extensions.md)]
 

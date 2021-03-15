@@ -6,12 +6,12 @@ ms.date: 02/02/2021
 ms.topic: conceptual
 ms.custom: devx-track-java
 ms.author: alzimmer
-ms.openlocfilehash: 63852f253a648e473ba91ac361bc5d9d0629b8f1
-ms.sourcegitcommit: 71847ee0a1fee3f3320503629d9a8c82319a1f6a
+ms.openlocfilehash: 868f15d7f8e0791ea190b77a6679f88c59d363e4
+ms.sourcegitcommit: 576c878c338d286060010646b96f3ad0fdbcb814
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99528455"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118210"
 ---
 # <a name="troubleshoot-networking-issues"></a>ネットワークに関する問題をトラブルシューティングする
 
@@ -49,16 +49,22 @@ HTTP プロキシを追加するには、[Azure SDK for Java でのプロキシ�
 
 **Windows**
 
-1. Fiddler の証明書をエクスポートします。
+1. Fiddler の証明書をエクスポートします。 証明書は通常、デスクトップにエクスポートされます。
 1. JRE の keytool (通常、`jre\bin`) を見つけます。
 1. JRE の cacert (通常、`jre\lib\security`) を見つけます。
-1. コマンド プロンプトを開き、次のコマンドを実行して証明書をインポートします。
+1. 管理者モードで PowerShell ウィンドウを開き、次のコマンドを実行して証明書をインポートします。
 
    ```cmd
-   keytool.exe -import -file <location of Fiddler certificate> -keystore <location of cacert> -alias Fiddler
+   keytool.exe -import -trustcacerts -file <location of Fiddler certificate> -keystore <location of cacert> -alias Fiddler
    ```
 
-1. パスワードを入力します。
+   たとえば、次のコマンドでは、いくつかの一般的な値を使用します。
+
+   ```cmd
+   keytool.exe -import -trustcacerts -file "C:\Users\username\Desktop\FiddlerRootCertificate.crt" -keystore "C:\Program Files\AdoptOpenJDK\jdk-8.0.275.1-hotspot\jre\lib\security\cacerts" -alias Fiddler
+   ```
+
+1. パスワードを入力します。 パスワードを設定していない場合、既定値は "changeit" です。 詳細については、Oracle のドキュメントの「[証明書と SSL の使用](https://docs.oracle.com/cd/E19830-01/819-4712/ablqw/index.html)」を参照してください。
 1. 証明書を信頼します。
 
 ## <a name="wireshark"></a>Wireshark

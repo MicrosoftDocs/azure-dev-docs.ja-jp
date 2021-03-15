@@ -2,16 +2,16 @@
 ms.custom: devx-track-js
 ms.topic: include
 ms.date: 02/08/2021
-ms.openlocfilehash: b2877a43eda86868eb3ee2841cedfd8c4d242340
-ms.sourcegitcommit: 98a7e855206ff463c1d95f93c23dd665b26a0aa1
+ms.openlocfilehash: e820cb17038a5251e658c9b7286cec65ddc40fca
+ms.sourcegitcommit: b0a119a624e9cb6b76d968951543a414bd08eaa0
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 02/09/2021
-ms.locfileid: "100018985"
+ms.lasthandoff: 03/09/2021
+ms.locfileid: "102118270"
 ---
 ## <a name="create-a-cosmos-db-resource-for-mongodb"></a>MongoDB の Cosmos DB リソースを作成する
 
-[Azure Cloud Shell](https://shell.azure.com) で次の Azure CLI [az cosmosdb create](/cli/azure/cosmosdb#az_cosmosdb_create) コマンドを使用して、mongoDB データベース用の新しい CosmosDB リソースを作成します。 
+[Azure Cloud Shell](https://shell.azure.com) で次の Azure CLI [az cosmosdb create](/cli/azure/cosmosdb#az_cosmosdb_create) コマンドを使用して、mongoDB データベース用の新しい Cosmos DB リソースを作成します。 
 
 ```azurecli
 az cosmosdb create \
@@ -114,7 +114,7 @@ az cosmosdb create \
 }
 ```
 
-## <a name="add-firewall-rule-for-your-client-ip-address-to-mongodb-resource"></a>クライアント IP アドレスのファイアウォール規則を MongoDB リソースに追加する
+## <a name="add-firewall-rule-for-your-client-ip-address"></a>クライアント IP アドレスのファイアウォール規則を追加する
 
 既定では、ファイアウォール規則は構成されていません。 JavaScript を使用したサーバーへのクライアント接続が成功するように、お使いのクライアント IP アドレスを追加する必要があります。
 

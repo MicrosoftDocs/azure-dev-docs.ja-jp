@@ -2,16 +2,16 @@
 title: チュートリアル - Terraform を使用して Azure でハブとスポーク ネットワークを検証する
 description: すべての仮想ネットワークが相互に接続されているハブとスポークのネットワーク トポロジを検証する方法について説明します。
 ms.topic: tutorial
-ms.date: 10/26/2019
+ms.date: 03/08/2021
 ms.custom: devx-track-terraform
-ms.openlocfilehash: 684bca6b62847718f34ce799d0c1371b25fdd532
-ms.sourcegitcommit: e20f6c150bfb0f76cd99c269fcef1dc5ee1ab647
+ms.openlocfilehash: 71d764da80888326be9625a9e90c1aba164b6f55
+ms.sourcegitcommit: 7991f748720673d2dc50baaa8658348ff6cc1044
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/28/2020
-ms.locfileid: "91401502"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102604143"
 ---
-# <a name="tutorial-validate-a-hub-and-spoke-network-in-azure-using-terraform"></a>チュートリアル:Terraform を使用して Azure でハブとスポーク ネットワークを検証する
+# <a name="tutorial-validate-a-hub-and-spoke-network-in-azure-using-terraform"></a>チュートリアル: Terraform を使用して Azure でハブとスポーク ネットワークを検証する
 
 この記事では、このシリーズの前の記事で作成した terraform ファイルを実行します。 その結果は、デモ仮想ネットワーク間の接続の検証です。
 
@@ -54,7 +54,7 @@ ms.locfileid: "91401502"
     cd hub-spoke
     ```
 
-1. `ls` コマンドを実行して、前のチュートリアルで作成した `.tf` 構成ファイルが一覧表示されることを確認します。
+1. 作業ディレクトリ内のファイルを一覧表示して、前のチュートリアルで作成した `.tf` 構成ファイルが一覧に表示されていることを確認します。 (スクリーンショットには、次の手順で Terraform を初期化するまで使用できない他のファイルが表示されています)。
 
     ![Terraform デモ構成ファイル](./media/hub-and-spoke-tutorial-series/hub-spoke-config-files.png)
 
@@ -94,13 +94,15 @@ ms.locfileid: "91401502"
 
 1. **[onprem-vnet-rg]** タブで、「**onprem-vm**」という名前の VM を選択します。
 
-1. **[接続]** を選択します。
+1. **パブリック IP アドレス** の値をメモします。
 
-1. **[VM ローカル アカウントを使用してログインする]** というテキストの横にある **ssh** コマンドをクリップボードにコピーします。
+1. コマンドラインに戻り、`ssh` を実行して、シミュレートされたオンプレミス環境に接続します。 `variables.tf` ファイルに指定されたパスワードを使用します。
 
-1. Linux プロンプトから `ssh` を実行して、シミュレートされたオンプレミスの環境に接続します。 `on-prem.tf` パラメーター ファイルで指定したパスワードを使用します。
+   ```bash
+   ssh testadmin@<onprem_vm_ip_address>
+   ```
 
-1. `ping` コマンドを実行して、ハブ VNet のジャンプボックス VM への接続をテストします。
+1. **onprem-vm** 仮想マシンに接続したら、`ping` コマンドを実行してハブ VNet 内のジャンプボックス VM への接続をテストします。
 
    ```bash
    ping 10.0.0.68
